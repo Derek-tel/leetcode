@@ -1,0 +1,52 @@
+package main
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func buildTree(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 {
+		return nil
+	}
+	rootVal := preorder[0]
+	root := &TreeNode{rootVal, nil, nil}
+	for i, v := range inorder {
+		if v == rootVal {
+			root.Left = buildTree(preorder[1:i+1], inorder[0:i])
+			root.Right = buildTree(preorder[i+1:], inorder[i+1:])
+		}
+	}
+	return root
+}
+
+func test(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 {
+		return nil
+	}
+	rootVal := preorder[0]
+	root := &TreeNode{rootVal, nil, nil}
+	for i, v := range inorder {
+		if v == rootVal {
+			root.Left = test(preorder[1:i+1], inorder[0:i])
+			root.Right = test(preorder[i+1:], inorder[i:])
+		}
+	}
+	return root
+}
+
+func get(preOrder []int, inorder []int) *TreeNode {
+	if len(preOrder) == 0 || len(inorder) == 0 {
+		return nil
+	}
+	rootVal := preOrder[0]
+	root := &TreeNode{rootVal, nil, nil}
+	for i, v := range inorder {
+		if v == rootVal {
+			root.Left = get(preOrder[1:i+1], inorder[0:i])
+			root.Right = get(preOrder[i+1:], inorder[i+1:])
+		}
+	}
+	return root
+}

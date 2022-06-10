@@ -1,0 +1,91 @@
+package main
+
+import (
+	"fmt"
+)
+
+//dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i]]
+//j-nums[i] >=0   j>=num[s]
+//
+func canPartition(nums []int) bool {
+	count := 0
+	for _, v := range nums {
+		count = count + v
+	}
+
+	if count%2 != 0 {
+		return false
+	}
+	half := count / 2
+	dp := make([]bool, half+1)
+	dp[0] = true
+	for i := 0; i < len(nums); i++ {
+		v := nums[i]
+		for j := half; j >= v; j-- {
+			dp[j] = dp[j] || dp[j-v]
+		}
+	}
+	fmt.Printf("%+v", dp)
+	return dp[half]
+}
+func test(nums []int) bool {
+	count := 0
+	for _, v := range nums {
+		count = count + v
+	}
+	if count%2 == 1 {
+		return false
+	}
+	half := count / 2
+	dp := make([]bool, half+1)
+	dp[0] = true
+	for i := 0; i < len(nums); i++ {
+		v := nums[i]
+		for j := half; j > v; j-- {
+			dp[j] = dp[j] || dp[j-v]
+		}
+	}
+	return dp[half]
+}
+
+func get(nums []int) bool {
+	count := 0
+	for _, num := range nums {
+		count += num
+	}
+	if count%2 == 1 {
+		return false
+	}
+	half := count / 2
+	dp := make([]bool, half+1)
+	dp[0] = true
+	for _, num := range nums {
+		for j := half; j > num; j-- {
+			dp[j] = dp[j] || dp[j-num]
+		}
+	}
+	return dp[half]
+}
+
+func demo(nums []int) bool {
+	count := 0
+	for _, num := range nums {
+		count += num
+	}
+	if count%2 == 1 {
+		return false
+	}
+	half := count / 2
+	dp := make([]bool, half+1)
+	dp[0] = true
+	for _, num := range nums {
+		for j := half; j > num; j-- {
+			dp[j] = dp[j] || dp[j-num]
+		}
+	}
+	return dp[half]
+}
+
+func main() {
+	fmt.Println(canPartition([]int{3, 3, 3, 4, 5}))
+}

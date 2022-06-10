@@ -1,0 +1,26 @@
+package hammingDistance
+
+func hammingDistance(x int, y int) int {
+	ans := 0
+
+	for i := x ^ y; i > 0; i = i >> 1 {
+		ans = ans + i&1
+	}
+	return ans
+}
+
+func test(x int, y int) int {
+	ans := 0
+	for i := x ^ y; i > 0; i = i >> 1 {
+		ans = ans + i&1
+	}
+	return ans
+}
+
+func get(x, y int) int {
+	ans := 0
+	for i := x ^ y; i > 0; i = i >> 1 {
+		ans += i & 1
+	}
+	return ans
+}

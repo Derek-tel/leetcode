@@ -1,0 +1,104 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func threeSum(nums []int) [][]int {
+	sort.Ints(nums)
+	result, start, end, add, length := make([][]int, 0), 0, 0, 0, len(nums)
+	for index := 1; index < length-1; index++ {
+		start, end = 0, length-1
+		if index > 1 && nums[index] == nums[index-1] {
+			start = index - 1
+		}
+		for start < index && end > index {
+			if start > 0 && nums[start] == nums[start-1] {
+				start++
+				continue
+			}
+			if end < length-1 && nums[end] == nums[end+1] {
+				end--
+				continue
+			}
+			add = nums[start] + nums[index] + nums[end]
+			if add == 0 {
+				result = append(result, []int{nums[start], nums[index], nums[end]})
+				start++
+				end--
+			} else if add < 0 {
+				start++
+			} else {
+				end--
+			}
+		}
+	}
+	return result
+}
+
+func test(nums []int, target int) (result [][]int) {
+	length := len(nums)
+	sort.Ints(nums)
+	for i := 1; i < length-1; i++ {
+		start := 0
+		end := length - 1
+		if nums[i] == nums[i-1] {
+			start = i - 1
+		}
+		for start < i && end > i {
+			if start > 0 && nums[start] == nums[start-1] {
+				start++
+				continue
+			}
+			if end < length-1 && nums[end] == nums[end+1] {
+				end--
+				continue
+			}
+			if sum := nums[start] + nums[i] + nums[end]; sum == target {
+				result = append(result, []int{nums[start], nums[i], nums[end]})
+			} else if sum > target {
+				end--
+			} else {
+				start++
+			}
+		}
+	}
+	return
+}
+
+func get(nums []int, target int) (result [][]int) {
+	sort.Ints(nums)
+	length := len(nums)
+	for i := 1; i < length-1; i++ {
+		start := 0
+		end := length - 1
+		if nums[i] == nums[i-1] {
+			start = i - 1
+		}
+		for start < i && end > i {
+			if start > 0 && nums[start] == nums[start-1] {
+				start++
+				continue
+			}
+			if end < length-1 && nums[end] == nums[end+1] {
+				end--
+				continue
+			}
+			if sum := nums[start] + nums[i] + nums[end]; sum == target {
+				result = append(result, []int{nums[start], nums[i], nums[end]})
+			} else if sum > target {
+				end--
+			} else {
+				start++
+			}
+		}
+	}
+	return
+}
+
+func main() {
+	test := []int{0, 0, 0, 0, 0}
+	result := threeSum(test)
+	fmt.Printf("resulut: %v", result)
+}
