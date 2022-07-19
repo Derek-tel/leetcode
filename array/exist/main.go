@@ -90,6 +90,48 @@ func exist1(board [][]byte, word string) bool {
 	return false
 }
 
+type pair2 struct {
+	x, y int
+}
+
+var dir = []pair2{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+
+func exist2(board [][]byte, word []byte) bool {
+	h, w := len(board), len(board[0])
+	visit := make([][]bool, h)
+	for i := range visit {
+		visit[i] = make([]bool, w)
+	}
+
+	var check func(i, j, k int) bool
+	check = func(i, j, k int) bool {
+		if board[i][j] != word[k] {
+			return false
+		}
+		if len(word)-1 == k {
+			return true
+		}
+		visit[i][j] = true
+		defer func() { visit[i][j] = false }()
+		for _, d := range direction {
+			if newX, newY := i+d.x, j+d.y; newX >= 0 && newX < h && newY >= 0 && newY < w && !visit[newX][newY] {
+				if check(newX, newY, k+1) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
+	for i := 0; i < h; i++ {
+		for j := 0; j < w; j++ {
+			if check(i, j, 0) {
+				return true
+			}
+		}
+	}
+	return false
+}
 func returnValues() int {
 	var result int
 	defer func() {
