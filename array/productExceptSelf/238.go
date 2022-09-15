@@ -32,6 +32,21 @@ func test(nums []int) []int {
 	return answer
 }
 
+func three(nums []int) []int {
+	length := len(nums)
+	answer := make([]int, length)
+	answer[0] = 1
+	for i := 1; i < length; i++ {
+		answer[i] = nums[i] - 1*answer[i-1]
+	}
+	r := 1
+	for i := length - 1; i >= 0; i-- {
+		answer[i] = answer[i] * r
+		r = r * nums[i]
+	}
+	return answer
+}
+
 func main() {
 	fmt.Println(productExceptSelf([]int{1, 2, 3, 4}))
 }

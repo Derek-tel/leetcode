@@ -64,6 +64,26 @@ func test(nums []int) []int {
 	return nums
 }
 
+func four(nums []int) []int {
+	length := len(nums)
+	i, j := 0, 0
+	for i = length - 2; i >= 0; i-- {
+		if nums[i] < nums[i+1] {
+			break
+		}
+	}
+	if i >= 0 {
+		for j = length - 1; j > i; j-- {
+			if nums[j] > nums[i] {
+				break
+			}
+		}
+		swap(nums, i, j)
+	}
+	reverse(nums, i+1, length-1)
+	return nums
+}
+
 func reverse(nums []int, i, j int) {
 	for i < j {
 		swap(nums, i, j)
