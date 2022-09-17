@@ -1,6 +1,8 @@
-package main
+package quickSort
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func quickSort(value []int, start int, end int) []int {
 	temp := value[start]
@@ -95,7 +97,63 @@ func demo(nums []int, start, end int) []int {
 	return nums
 }
 
+func four(nums []int) []int {
+	var sort func([]int, int, int)
+	sort = func(ints []int, left int, right int) {
+		if left >= right {
+			return
+		}
+		start, end := left, right
+		nums[start], nums[(start+end)>>1] = nums[(start+end)>>1], nums[start]
+		pivot := nums[start]
+		for start < end {
+			for start < end && pivot <= nums[end] {
+				end--
+			}
+			nums[start] = nums[end]
+			for start < end && pivot >= nums[start] {
+				start++
+			}
+			nums[end] = nums[start]
+		}
+		nums[start] = pivot
+		sort(nums, left, start-1)
+		sort(nums, start+1, right)
+	}
+
+	sort(nums, 0, len(nums)-1)
+	return nums
+}
+
+func five(nums []int) []int {
+	var sort func([]int, int, int)
+	sort = func(ints []int, left int, right int) {
+		if left >= right {
+			return
+		}
+		start, end := left, right
+		ints[start], ints[(start+end)>>1] = ints[(start+end)>>1], ints[start]
+		pivot := ints[start]
+		for start < end {
+			for start < end && pivot <= nums[end] {
+				end--
+			}
+			ints[start] = ints[end]
+			for start < end && pivot >= nums[start] {
+				start++
+			}
+			ints[end] = ints[start]
+		}
+		ints[start] = pivot
+		sort(ints, left, start-1)
+		sort(ints, start+1, right)
+	}
+
+	sort(nums, 0, len(nums)-1)
+	return nums
+}
+
 func main() {
 	test := []int{1, 1, 3, 4, 5, -1, -2, 6, 1}
-	fmt.Println(get(test, 0, len(test)-1))
+	fmt.Println(four(test))
 }

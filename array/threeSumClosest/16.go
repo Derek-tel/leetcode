@@ -85,6 +85,32 @@ func get(nuns []int, target int) (result int) {
 	return
 }
 
+func four(nums []int, target int) int {
+	length := len(nums)
+	var result int
+	sort.Ints(nums)
+	flag := math.MaxInt
+	for i := 0; i < length; i++ {
+		if i > 0 && nums[i] == nums[i]-1 {
+			continue
+		}
+		for start, end := i+1, length-1; start < end; {
+			sum := nums[i] + nums[start] + nums[end]
+			if abs(sum-target) < flag {
+				result, flag = sum, abs(sum-target)
+			}
+			if sum == target {
+				return sum
+			} else if sum < target {
+				start++
+			} else {
+				end--
+			}
+		}
+	}
+	return result
+}
+
 func abs(a int) int {
 	if a > 0 {
 		return a

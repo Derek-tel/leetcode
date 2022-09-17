@@ -97,6 +97,38 @@ func get(nums []int, target int) (result [][]int) {
 	return
 }
 
+func four(nums []int) [][]int {
+	sort.Ints(nums)
+	length := len(nums)
+	var result [][]int
+	for i := 1; i < length-1; i++ {
+		start, end := 0, length-1
+		if i > 1 && nums[i] == nums[i-1] {
+			start = i - 1
+		}
+		for start < i && end > i {
+			if start > 0 && nums[start] == nums[start-1] {
+				start++
+				continue
+			}
+			if end < length-1 && nums[end] == nums[end+1] {
+				end--
+				continue
+			}
+			if sum := nums[start] + nums[i] + nums[end]; sum == 0 {
+				result = append(result, []int{nums[start], nums[i], nums[end]})
+				start++
+				end--
+			} else if sum > 0 {
+				end--
+			} else {
+				start++
+			}
+		}
+	}
+	return result
+}
+
 func main() {
 	test := []int{0, 0, 0, 0, 0}
 	result := threeSum(test)
