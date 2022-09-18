@@ -104,7 +104,6 @@ func six(nums []int) [][]int {
 	helper = func(index int) {
 		if index == len(nums) {
 			result = append(result, append([]int(nil), temp...))
-			return
 		}
 		for i := 0; i < len(nums); i++ {
 			if !use[i] {

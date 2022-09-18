@@ -81,6 +81,26 @@ func demo(nums []int) [][]int {
 	return result
 }
 
+func five(nums []int) [][]int {
+	var result [][]int
+	var temp []int
+	var helper func(int)
+	helper = func(index int) {
+		if index == len(nums) {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+		//do not pick
+		helper(index + 1)
+		//pick
+		temp = append(temp, nums[index])
+		helper(index + 1)
+		temp = temp[:len(temp)-1]
+	}
+	helper(0)
+	return result
+}
+
 func main() {
 	test := []int{1, 2, 3}
 	fmt.Println(test1(test))
