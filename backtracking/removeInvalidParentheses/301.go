@@ -123,6 +123,60 @@ func handler(ans *[]string, s string, start int, lmove int, rmove int) {
 
 }
 
+func three(s string) []string {
+	lmove, rmove := 0, 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			lmove++
+		} else if s[i] == ')' {
+			if lmove > 0 {
+				lmove--
+			} else {
+				rmove++
+			}
+		}
+	}
+	var result []string
+	var backtrack func(string, int, int, int)
+	backtrack = func(s string, start int, lmove int, rmove int) {
+		if lmove == 0 && rmove == 0 {
+			if judge(s) {
+				result = append(result, s)
+			}
+		}
+		for i := start; i < len(s); i++ {
+			if i != start && s[i] == s[i-1] {
+				continue
+			}
+			if lmove+rmove > len(s)-i {
+				return
+			}
+			if lmove > 0 && s[i] == '(' {
+				backtrack(s[:i]+s[i+1:], i, lmove-1, rmove)
+			}
+			if rmove > 0 && s[i] == ')' {
+				backtrack(s[:i]+s[i+1:], i, lmove, rmove-1)
+			}
+		}
+	}
+	backtrack(s, 0, lmove, rmove)
+	return result
+}
+
+func judge(s string) bool {
+	cut := 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			cut++
+		} else if s[i] == ')' {
+			cut--
+			if cut < 0 {
+				return false
+			}
+		}
+	}
+	return cut == 0
+}
 func main() {
 	test := "()())()"
 	fmt.Println(removeInvalidParentheses(test))

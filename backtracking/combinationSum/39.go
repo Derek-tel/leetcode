@@ -102,6 +102,7 @@ func combination(nums []int, tar int) (res [][]int) {
 		}
 		if target == 0 {
 			res = append(res, append([]int(nil), com...))
+			return
 		}
 		//不访问
 		dfs(target, index+1)
@@ -126,12 +127,37 @@ func demo(nums []int, target int) [][]int {
 		}
 		if tar == 0 {
 			result = append(result, append([]int(nil), com...))
+			return
 		}
 		helper(target, index+1)
 		if target > nums[index] {
 			com = append(com, nums[index])
 			helper(tar-nums[index], index)
 			com = com[:len(nums)-1]
+		}
+	}
+	helper(target, 0)
+	return result
+}
+
+func four(nums []int, target int) [][]int {
+	var com []int
+	var result [][]int
+	var helper func(int, int)
+	helper = func(tar int, index int) {
+		if index == len(nums) {
+			return
+		}
+		if tar == 0 {
+			result = append(result, append([]int(nil), com...))
+			return
+		}
+		//不选
+		helper(tar, index+1)
+		if target > nums[index] {
+			com = append(com, nums[index])
+			helper(tar-nums[index], index)
+			com = com[:len(com)-1]
 		}
 	}
 	helper(target, 0)

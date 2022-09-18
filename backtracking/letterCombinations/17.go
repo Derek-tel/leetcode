@@ -34,6 +34,27 @@ func backTracking(digits string, index int, str string, res *[]string) {
 	}
 }
 
+func two(digits string) []string {
+	if len(digits) < 1 {
+		return []string{}
+	}
+	var result []string
+	var helper func(string, int, string, *[]string)
+	helper = func(letters string, index int, str string, res *[]string) {
+		if index == len(letters) {
+			*res = append(*res, str)
+			return
+		}
+		digit := digits[index]
+		chars := phoneMap[string(digit)]
+		for _, char := range chars {
+			helper(digits, index+1, str+string(char), res)
+		}
+
+	}
+	helper(digits, 0, "", &result)
+	return result
+}
 func main() {
 	fmt.Println(letterCombinations("23"))
 }

@@ -61,6 +61,32 @@ func test1(nums []int) [][]int {
 	return res
 }
 
+func three(nums []int) [][]int {
+	sort.Ints(nums)
+	use := make([]bool, len(nums))
+	var temp []int
+	var result [][]int
+	var backtrack func(int)
+	backtrack = func(index int) {
+		if index == len(nums) {
+			result = append(result, append([]int(nil), temp...))
+		}
+		for i := 0; i < len(nums); i++ {
+			if use[i] || i > 0 && use[i-1] && nums[i] == nums[i-1] {
+				continue
+			}
+			temp = append(temp, nums[i])
+			use[i] = true
+			backtrack(index + 1)
+			use[i] = false
+			temp = temp[:len(temp)-1]
+
+		}
+	}
+	backtrack(0)
+	return result
+}
+
 func main() {
 	test := []int{1, 1, 1, 2}
 	fmt.Println(permuteUnique(test))
