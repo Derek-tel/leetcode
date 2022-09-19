@@ -88,6 +88,31 @@ func get(nums []int, target int) int {
 	return -1
 }
 
+func four(nums []int, target int) int {
+	length := len(nums)
+	left, right := 0, length-1
+	for left <= right {
+		half := (left + right) >> 1
+		if nums[half] == target {
+			return half
+		}
+		if nums[0] <= nums[half] {
+			if target >= nums[0] && nums[half] > target {
+				right = half - 1
+			} else {
+				left = half + 1
+			}
+		} else {
+			if nums[half] < target && target <= nums[length-1] {
+				left = half + 1
+			} else {
+				right = half - 1
+			}
+		}
+	}
+	return -1
+}
+
 func main() {
 	test := []int{3, 1}
 	fmt.Println(search(test, 1))

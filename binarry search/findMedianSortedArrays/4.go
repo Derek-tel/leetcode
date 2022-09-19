@@ -101,6 +101,45 @@ func test(nums1 []int, nums2 []int, k int) int {
 	}
 }
 
+func four(nums1 []int, nums2 []int) float64 {
+	lengthA := len(nums1)
+	lengthB := len(nums2)
+	var helper func([]int, []int, int) int
+	helper = func(ints1 []int, ints2 []int, i int) int {
+		indexA := 0
+		indexB := 0
+		for {
+			if indexA == len(ints1) {
+				return ints2[indexB+i-1]
+			}
+			if indexB == len(ints2) {
+				return ints1[indexA+i-1]
+			}
+			if i == 1 {
+				return min(ints1[indexA], ints2[indexB])
+			}
+			half := i / 2
+			newIndexA := min(len(ints1), indexA+half) - 1
+			newIndexB := min(len(ints2), indexB+half) - 1
+			if ints1[newIndexA] < ints2[newIndexB] {
+				i = i - (newIndexA - indexA + 1)
+				indexA = newIndexA + 1
+			} else {
+				i = i - (newIndexB - indexB + 1)
+				indexB = newIndexB + 1
+			}
+		}
+	}
+	count := lengthA + lengthB
+	if count%2 == 1 {
+		k := count/2 + 1
+		return float64(helper(nums1, nums2, k))
+	} else {
+		k := count / 2
+		return float64(helper(nums1, nums2, k)+helper(nums1, nums2, k+1)) / 2
+	}
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
