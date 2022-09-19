@@ -92,7 +92,7 @@ func four(nums []int, target int) int {
 	length := len(nums)
 	left, right := 0, length-1
 	for left <= right {
-		half := (left + right) >> 1
+		half := left + (right-left)>>1
 		if nums[half] == target {
 			return half
 		}
