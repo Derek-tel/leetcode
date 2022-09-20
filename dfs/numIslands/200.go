@@ -71,3 +71,33 @@ func dfs1(grid [][]byte, x, y int) {
 	}
 
 }
+
+func three(grid [][]byte) int {
+	h, w := len(grid), len(grid[0])
+	count := 0
+	var helper func([][]byte, int, int)
+	helper = func(matrix [][]byte, x int, y int) {
+		grid[x][y] = '0'
+		if x-1 >= 0 && grid[x-1][y] == '1' {
+			helper(grid, x-1, y)
+		}
+		if x+1 < h && grid[x+1][y] == '1' {
+			helper(grid, x+1, y)
+		}
+		if y-1 >= 0 && grid[x][y-1] == '1' {
+			helper(grid, x, y-1)
+		}
+		if y+1 < w && grid[x][y+1] == '1' {
+			helper(grid, x, y+1)
+		}
+	}
+	for i := 0; i < h; i++ {
+		for j := 0; j < w; j++ {
+			if grid[i][j] == '1' {
+				count++
+				helper(grid, i, j)
+			}
+		}
+	}
+	return count
+}
