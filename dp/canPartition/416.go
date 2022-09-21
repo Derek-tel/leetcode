@@ -4,9 +4,8 @@ import (
 	"fmt"
 )
 
-//dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i]]
-//j-nums[i] >=0   j>=num[s]
-//
+// dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i]]
+// j-nums[i] >=0   j>=num[s]
 func canPartition(nums []int) bool {
 	count := 0
 	for _, v := range nums {
@@ -76,6 +75,32 @@ func demo(nums []int) bool {
 		return false
 	}
 	half := count / 2
+	dp := make([]bool, half+1)
+	dp[0] = true
+	for _, num := range nums {
+		for j := half; j > num; j-- {
+			dp[j] = dp[j] || dp[j-num]
+		}
+	}
+	return dp[half]
+}
+
+func five(nums []int) bool {
+	count := 0
+	max := 0
+	for _, num := range nums {
+		count += num
+		if num > max {
+			max = num
+		}
+	}
+	if count%2 == 1 {
+		return false
+	}
+	half := count / 2
+	if max > half {
+		return false
+	}
 	dp := make([]bool, half+1)
 	dp[0] = true
 	for _, num := range nums {
