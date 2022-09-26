@@ -62,6 +62,18 @@ func get(nums []int) int {
 	return res
 }
 
+func five(nums []int) int {
+	maxN, minN, result := nums[0], nums[0], nums[0]
+	for i := 1; i < len(nums); i++ {
+		mm := maxN
+		mn := minN
+		maxN = max(max(mm*nums[i], mn*nums[i]), nums[i])
+		minN = min(min(mm*nums[i], mn*nums[i]), nums[i])
+		result = max(maxN, result)
+	}
+	return result
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
