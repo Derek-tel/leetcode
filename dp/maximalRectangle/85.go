@@ -134,6 +134,48 @@ func get(height []int) int {
 	return res
 }
 
+func six(matrix [][]byte) int {
+	length := len(matrix[0])
+	if length == 0 {
+		return 0
+	}
+	height := make([]int, length)
+	var handler func([]int) int
+	result := 0
+	handler = func(h []int) int {
+		res := 0
+		long := len(h) + 2
+		stack := []int{}
+		getHeight := func(i int) int {
+			if i == 0 || i == long-1 {
+				return -1
+			}
+			return h[i-1]
+		}
+		for i := 0; i < long; i++ {
+			for len(stack) > 0 && getHeight(i) < getHeight(stack[len(stack)-1]) {
+				top := stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+				area := (i - stack[len(stack)-1] - 1) * getHeight(top)
+				res = max(res, area)
+			}
+			stack = append(stack, i)
+		}
+		return res
+	}
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < length; j++ {
+			if matrix[i][j] == '1' {
+				height[j] += 1
+			} else {
+				height[j] = 0
+			}
+		}
+		result = max(result, handler(height))
+	}
+	return result
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
