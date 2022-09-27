@@ -66,3 +66,20 @@ func getPrice(price []int) int {
 	}
 	return max(dp[len(price)-1][1], dp[len(price)-1][2])
 }
+
+func five(price []int) int {
+	dp := make([][3]int, len(price))
+	//0 持有股票
+	dp[0][0] = -price[0]
+	//1 冻结中
+	dp[0][1] = 0
+	//3 没有持有股票
+	dp[0][2] = 0
+
+	for i := 1; i < len(price); i++ {
+		dp[i][0] = max(dp[i-1][0], dp[i-1][2]-price[i])
+		dp[i][1] = dp[i-1][0] + price[i]
+		dp[i][2] = max(dp[i-1][1], dp[i-1][2])
+	}
+	return max(dp[len(price)-1][1], dp[len(price)-1][2])
+}
