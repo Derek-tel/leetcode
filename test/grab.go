@@ -169,7 +169,7 @@ func main() {
 	originStr := "54a3fbb3088e52339c49c22c724a2fdb9491b5b05f7cf2fdafd97b42dafa95aedce11db9470fa459b858e8f741b199959750b55d70efe59f99349f6f9cb49acab68036538a28c04d5365ac19b01c41de95ddf7241c24317fdad8bacb7ebd190f" + strconv.FormatUint(1276309543245865541, 10) + "LJ1E6A2U9MG074598"
 	keyId, _ := GetMd5StringHex(originStr)
 	fmt.Println("---" + keyId)
-	fmt.Println(StringToAsciiHex("LJ1E6A2U9MG074598"))
+	fmt.Println(StringToAsciiHex("JD00M12209130008"))
 	fmt.Println(fmt.Sprintf("%x", 1658504357))
 	fmt.Println(fmt.Sprintf("%x", 1665478999))
 	de := ISO9797M2Padding("b0362e09cb245ffc11b65cc4749c6245d8e6ba9b2360404bd3c8a1facda5720d014c4a314536413255394d473037343539380000000000017246E8AA0C4A62dac4a5634531570000ffff00000000000000000000", 16)
@@ -237,6 +237,9 @@ func main() {
 	err = json.Unmarshal([]byte("[{\"vid\":\"LKB3A21K0G5511098\",\"key_id\":\"58355fa0f6e54828b3287a41fbc94df7\"},{\"vid\":\"LKB3A21K0G5511099\",\"key_id\":\"58355fa0f6e54828b3287a41fbc94df8\"}]"), &asd)
 	fmt.Println(err)
 	fmt.Println(fmt.Sprintf("%+v", asd))
+
+	fmt.Println(StringToAsciiHex("JD00M12209130008"))
+	fmt.Println(StringToAsciiHex("JD00M12209130010"))
 }
 
 func ISO9797M2Padding(origin string, n int) string {
