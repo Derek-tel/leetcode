@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func trap(height []int) int {
 	highest := 0
@@ -22,8 +24,6 @@ func trap(height []int) int {
 			right[i] = highest - height[i]
 		}
 	}
-	fmt.Println(left)
-	fmt.Println(right)
 	for i := range height {
 		sum = sum + min(left[i], right[i])
 	}
@@ -85,6 +85,29 @@ func get(height []int) int {
 	return sum
 }
 
+func four(height []int) int {
+	left := make([]int, len(height))
+	right := make([]int, len(height))
+	left[0] = height[0]
+	for i := 1; i < len(height); i++ {
+		left[i] = max(left[i-1], height[i])
+	}
+	right[len(height)-1] = height[len(height)-1]
+	for j := len(height) - 2; j >= 0; j-- {
+		right[j] = max(right[j+1], height[j])
+	}
+	result := 0
+	for i := 0; i < len(height); i++ {
+		result += min(left[i], right[i]) - height[i]
+	}
+	return result
+}
+func max(i, j int) int {
+	if i > j {
+		return i
+	}
+	return j
+}
 func min(i, j int) int {
 	if i < j {
 		return i
