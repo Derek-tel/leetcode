@@ -70,6 +70,26 @@ func test(nums []int) []int {
 	return res
 }
 
+func four(nums []int) []int {
+	var result []int
+
+	for i := 0; i < len(nums); i++ {
+		num := nums[i]
+		if num < 0 {
+			num = -num
+		}
+		if nums[num-1] > 0 {
+			nums[num-1] = -nums[num-1]
+		}
+	}
+	for i := 0; i < len(nums); i++ {
+		if nums[i] > 0 {
+			result = append(result, i+1)
+		}
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(findDisappearedNumbers([]int{4, 3, 2, 7, 8, 2, 3, 1}))
 }
