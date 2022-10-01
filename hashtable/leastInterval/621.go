@@ -61,6 +61,22 @@ func get(task []byte, n int) int {
 	return max(len(task), minLength)
 }
 
+func four(task []byte, n int) int {
+	counter := make([]int, 26)
+	for _, b := range task {
+		counter[b-'A']++
+	}
+	sort.Ints(counter)
+	most := counter[len(counter)-1]
+	minLength := (n+1)*(most-1) + 1
+	for i := 0; i < len(counter)-1; i++ {
+		if counter[i] == most {
+			minLength++
+		}
+	}
+	return max(len(task), minLength)
+}
+
 func main() {
 	fmt.Println(leastInterval([]byte("AAAAABBBBB"), 2))
 }
