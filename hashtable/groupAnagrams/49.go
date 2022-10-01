@@ -96,3 +96,32 @@ func get(str []string) [][]string {
 	}
 	return res
 }
+
+type helper []rune
+
+func (h helper) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+
+func (h helper) Less(i, j int) bool {
+	return h[i] < h[j]
+}
+func (h helper) Len() int {
+	return len(h)
+}
+
+func four(str []string) [][]string {
+	dict := make(map[string][]string)
+	for _, s := range str {
+		temp := helper(s)
+		sort.Sort(temp)
+		tag := dict[string(temp)]
+		tag = append(tag, s)
+		dict[string(temp)] = tag
+	}
+	var result [][]string
+	for _, strings := range dict {
+		result = append(result, strings)
+	}
+	return result
+}
