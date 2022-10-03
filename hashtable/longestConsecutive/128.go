@@ -65,7 +65,29 @@ func test(nums []int) int {
 		if !mapDic[num-1] {
 			current := 1
 
-			if mapDic[num+1] {
+			for mapDic[num+1] {
+				current++
+				num++
+			}
+			if current > longest {
+				longest = current
+			}
+		}
+	}
+	return longest
+}
+
+func four(nums []int) int {
+	dic := make(map[int]bool)
+
+	for _, n := range nums {
+		dic[n] = true
+	}
+	longest := 0
+	for _, num := range nums {
+		if !dic[num-1] {
+			current := 1
+			for dic[num+1] {
 				current++
 				num++
 			}
