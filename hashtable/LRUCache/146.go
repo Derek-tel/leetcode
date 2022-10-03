@@ -170,3 +170,79 @@ func (lru *LruCache) Put(key, value int) {
 		}
 	}
 }
+
+type LruNode struct {
+	key        int
+	value      int
+	prev, next *LruNode
+}
+
+type Lru struct {
+	size       int
+	capacity   int
+	table      map[int]*LruNode
+	head, tail *LruNode
+}
+
+func initLruNode(key, value int) *LruNode {
+	return &LruNode{key: key, value: value}
+}
+func Construct(capacity int) Lru {
+	cache := Lru{
+		capacity: capacity,
+		table:    map[int]*LruNode{},
+		head:     initLruNode(0, 0),
+		tail:     initLruNode(0, 0),
+	}
+	cache.head.next = cache.tail
+	cache.tail.prev = cache.head
+	return cache
+}
+
+func (l *Lru) Get(key int) int {
+	if node, ok := l.table[key]; ok {
+		l.MoveToHead(node)
+		return node.value
+	} else {
+		return -1
+	}
+}
+
+func (l *Lru) MoveToHead(node *LruNode) {
+	l.MoveNode(node)
+	l.AddToHead(node)
+}
+
+func (l *Lru) MoveNode(node *LruNode) {
+	node.prev.next = node.next
+	node.next.prev = node.prev
+}
+
+func (l *Lru) AddToHead(node *LruNode) {
+	node.prev = l.head
+	node.next = l.head.next
+	l.head.next.prev = node
+	l.head.next = node
+}
+func (l *Lru) removeTail() *LruNode {
+	node := l.tail.prev
+	l.MoveNode(node)
+	return node
+}
+
+func (l *Lru) Put(key, value int) {
+	if node, ok := l.table[key]; ok {
+		node.value = value
+		l.MoveToHead(node)
+	} else {
+		n := initLruNode(key, value)
+		l.table[key] = n
+		l.AddToHead(n)
+		l.size++
+		for l.size > l.capacity {
+			del := l.removeTail()
+			delete(l.table, del.key)
+			l.size--
+		}
+	}
+}
