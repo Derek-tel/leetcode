@@ -148,3 +148,51 @@ func get(nums []int, k int) []int {
 	}
 	return res
 }
+
+type couple struct {
+	value int
+	count int
+}
+
+type helper []*couple
+
+func (h helper) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+
+func (h helper) Less(i, j int) bool {
+	return h[i].count > h[j].count
+}
+
+func (h helper) Len() int {
+	return len(h)
+}
+
+func (h *helper) Push(x any) {
+	item := x.(*couple)
+	*h = append(*h, item)
+}
+
+func (h *helper) Pop() any {
+	length := len(*h)
+	item := (*h)[length-1]
+	*h = (*h)[:length-1]
+	return item
+}
+
+func four(nums []int, k int) []int {
+	count := make(map[int]int)
+	for _, num := range nums {
+		count[num]++
+	}
+	h := helper{}
+	for val, c := range count {
+		heap.Push(&h, &couple{value: val, count: c})
+	}
+	result := []int{}
+	for len(result) < k {
+		item := heap.Pop(&h).(*couple)
+		result = append(result, item.value)
+	}
+	return result
+}
