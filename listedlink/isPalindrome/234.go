@@ -127,3 +127,38 @@ func helper(head *ListNode) *ListNode {
 	}
 	return pre
 }
+
+func four(head *ListNode) bool {
+	if head == nil {
+		return true
+	}
+	fast, slow := head, head
+	var handler func(*ListNode) *ListNode
+	handler = func(node *ListNode) *ListNode {
+		var pre *ListNode
+		cur := node
+		for cur != nil {
+			next := cur.Next
+			cur.Next = pre
+			pre = cur
+			cur = next
+		}
+		return pre
+	}
+	for fast.Next != nil && fast.Next.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+	half := slow
+	second := handler(half.Next)
+	p1 := head
+	p2 := second
+	for p1 != nil && p2 != nil {
+		if p1.Val != p2.Val {
+			return false
+		}
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	return true
+}
