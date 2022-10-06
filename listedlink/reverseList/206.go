@@ -46,3 +46,19 @@ func test(head *ListNode) *ListNode {
 
 	return dumpy.Next
 }
+
+func three(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+	preHead := &ListNode{-1, head}
+	pre := preHead
+	cur := head
+	for cur.Next != nil {
+		next := cur.Next
+		cur.Next = next.Next
+		next.Next = pre.Next
+		pre.Next = next
+	}
+	return preHead.Next
+}
