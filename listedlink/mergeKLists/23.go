@@ -121,3 +121,37 @@ func help(listA, listB *ListNode) *ListNode {
 	}
 	return preHead.Next
 }
+
+func four(lists []*ListNode) *ListNode {
+	var handler func(*ListNode, *ListNode) *ListNode
+	handler = func(listA *ListNode, listB *ListNode) *ListNode {
+		preHead := &ListNode{Val: -1}
+		pre := preHead
+		for listA != nil && listB != nil {
+			if listA.Val < listB.Val {
+				pre.Next = listA
+				listA = listA.Next
+			} else {
+				pre.Next = listB
+				listB = listB.Next
+			}
+			pre = pre.Next
+		}
+		if listA == nil {
+			pre.Next = listB
+		} else {
+			pre.Next = listA
+		}
+		return preHead.Next
+	}
+	if len(lists) == 0 {
+		return nil
+	} else if len(lists) == 1 {
+		return lists[0]
+	} else if len(lists) == 2 {
+		return handler(lists[0], lists[1])
+	} else {
+		mid := len(lists) / 2
+		return handler(four(lists[0:mid]), four(lists[mid:]))
+	}
+}
