@@ -123,6 +123,33 @@ func helper(head *ListNode) *ListNode {
 	return slow
 }
 
+func four(head *ListNode) *ListNode {
+	var findMiddle func(*ListNode) *ListNode
+	findMiddle = func(node *ListNode) *ListNode {
+		fast := node
+		slow := node
+		for fast.Next != nil && fast.Next.Next != nil {
+			fast = fast.Next.Next
+			slow = slow.Next
+		}
+		return slow
+	}
+	length := 0
+	cur := head
+	for cur != nil {
+		length++
+		cur = cur.Next
+	}
+	if length <= 1 {
+		return head
+	}
+	mid := findMiddle(head)
+	flag := mid.Next
+	mid.Next = nil
+	mid = flag
+	return merge(four(head), four(mid))
+}
+
 func main() {
 	a := &ListNode{1, nil}
 	b := &ListNode{3, a}
