@@ -151,6 +151,55 @@ func get(nums []int, k int) []int {
 	return ans
 }
 
+var demo []int
+
+type demoHeap []int
+
+func (d demoHeap) Less(i, j int) bool {
+	return demo[d[i]] > demo[d[j]]
+}
+func (d demoHeap) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
+}
+func (d demoHeap) Len() int {
+	return len(d)
+}
+func (d *demoHeap) Push(x interface{}) {
+	item := x.(int)
+	*d = append(*d, item)
+}
+func (d *demoHeap) Pop() interface{} {
+	length := len(*d)
+	item := (*d)[length-1]
+	*d = (*d)[:length-1]
+	return item
+}
+
+func four(nums []int, k int) []int {
+	demo = nums
+	d := make(demoHeap, k)
+	for i := 0; i < k; i++ {
+		d[i] = i
+	}
+	heap.Init(&d)
+	result := []int{}
+	result = append(result, nums[d[0]])
+	for i := k; i < len(nums); i++ {
+		heap.Push(&d, i)
+		for d[0] <= i-k {
+			heap.Pop(&d)
+		}
+		result = append(result, nums[d[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
+	d := make([]int, 2)
+	for i := 0; i < 5; i++ {
+		d = append(d, 1)
+	}
+	fmt.Println(d)
+
 }
