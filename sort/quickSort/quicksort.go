@@ -153,6 +153,63 @@ func five(nums []int) []int {
 	return nums
 }
 
+func six(nums []int) []int {
+	var sort func([]int, int, int)
+	sort = func(ints []int, left int, right int) {
+		if left >= right {
+			return
+		}
+		start, end := left, right
+		ints[start], ints[(start+end)>>1] = ints[(start+end)>>1], ints[start]
+		p := ints[start]
+		for start < end {
+			for start < end && p <= ints[end] {
+				end--
+			}
+			ints[start] = ints[end]
+			for start < end && p >= ints[start] {
+				start++
+			}
+			ints[end] = ints[start]
+		}
+		ints[start] = p
+		sort(ints, left, start-1)
+		sort(ints, start+1, right)
+	}
+	sort(nums, 0, len(nums)-1)
+	return nums
+}
+
+func seven(nums []int, start, end int) []int {
+	p := start
+	temp := nums[start]
+	i, j := start, end
+	for i <= j {
+		for j >= p && nums[j] >= temp {
+			j--
+		}
+		if j >= p {
+			nums[j], nums[p] = nums[p], nums[j]
+			p = j
+		}
+		for i <= p && nums[i] <= p {
+			i++
+		}
+		if i <= p {
+			nums[i], nums[p] = nums[p], nums[i]
+			p = i
+		}
+	}
+	nums[p] = temp
+	if p-start >= 1 {
+		seven(nums, start, p-1)
+	}
+	if end-p >= 1 {
+		seven(nums, p+1, end)
+	}
+	return nums
+}
+
 func main() {
 	test := []int{1, 1, 3, 4, 5, -1, -2, 6, 1}
 	fmt.Println(four(test))
