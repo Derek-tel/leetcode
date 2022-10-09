@@ -176,12 +176,66 @@ func up(nums []int, i int, size int) {
 	}
 }
 
+type demo [][]int
+
+func (d demo) Less(i, j int) bool {
+	return d[i][0] < d[j][0]
+}
+
+func (d demo) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
+}
+func (d demo) Len() int {
+	return len(d)
+}
+
+func four(interval [][]int) int {
+	sort.Sort(demo(interval))
+	var buildHeap func([]int)
+	var modifyHeap func([]int, int, int)
+	buildHeap = func(ints []int) {
+		size := len(ints)
+		for i := size / 2; i >= 0; i-- {
+			modifyHeap(ints, i, size)
+		}
+	}
+	modifyHeap = func(ints []int, i int, size int) {
+		left := i*2 + 1
+		right := i*2 + 2
+		small := i
+		if left < size && ints[left] <= ints[small] {
+			small = left
+		}
+		if right < size && ints[right] <= ints[small] {
+			small = right
+		}
+		if small != i {
+			ints[i], ints[small] = ints[small], ints[i]
+			modifyHeap(ints, small, size)
+		}
+	}
+	var result []int
+	for i := 0; i < len(interval); i++ {
+		if len(result) == 0 {
+			result = append(result, interval[i][1])
+		} else {
+			if interval[i][0] < result[0] {
+				result = append(result, interval[i][1])
+			} else {
+				result[0] = interval[i][1]
+			}
+		}
+		buildHeap(result)
+	}
+	return len(result)
+}
+
 func main() {
 
 	test := [][]int{
 		{0, 6},
-		{15, 20},
+		{9, 20},
 		{5, 10},
 	}
-	fmt.Println(get(test))
+	fmt.Println(four(test))
 }
