@@ -31,6 +31,27 @@ func merge(intervals [][]int) [][]int {
 	res = append(res, temp)
 	return res
 }
+func four(intervals [][]int) [][]int {
+	var result [][]int
+	sort2.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	temp := intervals[0]
+	for i := 1; i < len(intervals); i++ {
+		if temp[1] < intervals[i][0] {
+			result = append(result, temp)
+			temp = intervals[i]
+		} else {
+			if temp[1] >= intervals[i][1] {
+				continue
+			} else {
+				temp[1] = intervals[i][1]
+			}
+		}
+	}
+	result = append(result, temp)
+	return result
+}
 
 func test(intervals [][]int) [][]int {
 	res := [][]int{}
