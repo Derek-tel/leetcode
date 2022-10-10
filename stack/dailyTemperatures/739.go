@@ -62,3 +62,21 @@ func get(temperatures []int) []int {
 	}
 	return ans
 }
+
+func four(temperatures []int) []int {
+	if len(temperatures) == 0 {
+		return temperatures
+	}
+	stack := []int{}
+	result := make([]int, len(temperatures))
+	for i := 0; i < len(temperatures); i++ {
+		today := temperatures[i]
+		for len(stack) != 0 && today > temperatures[stack[len(stack)-1]] {
+			prev := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			result[prev] = i - prev
+		}
+		stack = append(stack, i)
+	}
+	return result
+}
