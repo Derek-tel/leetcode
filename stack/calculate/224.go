@@ -134,6 +134,37 @@ func get(s string) int {
 	return res
 }
 
+func five(s string) int {
+	result := 0
+	sign := 1
+	stack := []int{sign}
+	for i := 0; i < len(s); {
+		ch := s[i]
+		switch ch {
+		case ' ':
+			i++
+		case '+':
+			sign = stack[len(stack)-1]
+			i++
+		case '-':
+			sign = -stack[len(stack)-1]
+			i++
+		case '(':
+			stack = append(stack, sign)
+			i++
+		case ')':
+			stack = stack[:len(stack)-1]
+			i++
+		default:
+			num := 0
+			for ; i < len(s) && s[i] >= '0' && s[i] <= '9'; i++ {
+				num = num*10 + int(s[i]-'0')
+			}
+			result = result + sign*num
+		}
+	}
+	return result
+}
 func main() {
 	s := " 2-1 + 2 "
 	calculate(s)
