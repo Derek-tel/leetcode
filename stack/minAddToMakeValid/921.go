@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func minAddToMakeValid(s string) int {
 	if len(s) == 0 {
@@ -40,6 +42,20 @@ func test(s string) int {
 func get(s string) int {
 	var stack []rune
 
+	for _, ch := range s {
+		if ch == '(' {
+			stack = append(stack, ch)
+		} else if ch == ')' && len(stack) > 0 && stack[len(stack)-1] == '(' {
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, ch)
+		}
+	}
+	return len(stack)
+}
+
+func four(s string) int {
+	var stack []rune
 	for _, ch := range s {
 		if ch == '(' {
 			stack = append(stack, ch)
