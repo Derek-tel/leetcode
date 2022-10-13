@@ -60,6 +60,37 @@ func (s *Stack) Push(val int) {
 	s.minStack = append(s.minStack, min(val, m))
 }
 
+type minStack struct {
+	stack    []int
+	minStack []int
+}
+
+func Constructer() minStack {
+	return minStack{
+		stack:    []int{},
+		minStack: []int{math.MaxInt},
+	}
+}
+
+func (this *minStack) Push(val int) {
+	this.stack = append(this.stack, val)
+	top := this.minStack[len(this.minStack)-1]
+	this.minStack = append(this.minStack, min(top, val))
+}
+
+func (this *minStack) Pop() {
+	this.stack = this.stack[:len(this.stack)-1]
+	this.minStack = this.minStack[:len(this.minStack)-1]
+}
+
+func (this *minStack) Top() int {
+	return this.stack[len(this.stack)-1]
+}
+
+func (this *minStack) GetMin() int {
+	return this.minStack[len(this.minStack)-1]
+}
+
 /**
  * Your MinStack object will be instantiated and called as such:
  * obj := Constructor();
