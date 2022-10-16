@@ -85,5 +85,5 @@ func five(s string) int {
 
 func main() {
 	s := "abcbcbbb"
-	fmt.Println(test(s))
+	fmt.Println(five(s))
 }
