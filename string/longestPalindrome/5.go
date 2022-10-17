@@ -84,6 +84,32 @@ func helper(s string, i, j int) int {
 	return j - i - 1
 }
 
+func four(s string) string {
+	begin := -1
+	maxLen := 0
+	var handler func(string, int, int) int
+	handler = func(str string, i int, j int) int {
+		for i >= 0 && j < len(str) {
+			if str[i] != str[j] {
+				break
+			}
+			i--
+			j++
+		}
+		return j - i + 1
+	}
+	for i := 0; i < len(s)-1; i++ {
+		oddLen := handler(s, i, i)
+		evenLen := handler(s, i, i+1)
+		current := max(oddLen, evenLen)
+		if current > maxLen {
+			maxLen = current
+			begin = i - (current-1)/2
+		}
+	}
+	return s[begin : begin+maxLen]
+}
+
 func main() {
 	test := "ab"
 	fmt.Println(longestPalindrome(test))
