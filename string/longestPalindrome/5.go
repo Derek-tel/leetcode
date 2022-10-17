@@ -85,7 +85,7 @@ func helper(s string, i, j int) int {
 }
 
 func four(s string) string {
-	begin := -1
+	begin := 0
 	maxLen := 0
 	var handler func(string, int, int) int
 	handler = func(str string, i int, j int) int {
@@ -98,7 +98,7 @@ func four(s string) string {
 		}
 		return j - i + 1
 	}
-	for i := 0; i < len(s)-1; i++ {
+	for i := 0; i < len(s); i++ {
 		oddLen := handler(s, i, i)
 		evenLen := handler(s, i, i+1)
 		current := max(oddLen, evenLen)
