@@ -134,11 +134,39 @@ func four(s, t string) string {
 		freqT[t[i]-'a']++
 	}
 	left, right := 0, 0
-
+	count := 0
+	minWin := math.MaxInt
+	finalLeft, finalRight := -1, -1
+	for left < len(s) {
+		if right < len(s) && count < len(t) {
+			freqS[s[right]-'a']++
+			if freqS[s[right]-'a'] <= freqT[s[right]-'a'] {
+				count++
+			}
+			right++
+		} else {
+			if count == len(t) && right-left+1 <= minWin {
+				fmt.Println(left, right)
+				minWin = right - left + 1
+				finalLeft = left
+				finalRight = right
+			}
+			if freqS[s[left]-'a'] <= freqT[s[left]-'a'] {
+				count--
+			}
+			freqS[s[left]-'a']--
+			left++
+		}
+	}
+	var result string
+	if finalRight != -1 {
+		result = s[finalLeft:finalRight]
+	}
+	return result
 }
 
 func main() {
-	s := "aaaacddDAddddb"
-	t := "adA"
-	fmt.Println(minWindow(s, t))
+	s := "cabwefgewcwaefgcf"
+	t := "cae"
+	fmt.Println(four(s, t))
 }
