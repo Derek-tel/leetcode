@@ -125,6 +125,18 @@ func get(s, t string) string {
 	return result
 }
 
+func four(s, t string) string {
+	if len(s) == 0 || len(s) == 0 || len(s) < len(t) {
+		return ""
+	}
+	var freqS, freqT [256]int
+	for i := 0; i < len(t); i++ {
+		freqT[t[i]-'a']++
+	}
+	left, right := 0, 0
+
+}
+
 func main() {
 	s := "aaaacddDAddddb"
 	t := "adA"

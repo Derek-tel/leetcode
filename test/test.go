@@ -69,6 +69,10 @@ func main() {
 	a = a | (1 << 0)
 	fmt.Println(biu.ToBinaryString(a)) //a输出结果:[10100000 00000001]
 	fmt.Println(fmt.Sprintf("%x", a))  //a输出结果:[a001]
+
+	var sss uint64
+	sss = 18446744073709551615
+	fmt.Println(fmt.Sprintf("%x", sss))
 }
 
 func ISO9797M2Padding(origin string, n int) string {
