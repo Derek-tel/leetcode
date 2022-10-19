@@ -158,6 +158,48 @@ func getter(s string, segNum int, start int) {
 	}
 }
 
+func four(s string) []string {
+	var segConst = 4
+	var resp []string
+	var numbers = make([]int, segConst)
+	var handler func(string, int, int)
+	handler = func(str string, segIndex int, start int) {
+		if segIndex == segConst {
+			if start == len(str) {
+				add := ""
+				for i, v := range numbers {
+					add = add + strconv.Itoa(v)
+					if i < segConst-1 {
+						add += "."
+					}
+				}
+				resp = append(resp, add)
+			} else {
+				return
+			}
+		}
+		if start == len(str) {
+			return
+		}
+		if str[start] == '0' {
+			numbers[segIndex] = 0
+			handler(str, segIndex+1, start+1)
+		}
+		address := 0
+		for i := start; i < len(s); i++ {
+			address = address*10 + int(s[i]-'0')
+			if address > 0 && address <= 0xFF {
+				numbers[segIndex] = address
+				handler(str, segIndex+1, i+1)
+			} else {
+				break
+			}
+		}
+	}
+	handler(s, 0, 0)
+	return resp
+}
+
 func main() {
 	test := "0000"
 	fmt.Println(restoreIpAddresses(test))
