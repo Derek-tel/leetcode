@@ -57,3 +57,20 @@ func get(root *TreeNode) *TreeNode {
 	helper(root)
 	return root
 }
+
+func four(root *TreeNode) *TreeNode {
+	sum := 0
+	var helper func(*TreeNode)
+
+	helper = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		helper(node.Right)
+		sum = sum + node.Val
+		node.Val = sum
+		helper(node.Left)
+	}
+	helper(root)
+	return root
+}
