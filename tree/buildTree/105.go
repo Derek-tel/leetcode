@@ -50,3 +50,18 @@ func get(preOrder []int, inorder []int) *TreeNode {
 	}
 	return root
 }
+
+func four(preOrder []int, inorder []int) *TreeNode {
+	if len(preOrder) == 0 || len(inorder) == 0 {
+		return nil
+	}
+	rootVal := preOrder[0]
+	root := &TreeNode{rootVal, nil, nil}
+	for i, v := range inorder {
+		if v == rootVal {
+			root.Left = four(preOrder[1:i+1], inorder[0:i])
+			root.Right = four(preOrder[i+1:], inorder[i+1:])
+		}
+	}
+	return root
+}
