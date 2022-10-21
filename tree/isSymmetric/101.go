@@ -76,3 +76,17 @@ func charge(left *TreeNode, right *TreeNode) bool {
 		return false
 	}
 }
+
+func five(root *TreeNode) bool {
+	var handler func(*TreeNode, *TreeNode) bool
+	handler = func(left *TreeNode, right *TreeNode) bool {
+		if left == nil && right == nil {
+			return true
+		}
+		if left == nil || right == nil {
+			return false
+		}
+		return left.Val == right.Val && handler(left.Left, right.Right) && handler(left.Right, right.Left)
+	}
+	return handler(root.Left, root.Right)
+}
