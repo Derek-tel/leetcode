@@ -89,3 +89,15 @@ func helper(root *TreeNode, max, min int) bool {
 	}
 	return root.Val > min && root.Val < max && helper(root.Left, root.Val, min) && helper(root.Right, max, root.Val)
 }
+
+func five(root *TreeNode) bool {
+	var handler func(*TreeNode, float64, float64) bool
+	handler = func(node *TreeNode, min float64, max float64) bool {
+		if node == nil {
+			return true
+		}
+		v := float64(node.Val)
+		return v > min && v < max && handler(node.Left, min, v) && handler(node.Right, v, max)
+	}
+	return handler(root, math.Inf(-1), math.Inf(1))
+}
