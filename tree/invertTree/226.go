@@ -50,3 +50,13 @@ func helper(root *TreeNode) *TreeNode {
 	root.Left, root.Right = root.Right, root.Left
 	return root
 }
+
+func four(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	four(root.Left)
+	four(root.Right)
+	root.Left, root.Right = root.Right, root.Left
+	return root
+}
