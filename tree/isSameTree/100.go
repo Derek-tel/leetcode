@@ -35,3 +35,13 @@ func get(p, q *TreeNode) bool {
 	}
 	return p.Val == q.Val && get(p.Left, q.Left) && get(p.Right, q.Right)
 }
+
+func four(p *TreeNode, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	return p.Val == q.Val && four(p.Left, q.Left) && four(p.Right, q.Right)
+}
