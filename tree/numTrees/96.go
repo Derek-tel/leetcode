@@ -54,6 +54,31 @@ func four(n int) int {
 	return dp[n]
 }
 
+func five(n int) int {
+	if n == 0 {
+		return 0
+	}
+	var handler func(int, int) []*TreeNode
+	handler = func(start int, end int) []*TreeNode {
+		var trees []*TreeNode
+		if start > end {
+			return append(trees, nil)
+		}
+		for i := start; i <= end; i++ {
+			left := handler(start, i-1)
+			right := handler(i+1, end)
+			for _, l := range left {
+				for _, r := range right {
+					tree := &TreeNode{i, l, r}
+					trees = append(trees, tree)
+				}
+			}
+		}
+		return trees
+	}
+	return len(handler(1, n))
+}
+
 func main() {
 	fmt.Println(numTrees(3))
 }
