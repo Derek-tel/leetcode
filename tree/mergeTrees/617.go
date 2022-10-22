@@ -52,3 +52,7 @@ func get(rootQ, rootP *TreeNode) *TreeNode {
 	rootQ.Right = get(rootQ.Right, rootP.Right)
 	return rootQ
 }
+
+func four() {
+
+}
