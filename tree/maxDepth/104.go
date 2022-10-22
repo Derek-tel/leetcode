@@ -33,3 +33,10 @@ func get(root *TreeNode) int {
 	}
 	return max(get(root.Left), get(root.Right)) + 1
 }
+
+func five(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return max(five(root.Left), five(root.Right)) + 1
+}
