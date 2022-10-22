@@ -137,3 +137,28 @@ func dfs(root *TreeNode) [][]int {
 	dfs(root, 0)
 	return res
 }
+
+func six(root *TreeNode) [][]int {
+	var result [][]int
+	if root == nil {
+		return result
+	}
+	queue := []*TreeNode{root}
+	for len(queue) > 0 {
+		length := len(queue)
+		var temp []int
+		for i := 0; i < length; i++ {
+			top := queue[i]
+			temp = append(temp, top.Val)
+			if top.Left != nil {
+				queue = append(queue, top.Left)
+			}
+			if top.Right != nil {
+				queue = append(queue, top.Right)
+			}
+		}
+		result = append(result, temp)
+		queue = queue[length:]
+	}
+	return result
+}
