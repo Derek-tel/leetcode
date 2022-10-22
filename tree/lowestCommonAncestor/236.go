@@ -63,3 +63,21 @@ func get(root, q, p *TreeNode) *TreeNode {
 	}
 	return left
 }
+
+func four(root, p, q *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if root.Val == q.Val || root.Val == p.Val {
+		return root
+	}
+	left := four(root.Left, p, q)
+	right := four(root.Right, p, q)
+	if left != nil && right != nil {
+		return root
+	}
+	if left == nil {
+		return right
+	}
+	return left
+}
