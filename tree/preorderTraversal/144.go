@@ -53,3 +53,19 @@ func get(root *TreeNode) []int {
 	}
 	return res
 }
+
+func four(root *TreeNode) []int {
+	var stack []*TreeNode
+	var result []int
+	for len(stack) > 0 || root != nil {
+		for root != nil {
+			result = append(result, root.Val)
+			stack = append(stack, root)
+			root = root.Left
+		}
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		root = top.Right
+	}
+	return result
+}
