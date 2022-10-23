@@ -79,3 +79,23 @@ func get(head *ListNode, x int) *ListNode {
 	largeHead.Next = nil
 	return small.Next
 }
+
+func four(head *ListNode, x int) *ListNode {
+	small := &ListNode{}
+	smallHead := small
+	large := &ListNode{}
+	largeHead := large
+	for head != nil {
+		if head.Val >= x {
+			largeHead.Next = head
+			largeHead = largeHead.Next
+		} else {
+			smallHead.Next = head
+			smallHead = smallHead.Next
+		}
+		head = head.Next
+	}
+	smallHead.Next = large.Next
+	largeHead.Next = nil
+	return small.Next
+}
