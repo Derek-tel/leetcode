@@ -72,3 +72,23 @@ func test(height []int) int {
 	}
 	return ans
 }
+
+func four(height []int) int {
+	length := len(height)
+	if length == 0 {
+		return 0
+	}
+	left, right := 0, length-1
+	ans := 0
+
+	for left < right {
+		area := min(height[left], height[right]) * (right - left)
+		ans = max(ans, area)
+		if height[left] < height[right] {
+			left++
+		} else {
+			right--
+		}
+	}
+	return ans
+}
