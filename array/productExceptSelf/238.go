@@ -47,6 +47,21 @@ func three(nums []int) []int {
 	return answer
 }
 
+func four(nums []int) []int {
+	length := len(nums)
+	result := make([]int, length)
+	result[0] = 1
+	for i := 1; i < length; i++ {
+		result[i] = result[i-1] * nums[i-1]
+	}
+	r := 1
+	for j := length - 1; j >= 0; j-- {
+		result[j] = result[j] * r
+		r = r * nums[j]
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(productExceptSelf([]int{1, 2, 3, 4}))
 }
