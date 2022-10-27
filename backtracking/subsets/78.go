@@ -101,6 +101,25 @@ func five(nums []int) [][]int {
 	return result
 }
 
+func six(nums []int) [][]int {
+	var result [][]int
+	var com []int
+	var handler func(int)
+	handler = func(index int) {
+		if index == len(nums) {
+			result = append(result, append([]int(nil), com...))
+			return
+		}
+		handler(index + 1)
+
+		com = append(com, nums[index])
+		handler(index + 1)
+		com = com[:len(com)-1]
+	}
+	handler(0)
+	return result
+}
+
 func main() {
 	test := []int{1, 2, 3}
 	fmt.Println(test1(test))

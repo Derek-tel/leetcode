@@ -55,6 +55,18 @@ func two(digits string) []string {
 	helper(digits, 0, "", &result)
 	return result
 }
+
+var phone map[string]string = map[string]string{
+	"2": "abc",
+	"3": "def",
+	"4": "ghi",
+	"5": "jkl",
+	"6": "mno",
+	"7": "pqrs",
+	"8": "tuv",
+	"9": "wxyz",
+}
+
 func main() {
 	fmt.Println(letterCombinations("23"))
 }
