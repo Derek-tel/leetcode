@@ -137,6 +137,13 @@ func five(nums []int, target int) int {
 	return result
 }
 
+func abs(a int) int {
+	if a > 0 {
+		return a
+	}
+	return -a
+}
+
 func main() {
 	test := []int{-1, 0, 0, 1, 0}
 	result := threeSumClosest(test, 2)
