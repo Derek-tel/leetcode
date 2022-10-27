@@ -67,6 +67,27 @@ var phone map[string]string = map[string]string{
 	"9": "wxyz",
 }
 
+func three(digits string) []string {
+	if len(digits) < 1 {
+		return []string{}
+	}
+	var result []string
+	var handler func(int, string)
+	handler = func(i int, s string) {
+		if i == len(digits) {
+			result = append(result, s)
+			return
+		}
+		dig := digits[i]
+		char := phone[string(dig)]
+		for _, v := range char {
+			handler(i+1, s+string(v))
+		}
+	}
+	handler(0, "")
+	return result
+}
+
 func main() {
 	fmt.Println(letterCombinations("23"))
 }
