@@ -110,11 +110,31 @@ func four(nums []int, target int) int {
 	return result
 }
 
-func abs(a int) int {
-	if a > 0 {
-		return a
+func five(nums []int, target int) int {
+	sort.Ints(nums)
+	length := len(nums)
+	var result int
+	flag := math.MaxInt
+	for i := 0; i < length; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
+		for start, end := i+1, length-1; start < end; {
+			sum := nums[i] + nums[start] + nums[end]
+			if abs(sum-target) < flag {
+				flag = abs(sum - target)
+				result = sum
+			}
+			if sum == target {
+				return sum
+			} else if sum < target {
+				start++
+			} else {
+				end--
+			}
+		}
 	}
-	return -a
+	return result
 }
 
 func main() {
