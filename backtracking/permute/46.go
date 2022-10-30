@@ -118,3 +118,27 @@ func six(nums []int) [][]int {
 	helper(0)
 	return result
 }
+
+func seven(nums []int) [][]int {
+	use := make([]bool, len(nums))
+	var temp []int
+	var result [][]int
+	var helper func(int)
+	helper = func(index int) {
+		if index == len(nums) {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+		for i := 0; i < len(nums); i++ {
+			if !use[i] {
+				use[i] = true
+				temp = append(temp, nums[i])
+				helper(index + 1)
+				temp = temp[:len(temp)-1]
+				use[i] = false
+			}
+		}
+	}
+	helper(0)
+	return result
+}
