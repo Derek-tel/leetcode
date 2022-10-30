@@ -177,6 +177,64 @@ func judge(s string) bool {
 	}
 	return cut == 0
 }
+
+func four(s string) []string {
+	var valid func(string) bool
+	valid = func(str string) bool {
+		cut := 0
+		for i := 0; i < len(str); i++ {
+			if str[i] == '(' {
+				cut++
+			} else if str[i] == ')' {
+				cut--
+				if cut < 0 {
+					return false
+				}
+			}
+		}
+		return cut == 0
+	}
+	lmove, rmove := 0, 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			lmove++
+		} else if s[i] == ')' {
+			if lmove > 0 {
+				lmove--
+			} else {
+				rmove++
+			}
+		}
+	}
+
+	var result []string
+	var backtrack func(string, int, int, int)
+	backtrack = func(str string, index int, lmove int, rmove int) {
+		if lmove == 0 && rmove == 0 {
+			if valid(str) {
+				result = append(result, str)
+			}
+			return
+		}
+		for i := index; i < len(str); i++ {
+			if i != index && str[i] == str[i-1] {
+				continue
+			}
+			if lmove+rmove > len(str)-index {
+				return
+			}
+			if str[i] == '(' && lmove > 0 {
+				backtrack(str[:i]+str[i+1:], i, lmove-1, rmove)
+			}
+			if str[i] == ')' && rmove > 0 {
+				backtrack(str[:i]+str[i+1:], i, lmove, rmove-1)
+			}
+		}
+	}
+
+	backtrack(s, 0, lmove, rmove)
+	return result
+}
 func main() {
 	test := "()())()"
 	fmt.Println(removeInvalidParentheses(test))
