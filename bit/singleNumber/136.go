@@ -29,6 +29,14 @@ func three(nums []int) int {
 	}
 	return res
 }
+
+func four(nums []int) int {
+	res := 0
+	for _, v := range nums {
+		res ^= v
+	}
+	return res
+}
 func main() {
 	fmt.Println(singleNumber([]int{2, 2, 1}))
 }
