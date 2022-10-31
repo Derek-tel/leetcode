@@ -49,38 +49,6 @@ func lastEqual(nums []int, target int) int {
 	return -1
 }
 
-func firstGreater(nums []int, target int) int {
-	low, high := 0, len(nums)
-	for low <= high {
-		mid := low + (high-low)>>1
-		if nums[mid] >= target {
-			if mid == 0 || nums[mid-1] < target {
-				return mid
-			}
-			high = mid - 1
-		} else {
-			low = mid + 1
-		}
-	}
-	return -1
-}
-
-func lastLess(nums []int, target int) int {
-	low, high := 0, len(nums)-1
-	for low <= high {
-		mid := low + (high-low)>>1
-		if nums[mid] <= target {
-			if mid == len(nums)-1 || nums[mid+1] > target {
-				return mid
-			}
-			low = mid + 1
-		} else {
-			high = mid - 1
-		}
-	}
-	return -1
-}
-
 // 二分查找第一个与 target 相等的元素，时间复杂度 O(logn)
 func searchFirstEqualElement(nums []int, target int) int {
 	low, high := 0, len(nums)-1
