@@ -143,3 +143,37 @@ func four(numCourses int, prerequisites [][]int) bool {
 	}
 	return valid
 }
+
+func five(numCourses int, prerequisites [][]int) bool {
+	var (
+		valid  = true
+		edge   = make([][]int, numCourses)
+		visit  = make([]int, numCourses) //0 not yet 1 ing 2 done
+		helper func(int)
+	)
+	helper = func(i int) {
+		visit[i] = 1
+		for _, site := range edge[i] {
+			if visit[site] == 0 {
+				helper(site)
+				if !valid {
+					return
+				}
+			} else if visit[site] == 1 {
+				valid = false
+				return
+			}
+		}
+		visit[i] = 2
+		return
+	}
+	for _, prerequisite := range prerequisites {
+		edge[prerequisite[1]] = append(edge[prerequisite[1]], prerequisite[0])
+	}
+	for i := 0; i < numCourses && valid; i++ {
+		if visit[i] == 0 {
+			helper(i)
+		}
+	}
+	return valid
+}
