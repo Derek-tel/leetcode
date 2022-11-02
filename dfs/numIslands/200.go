@@ -101,3 +101,33 @@ func three(grid [][]byte) int {
 	}
 	return count
 }
+
+func four(grid [][]byte) int {
+	h, w := len(grid), len(grid[0])
+	count := 0
+	var helper func(int, int)
+	helper = func(x int, y int) {
+		grid[x][y] = '0'
+		if x+1 < h && grid[x+1][y] == '1' {
+			helper(x+1, y)
+		}
+		if x-1 >= 0 && grid[x-1][y] == '1' {
+			helper(x-1, y)
+		}
+		if y+1 < w && grid[x][y+1] == '1' {
+			helper(x, y+1)
+		}
+		if y-1 >= 0 && grid[x][y-1] == '1' {
+			helper(x, y-1)
+		}
+	}
+	for i := 0; i < h; i++ {
+		for j := 0; j < w; j++ {
+			if grid[i][j] == '1' {
+				count++
+				helper(i, j)
+			}
+		}
+	}
+	return count
+}
