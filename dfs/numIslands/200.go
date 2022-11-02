@@ -102,7 +102,7 @@ func three(grid [][]byte) int {
 	return count
 }
 
-func four(grid [][]byte) int {
+func fourCount(grid [][]byte) int {
 	h, w := len(grid), len(grid[0])
 	count := 0
 	var helper func(int, int)
