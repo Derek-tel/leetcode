@@ -40,7 +40,7 @@ func test(nums []int) bool {
 	dp[0] = true
 	for i := 0; i < len(nums); i++ {
 		v := nums[i]
-		for j := half; j > v; j-- {
+		for j := half; j >= v; j-- {
 			dp[j] = dp[j] || dp[j-v]
 		}
 	}
@@ -59,7 +59,7 @@ func get(nums []int) bool {
 	dp := make([]bool, half+1)
 	dp[0] = true
 	for _, num := range nums {
-		for j := half; j > num; j-- {
+		for j := half; j >= num; j-- {
 			dp[j] = dp[j] || dp[j-num]
 		}
 	}
@@ -78,7 +78,7 @@ func demo(nums []int) bool {
 	dp := make([]bool, half+1)
 	dp[0] = true
 	for _, num := range nums {
-		for j := half; j > num; j-- {
+		for j := half; j >= num; j-- {
 			dp[j] = dp[j] || dp[j-num]
 		}
 	}
@@ -104,7 +104,33 @@ func five(nums []int) bool {
 	dp := make([]bool, half+1)
 	dp[0] = true
 	for _, num := range nums {
-		for j := half; j > num; j-- {
+		for j := half; j >= num; j-- {
+			dp[j] = dp[j] || dp[j-num]
+		}
+	}
+	return dp[half]
+}
+
+func six(nums []int) bool {
+	count := 0
+	max := 0
+	for i := 0; i < len(nums); i++ {
+		count += nums[i]
+		if nums[i] > max {
+			max = nums[i]
+		}
+	}
+	if count%2 == 1 {
+		return false
+	}
+	half := count / 2
+	if max > half {
+		return false
+	}
+	dp := make([]bool, half+1)
+	dp[0] = true
+	for _, num := range nums {
+		for j := half; j >= num; j-- {
 			dp[j] = dp[j] || dp[j-num]
 		}
 	}
