@@ -176,6 +176,44 @@ func six(matrix [][]byte) int {
 	return result
 }
 
+func seven(matrix [][]byte) int {
+	var handler func([]int) int
+	handler = func(h []int) int {
+		length := len(h) + 2
+		stack := []int{}
+		res := 0
+		getHeight := func(i int) int {
+			if i == 0 || i == length-1 {
+				return -1
+			}
+			return h[i-1]
+		}
+		for i := 0; i < length; i++ {
+			for len(stack) > 0 && getHeight(i) < getHeight(stack[len(stack)-1]) {
+				top := stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+				area := getHeight(top) * (i - stack[len(stack)-1] - 1)
+				res = max(res, area)
+			}
+			stack = append(stack, i)
+		}
+		return res
+	}
+	high := make([]int, len(matrix[0]))
+	var result int
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] == '1' {
+				high[j] = high[j] + 1
+			} else {
+				high[j] = 0
+			}
+		}
+		result = max(result, handler(high))
+	}
+	return result
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
