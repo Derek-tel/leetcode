@@ -124,3 +124,23 @@ func five(root *TreeNode) int {
 	doRob, notRob := handler(root)
 	return max(doRob, notRob)
 }
+
+func six(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	var handler func(*TreeNode) (int, int)
+	handler = func(node *TreeNode) (int, int) {
+		if node == nil {
+			return 0, 0
+		}
+		robLeft, notRobLeft := handler(node.Left)
+		robRight, notRobRight := handler(node.Right)
+		do := node.Val + notRobRight + notRobLeft
+		notDo := max(robLeft, notRobLeft) + max(robRight, notRobRight)
+
+		return do, notDo
+	}
+	doRob, doNotRob := handler(root)
+	return max(doRob, doNotRob)
+}
