@@ -125,3 +125,21 @@ func four(str []string) [][]string {
 	}
 	return result
 }
+
+func five(str []string) [][]string {
+	dict := make(map[string][]string)
+	for _, s := range str {
+		v := []rune(s)
+		sort.Slice(v, func(i, j int) bool {
+			return v[i] < v[j]
+		})
+		tag := dict[string(v)]
+		tag = append(tag, s)
+		dict[string(v)] = tag
+	}
+	var result [][]string
+	for _, strings := range dict {
+		result = append(result, strings)
+	}
+	return result
+}
