@@ -87,3 +87,23 @@ func four(headA, headB *ListNode) *ListNode {
 	}
 	return pa
 }
+
+func five(headA, headB *ListNode) *ListNode {
+	pa, pb := headA, headB
+	if pa == nil || pb == nil {
+		return nil
+	}
+	for pa != pb {
+		if pa == nil {
+			pa = headB
+		} else {
+			pa = pa.Next
+		}
+		if pb == nil {
+			pb = headA
+		} else {
+			pb = pb.Next
+		}
+	}
+	return pa
+}
