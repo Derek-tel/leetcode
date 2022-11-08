@@ -196,3 +196,51 @@ func four(nums []int, k int) []int {
 	}
 	return result
 }
+
+type Counter struct {
+	Value int
+	Count int
+}
+
+type Counters []*Counter
+
+func (c Counters) Swap(i, j int) {
+	c[i], c[j] = c[j], c[i]
+}
+func (c Counters) Less(i, j int) bool {
+	return c[i].Count > c[j].Count
+}
+
+func (c Counters) Len() int {
+	return len(c)
+}
+
+func (c *Counters) Push(x any) {
+	v := x.(*Counter)
+	*c = append(*c, v)
+}
+
+func (c *Counters) Pop() any {
+	v := (*c)[len(*c)-1]
+	*c = (*c)[:len(*c)-1]
+	return v
+}
+
+func five(nums []int, k int) []int {
+	count := make(map[int]int)
+	for _, num := range nums {
+		count[num]++
+	}
+	var c Counters
+	for i, v := range count {
+		temp := &Counter{Value: i, Count: v}
+		heap.Push(&c, temp)
+	}
+	var result []int
+
+	for len(result) < k {
+		item := heap.Pop(&c).(*Counter)
+		result = append(result, item.Value)
+	}
+	return result
+}
