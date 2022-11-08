@@ -60,3 +60,18 @@ func four(nums []int, k int) int {
 	}
 	return count
 }
+
+func five(nums []int, k int) int {
+	count := 0
+	prefix := make(map[int]int)
+	prefix[0] = 1
+	sum := 0
+	for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+		if _, ok := prefix[sum-k]; ok {
+			count += prefix[sum-k]
+		}
+		prefix[sum] += 1
+	}
+	return count
+}
