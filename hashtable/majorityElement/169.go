@@ -75,3 +75,21 @@ func four(nums []int) int {
 	}
 	return p
 }
+
+func five(nums []int) int {
+	count := 0
+	var p int
+	for _, v := range nums {
+		if count == 0 {
+			p = v
+			count++
+		} else {
+			if p == v {
+				count++
+			} else {
+				count--
+			}
+		}
+	}
+	return p
+}
