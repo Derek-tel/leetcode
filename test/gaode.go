@@ -37,22 +37,22 @@ func main() {
 	fmt.Println(dic)
 
 	const (
-		//a = iota
-		//b
-		//c
-		//d = "ha"
-		//e
-		//f = 100
-		//g
-		//h = iota
-		//i
+		a = iota
+		b
+		c
+		d = "ha"
+		e
+		f = 100
+		g
+		h = iota
+		i
 		mutexLocked           = 1 << iota // 持有锁的标记
 		mutexWoken                        //唤醒标记
 		mutexStarving                     // 饥饿标记
 		mutexWaiterShift      = iota      //阻塞等待的数量
 		starvationThresholdNs = 1e6       //饥饿阈值 1ms
 	)
-	//fmt.Println(a, b, c, d, e, f, g, h, i)
+	fmt.Println(a, b, c, d, e, f, g, h, i)
 	fmt.Println(mutexLocked, mutexWoken, mutexStarving, mutexWaiterShift, starvationThresholdNs)
 	slc := make([]int, 100)
 	leakSlice := slc[:10]
