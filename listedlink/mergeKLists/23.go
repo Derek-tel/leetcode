@@ -155,3 +155,38 @@ func four(lists []*ListNode) *ListNode {
 		return handler(four(lists[0:mid]), four(lists[mid:]))
 	}
 }
+
+func five(lists []*ListNode) *ListNode {
+	var handler func(*ListNode, *ListNode) *ListNode
+	handler = func(left *ListNode, right *ListNode) *ListNode {
+		preHead := &ListNode{}
+		pre := preHead
+		for left != nil && right != nil {
+			if left.Val < right.Val {
+				pre.Next = left
+				left = left.Next
+			} else {
+				pre.Next = right
+				right = right.Next
+			}
+			pre = pre.Next
+		}
+		if left != nil {
+			pre.Next = left
+		} else {
+			pre.Next = right
+		}
+		return preHead.Next
+	}
+
+	if len(lists) == 0 {
+		return nil
+	} else if len(lists) == 1 {
+		return lists[0]
+	} else if len(lists) == 2 {
+		return handler(lists[0], lists[1])
+	} else {
+		mid := len(lists) / 2
+		return handler(five(lists[:mid]), five(lists[mid:]))
+	}
+}
