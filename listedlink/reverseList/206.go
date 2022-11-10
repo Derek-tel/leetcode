@@ -62,3 +62,19 @@ func three(head *ListNode) *ListNode {
 	}
 	return preHead.Next
 }
+
+func four(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+	dumpy := &ListNode{Next: head}
+	pre := dumpy
+	cur := head
+	for cur.Next != nil {
+		next := cur.Next
+		cur.Next = next.Next
+		next.Next = pre.Next
+		pre.Next = next
+	}
+	return dumpy.Next
+}
