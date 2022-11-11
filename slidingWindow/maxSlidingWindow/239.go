@@ -194,6 +194,52 @@ func four(nums []int, k int) []int {
 	return result
 }
 
+var fiveTag []int
+
+type FiveHead []int
+
+func (f FiveHead) Less(i, j int) bool {
+	return fiveTag[f[i]] > fiveTag[f[j]]
+}
+
+func (f FiveHead) Swap(i, j int) {
+	f[i], f[j] = f[j], f[i]
+}
+
+func (f FiveHead) Len() int {
+	return len(f)
+}
+
+func (f *FiveHead) Push(x interface{}) {
+	item := x.(int)
+	*f = append(*f, item)
+}
+
+func (f *FiveHead) Pop() interface{} {
+	length := len(*f)
+	top := (*f)[length-1]
+	*f = (*f)[:length-1]
+	return top
+}
+
+func five(nums []int, k int) []int {
+	fiveTag = nums
+	handler := FiveHead{}
+	for i := 0; i < k; i++ {
+		handler = append(handler, i)
+	}
+	heap.Init(&handler)
+	result := []int{nums[handler[0]]}
+	for i := k; i < len(nums); i++ {
+		heap.Push(&handler, i)
+		for handler[0] <= i-k {
+			heap.Pop(&handler)
+		}
+		result = append(result, nums[handler[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)
