@@ -143,6 +143,39 @@ func four(nums []int, k int) int {
 	return nums[0]
 }
 
+func five(nums []int, k int) int {
+	var headModify func([]int, int, int)
+	headModify = func(ints []int, i int, size int) {
+		left := i*2 + 1
+		right := i*2 + 2
+		largest := i
+		if left < size && ints[left] > ints[largest] {
+			largest = left
+		}
+		if right < size && ints[right] > ints[largest] {
+			largest = right
+		}
+		if i != largest {
+			ints[i], ints[largest] = ints[largest], ints[i]
+			headModify(ints, largest, size)
+		}
+	}
+	var buildHead func([]int, int)
+	buildHead = func(ints []int, size int) {
+		for i := size / 2; i >= 0; i-- {
+			headModify(ints, i, size)
+		}
+	}
+	size := len(nums)
+	buildHead(nums, size)
+	for i := len(nums) - 1; i > len(nums)-k; i-- {
+		nums[0], nums[i] = nums[i], nums[0]
+		size--
+		headModify(nums, 0, size)
+	}
+	return nums[0]
+}
+
 func main() {
 	test := []int{1, 4, 2, 7, 9, -1}
 	fmt.Println(get(test, 2))
