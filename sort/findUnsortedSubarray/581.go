@@ -117,6 +117,31 @@ func four(nums []int) int {
 	return result
 }
 
+func five(nums []int) int {
+	left := 0
+	right := 0
+	flag := nums[0]
+	for i := 0; i < len(nums); i++ {
+		if nums[i] >= flag {
+			flag = nums[i]
+		} else {
+			right = i
+		}
+	}
+	flag = nums[len(nums)-1]
+	for i := len(nums) - 1; i >= 0; i-- {
+		if nums[i] <= flag {
+			flag = nums[i]
+		} else {
+			left = i
+		}
+	}
+	if right == 0 {
+		return 0
+	}
+	return right - left + 1
+}
+
 func main() {
 	test := []int{2, 6, 4, 11, 10, 9, 15}
 	fmt.Println(findUnsortedSubarray(test))
