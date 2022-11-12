@@ -156,6 +156,38 @@ func four(nums []int) []int {
 	return handler(four(left), four(right))
 }
 
+func five(nums []int) []int {
+	var handler func([]int, []int) []int
+	handler = func(sliceA []int, sliceB []int) []int {
+		var temp []int
+		i, j := 0, 0
+		for {
+			if i >= len(sliceA) {
+				temp = append(temp, sliceB[j:]...)
+				break
+			}
+			if j >= len(sliceB) {
+				temp = append(temp, sliceA[i:]...)
+			}
+			if sliceA[i] < sliceB[j] {
+				temp = append(temp, sliceA[i])
+				i++
+			} else {
+				temp = append(temp, sliceB[j])
+				j++
+			}
+		}
+		return temp
+	}
+	if len(nums) <= 1 {
+		return nums
+	}
+	mid := len(nums) / 2
+	left := nums[:mid]
+	right := nums[mid:]
+	return handler(five(left), five(right))
+}
+
 // 测试：
 func main() {
 	arr := []int{0, 1, 5, 2, 3, 8, 0, 4, 9, 2}
