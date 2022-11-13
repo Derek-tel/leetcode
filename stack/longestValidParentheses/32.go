@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func longestValidParentheses(s string) int {
 	if len(s) == 0 {
 		return 0
@@ -84,9 +86,38 @@ func four(s string) int {
 	return result
 }
 
+func five(s string) int {
+	stack := []int{-1}
+	result := 0
+	maxInt := func(i, j int) int {
+		if i > j {
+			return i
+		}
+		return j
+	}
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			stack = append(stack, i)
+		} else {
+			stack = stack[:len(stack)-1]
+			fmt.Println(stack)
+			if len(stack) == 0 {
+				stack = append(stack, i)
+			} else {
+				result = maxInt(result, i-stack[len(stack)-1])
+			}
+		}
+	}
+	return result
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
 	}
 	return j
+}
+
+func main() {
+	fmt.Println(five("(())"))
 }
