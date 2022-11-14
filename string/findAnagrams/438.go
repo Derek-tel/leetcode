@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func findAnagrams(s string, p string) []int {
 	var freq [256]int
@@ -136,6 +138,37 @@ func get(s, p string) []int {
 }
 
 func five(s, p string) []int {
+	lengthS := len(s)
+	lengthP := len(p)
+
+	var freq [256]int
+	for i := 0; i < lengthP; i++ {
+		freq[p[i]-'a']++
+	}
+	left, right := 0, 0
+	count := lengthP
+	var result []int
+	for right < lengthS {
+		if freq[s[right]-'a'] > 0 {
+			count--
+		}
+		freq[s[right]-'a']--
+		if count == 0 {
+			result = append(result, left)
+		}
+		if right-left+1 == lengthP {
+			if freq[s[left]-'a'] >= 0 {
+				count++
+			}
+			freq[s[left]-'a']++
+			left++
+		}
+		right++
+	}
+	return result
+}
+
+func six(s, p string) []int {
 	lengthS := len(s)
 	lengthP := len(p)
 
