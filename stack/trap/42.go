@@ -44,8 +44,8 @@ func trap2(height []int) int {
 func three(height []int) int {
 	var stack []int
 	result := 0
-	for index, h := range height {
-		for len(stack) != 0 && h > height[stack[len(stack)-1]] {
+	for index, high := range height {
+		for len(stack) > 0 && high > height[stack[len(stack)-1]] {
 			top := stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
 			if len(stack) == 0 {
@@ -53,7 +53,26 @@ func three(height []int) int {
 			}
 			seek := stack[len(stack)-1]
 			weight := index - seek - 1
-			result += weight * (min(h, height[seek]) - height[top])
+			result = result + (min(high, height[seek])-height[top])*weight
+		}
+		stack = append(stack, index)
+	}
+	return result
+}
+
+func four(height []int) int {
+	var stack []int
+	result := 0
+	for index, high := range height {
+		for len(stack) > 0 && high > height[stack[len(stack)-1]] {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				break
+			}
+			seek := stack[len(stack)-1]
+			weight := index - seek - 1
+			result = result + (min(high, height[seek])-height[top])*weight
 		}
 		stack = append(stack, index)
 	}
