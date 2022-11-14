@@ -1,94 +1,43 @@
 package MinStack
 
-import (
-	"math"
-)
+import "math"
 
 type MinStack struct {
-	stack    []int
-	minStack []int
+	Stack []int
+	Min   []int
 }
 
 func Constructor() MinStack {
 	return MinStack{
-		stack:    []int{},
-		minStack: []int{math.MaxInt},
+		Stack: []int{},
+		Min:   []int{math.MaxInt},
 	}
 }
 
 func (this *MinStack) Push(val int) {
-	this.stack = append(this.stack, val)
-	m := this.minStack[len(this.minStack)-1]
-	this.minStack = append(this.minStack, min(m, val))
-}
-
-func min(i, j int) int {
-	if i < j {
-		return i
-	}
-	return j
+	this.Stack = append(this.Stack, val)
+	top := this.Min[len(this.Min)-1]
+	this.Min = append(this.Min, min(top, val))
 }
 
 func (this *MinStack) Pop() {
-	this.stack = this.stack[:len(this.stack)-1]
-	this.minStack = this.minStack[:len(this.minStack)-1]
+	this.Stack = this.Stack[:len(this.Stack)-1]
+	this.Min = this.Min[:len(this.Min)-1]
 }
 
 func (this *MinStack) Top() int {
-	return this.stack[len(this.stack)-1]
+	return this.Stack[len(this.Stack)-1]
 }
 
 func (this *MinStack) GetMin() int {
-	return this.minStack[len(this.minStack)-1]
+	return this.Min[len(this.Min)-1]
 }
 
-type Stack struct {
-	stack    []int
-	minStack []int
-}
-
-func constructor() Stack {
-	return Stack{
-		stack:    []int{},
-		minStack: []int{math.MaxInt},
+func min(x, j int) int {
+	if x < j {
+		return x
 	}
-}
-
-func (s *Stack) Push(val int) {
-	s.stack = append(s.minStack, val)
-	m := s.minStack[len(s.minStack)-1]
-	s.minStack = append(s.minStack, min(val, m))
-}
-
-type minStack struct {
-	stack    []int
-	minStack []int
-}
-
-func Constructer() minStack {
-	return minStack{
-		stack:    []int{},
-		minStack: []int{math.MaxInt},
-	}
-}
-
-func (this *minStack) Push(val int) {
-	this.stack = append(this.stack, val)
-	top := this.minStack[len(this.minStack)-1]
-	this.minStack = append(this.minStack, min(top, val))
-}
-
-func (this *minStack) Pop() {
-	this.stack = this.stack[:len(this.stack)-1]
-	this.minStack = this.minStack[:len(this.minStack)-1]
-}
-
-func (this *minStack) Top() int {
-	return this.stack[len(this.stack)-1]
-}
-
-func (this *minStack) GetMin() int {
-	return this.minStack[len(this.minStack)-1]
+	return j
 }
 
 /**
