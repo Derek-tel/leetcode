@@ -295,6 +295,62 @@ func five(beginWord, endWord string, wordList []string) int {
 	}
 	return 0
 }
+
+func six(beginWord, endWord string, wordList []string) int {
+	wordId := make(map[string]int)
+	var graph [][]int
+	addWord := func(word string) int {
+		id, ok := wordId[word]
+		if !ok {
+			id = len(wordId)
+			wordId[word] = id
+			graph = append(graph, []int{})
+		}
+		return id
+	}
+	addEdge := func(word string) int {
+		id := addWord(word)
+		wordByte := []byte(word)
+		for i, v := range wordByte {
+			wordByte[i] = '*'
+			extId := addWord(string(wordByte))
+			graph[id] = append(graph[id], extId)
+			graph[extId] = append(graph[extId], id)
+			wordByte[i] = v
+		}
+		return id
+	}
+	for _, v := range wordList {
+		addEdge(v)
+	}
+	beginId := addEdge(beginWord)
+	endId, has := wordId[endWord]
+	if !has {
+		return 0
+	}
+	inf := math.MaxInt
+	dist := make([]int, len(wordId))
+	for i := 0; i < len(dist); i++ {
+		dist[i] = inf
+	}
+	dist[beginId] = 0
+	queue := []int{beginId}
+	for len(queue) > 0 {
+		top := queue[0]
+		queue = queue[1:]
+		if top == endId {
+			return dist[top]/2 + 1
+		}
+		for _, v := range graph[top] {
+			if dist[v] == inf {
+				queue = append(queue, v)
+				dist[v] = dist[top] + 1
+			}
+
+		}
+	}
+	return 0
+}
 func main() {
 
 	beginWord := "hit"
