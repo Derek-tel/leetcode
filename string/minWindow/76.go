@@ -70,7 +70,7 @@ func test(s string, t string) string {
 				minWin = right - left
 			}
 
-			if sFreq[s[left]-'a'] == tFreq[s[left]-'a'] {
+			if sFreq[s[left]-'a'] <= tFreq[s[left]-'a'] {
 				count++
 			}
 			sFreq[s[left]-'a']--
@@ -79,7 +79,7 @@ func test(s string, t string) string {
 	}
 	result := ""
 	if finalRight != -1 {
-		result = s[finalLeft : finalRight+1]
+		result = s[finalLeft:finalRight]
 	}
 	return result
 }
@@ -159,6 +159,45 @@ func four(s, t string) string {
 		}
 	}
 	var result string
+	if finalRight != -1 {
+		result = s[finalLeft:finalRight]
+	}
+	return result
+}
+
+func five(s string, t string) string {
+	var result string
+	if len(s) == 0 || len(t) == 0 || len(s) < len(t) {
+		return result
+	}
+	var freqS, freqT [256]int
+	for i := 0; i < len(t); i++ {
+		freqT[t[i]-'a']++
+	}
+	left, right := 0, 0
+	count := 0
+	minLen := math.MaxInt
+	finalLeft, finalRight := -1, -1
+	for left < len(s) {
+		if right < len(s) && count < len(t) {
+			freqS[s[right]-'a']++
+			if freqS[s[right]-'a'] <= freqT[s[right]-'a'] {
+				count++
+			}
+			right++
+		} else {
+			if count == len(t) && right-left+1 < minLen {
+				finalLeft = left
+				finalRight = right
+				minLen = right - left + 1
+			}
+			if freqS[s[left]-'a'] <= freqT[s[left]-'a'] {
+				count--
+			}
+			freqS[s[left]-'a']--
+			left++
+		}
+	}
 	if finalRight != -1 {
 		result = s[finalLeft:finalRight]
 	}
