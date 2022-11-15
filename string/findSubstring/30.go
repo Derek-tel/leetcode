@@ -145,7 +145,6 @@ func helper(s string, words []string) []int {
 
 func five(s string, words []string) []int {
 	var result []int
-
 	wordLen := len(words[0])
 	wordCount := len(words)
 	if wordCount < 1 || len(s) < wordLen*wordCount {
@@ -157,6 +156,43 @@ func five(s string, words []string) []int {
 	}
 	for i := 0; i < wordLen; i++ {
 		var count int
+		var tempDic = make(map[string]int)
+		for left, right := i, i; right <= len(s)-wordLen; right += wordLen {
+			word := s[right : right+wordLen]
+			if num, ok := dic[word]; ok {
+				for tempDic[word] >= num {
+					tempDic[s[left:left+wordLen]]--
+					count--
+					left = left + wordLen
+				}
+				tempDic[word]++
+				count++
+			} else {
+				left = right + wordLen
+				count = 0
+				tempDic = make(map[string]int)
+			}
+			if count == wordCount {
+				result = append(result, left)
+			}
+		}
+	}
+	return result
+}
+
+func six(s string, words []string) []int {
+	var result []int
+	wordLen := len(words[0])
+	wordCount := len(words)
+	if wordCount < 1 || len(s) < wordLen*wordCount {
+		return result
+	}
+	dic := make(map[string]int)
+	for _, word := range words {
+		dic[word]++
+	}
+	for i := 0; i < wordLen; i++ {
+		count := 0
 		var tempDic = make(map[string]int)
 		for left, right := i, i; right <= len(s)-wordLen; right += wordLen {
 			word := s[right : right+wordLen]
