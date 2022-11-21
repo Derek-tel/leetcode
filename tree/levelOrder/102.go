@@ -162,3 +162,27 @@ func six(root *TreeNode) [][]int {
 	}
 	return result
 }
+func seven(root *TreeNode) [][]int {
+	var result [][]int
+	if root == nil {
+		return result
+	}
+	queue := []*TreeNode{root}
+	for len(queue) > 0 {
+		length := len(queue)
+		var temp []int
+		for i := 0; i < length; i++ {
+			tag := queue[i]
+			temp = append(temp, tag.Val)
+			if tag.Left != nil {
+				queue = append(queue, tag.Left)
+			}
+			if tag.Right != nil {
+				queue = append(queue, tag.Right)
+			}
+		}
+		result = append(result, temp)
+		queue = queue[length:]
+	}
+	return result
+}
