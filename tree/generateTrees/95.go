@@ -110,3 +110,28 @@ func four(n int) []*TreeNode {
 
 	return handler(1, n)
 }
+
+func five(n int) []*TreeNode {
+	if n == 0 {
+		return []*TreeNode{}
+	}
+	var handler func(int, int) []*TreeNode
+	handler = func(start int, end int) []*TreeNode {
+		tree := []*TreeNode{}
+		if start > end {
+			return append(tree, nil)
+		}
+		for i := start; i <= end; i++ {
+			left := handler(start, i-1)
+			right := handler(i+1, end)
+			for _, l := range left {
+				for _, r := range right {
+					flag := &TreeNode{i, l, r}
+					tree = append(tree, flag)
+				}
+			}
+		}
+		return tree
+	}
+	return handler(1, n)
+}
