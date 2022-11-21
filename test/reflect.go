@@ -20,7 +20,7 @@ func main() {
 
 	tem := User{}
 	val := reflect.ValueOf(&tem)
-	fc := val.MethodByName("put")
-	fc.Call([]reflect.Value{reflect.ValueOf(1)})
+	fc := val.MethodByName("Put")
+	fc.Call([]reflect.Value{reflect.ValueOf(3)})
 
 }
