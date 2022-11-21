@@ -81,3 +81,19 @@ func four(root *TreeNode) int {
 	helper(root)
 	return sum
 }
+
+func five(root *TreeNode) int {
+	sum := 0
+	var helper func(*TreeNode) int
+	helper = func(node *TreeNode) int {
+		if node == nil {
+			return 0
+		}
+		left := helper(node.Left)
+		right := helper(node.Right)
+		sum = max(sum, left+right)
+		return max(left, right) + 1
+	}
+	helper(root)
+	return sum
+}
