@@ -54,3 +54,15 @@ func four(nums []int) []int {
 	}
 	return nums
 }
+
+func five(nums []int) []int {
+	length := len(nums)
+	flag := 0
+	for i := 0; i < length; i++ {
+		if nums[i] != 0 {
+			nums[i], nums[flag] = nums[flag], nums[i]
+			flag++
+		}
+	}
+	return nums
+}
