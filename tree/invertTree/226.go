@@ -60,3 +60,13 @@ func four(root *TreeNode) *TreeNode {
 	root.Left, root.Right = root.Right, root.Left
 	return root
 }
+
+func five(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	five(root.Left)
+	five(root.Right)
+	root.Left, root.Right = root.Right, root.Left
+	return root
+}
