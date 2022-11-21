@@ -85,6 +85,26 @@ func four(nums1 []int, m int, nums2 []int, n int) {
 	}
 }
 
+func five(nums1 []int, m int, nums2 []int, n int) {
+	p := m + n - 1
+	pm := m - 1
+	pn := n - 1
+	for ; pm >= 0 && pn >= 0; p-- {
+		currentM := nums1[pm]
+		currentN := nums2[pn]
+		if currentM >= currentN {
+			nums1[p] = currentM
+			pm--
+		} else {
+			nums1[p] = currentN
+			pn--
+		}
+	}
+	for ; pn >= 0; pn-- {
+		nums1[pn] = nums2[pn]
+	}
+}
+
 func main() {
 	a := []int{1, 2, 3, 0, 0, 0}
 	b := []int{2, 5, 6}
