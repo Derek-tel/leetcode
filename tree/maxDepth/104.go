@@ -40,3 +40,10 @@ func five(root *TreeNode) int {
 	}
 	return max(five(root.Left), five(root.Right)) + 1
 }
+
+func six(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return max(six(root.Left), six(root.Right)) + 1
+}
