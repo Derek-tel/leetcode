@@ -74,3 +74,19 @@ func four(root *TreeNode) *TreeNode {
 	helper(root)
 	return root
 }
+
+func five(root *TreeNode) *TreeNode {
+	sum := 0
+	var handler func(*TreeNode)
+	handler = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		handler(node.Right)
+		sum = sum + node.Val
+		node.Val = sum
+		handler(node.Left)
+	}
+	handler(root)
+	return root
+}
