@@ -69,3 +69,7 @@ func four(root *TreeNode) []int {
 	}
 	return result
 }
+
+func five() {
+
+}
