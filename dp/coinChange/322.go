@@ -130,6 +130,7 @@ func seven(coins []int, amount int) int {
 	}
 	return dp[amount]
 }
+
 func main() {
 	a := []int{1, 2, 5}
 	amount := 1
