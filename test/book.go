@@ -29,18 +29,4 @@ func main() {
 
 	chA <- true
 	<-exit
-	demo := map[string]string{
-		"a":   "b",
-		"aa":  "bb",
-		"aaa": "bbbb",
-	}
-	fmt.Println(Map2Kvs(demo))
-}
-
-func Map2Kvs(m map[string]string) []string {
-	kvs := []string{}
-	for k, v := range m {
-		kvs = append(kvs, k, v)
-	}
-	return kvs
 }
