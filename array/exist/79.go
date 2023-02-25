@@ -209,6 +209,49 @@ func four(board [][]byte, word []byte) bool {
 	}
 	return false
 }
+
+type dirFivePair struct {
+	x, y int
+}
+
+var dirFive = []dirFivePair{{-1, 0}, {1, 0}, {0, 1}, {0, -1}}
+
+func five(board [][]byte, word []byte) bool {
+	h, w := len(board), len(board[0])
+	visit := make([][]bool, h)
+	for i := 0; i < h; i++ {
+		visit[i] = make([]bool, w)
+	}
+	var handler func(int, int, int) bool
+	handler = func(x int, y int, k int) bool {
+		if board[x][y] != word[k] {
+			return false
+		}
+		if k == len(word)-1 {
+			return true
+		}
+		visit[x][y] = true
+		defer func() { visit[x][y] = false }()
+		for _, p := range dirFive {
+			if newX, newY := x+p.x, y+p.y; newX >= 0 && newX < h && newY >= 0 && newY < w && !visit[newX][newY] {
+				if handler(newX, newY, k+1) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
+	for i := 0; i < h; i++ {
+		for j := 0; j < w; j++ {
+			if handler(i, j, 0) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func returnValues() (result int) {
 	//var result int
 	defer func() {
