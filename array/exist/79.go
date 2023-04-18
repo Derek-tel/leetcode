@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
@@ -266,6 +267,16 @@ type Trie struct {
 	Children map[rune]*Trie
 }
 
+type KeyPicConfig struct {
+	Nfc    map[string]PartNumInfo `json:"nfc"`
+	Keyfob map[string]PartNumInfo `json:"keyfob"`
+}
+
+type PartNumInfo struct {
+	ListPage    string `json:"listPage"`
+	BatteryPage string `json:"batteryPage"`
+}
+
 func main() {
 	board := [][]byte{[]byte("ABCE"), []byte("SFCS"), []byte("ADEE")}
 	word := "ABCCED"
@@ -278,4 +289,24 @@ func main() {
 		fmt.Printf("%T", r)
 	}
 
+	k := KeyPicConfig{
+		Nfc: map[string]PartNumInfo{
+			"8893802714": {"xxx", "yyy"},
+			"6608064141": {"xxx", "yyy"},
+			"default":    {"xxx", "yyy"},
+		},
+		Keyfob: map[string]PartNumInfo{
+			"A990000001": {"xxx", "yyy"},
+			"A990000002": {"xxx", "yyy"},
+			"A990000003": {"xxx", "yyy"},
+			"default":    {"xxx", "yyy"},
+		},
+	}
+	b, _ := json.Marshal(k)
+	fmt.Println(string(b))
+
+	str := "{\"nfc\":{\"6608064141\":{\"listPage\":\"xxx\",\"batteryPage\":\"yyy\"},\"8893802714\":{\"listPage\":\"xxx\",\"batteryPage\":\"yyy\"},\"default\":{\"listPage\":\"xxx\",\"batteryPage\":\"yyy\"}},\"keyfob\":{\"A990000001\":{\"listPage\":\"xxx\",\"batteryPage\":\"yyy\"},\"A990000002\":{\"listPage\":\"xxx\",\"batteryPage\":\"yyy\"},\"A990000003\":{\"listPage\":\"xxx\",\"batteryPage\":\"yyy\"},\"default\":{\"listPage\":\"xxx\",\"batteryPage\":\"yyy\"}}}"
+	config := &KeyPicConfig{}
+	var _ = json.Unmarshal([]byte(str), config)
+	fmt.Println(fmt.Sprintf("%+v", *config))
 }
