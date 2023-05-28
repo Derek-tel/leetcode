@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func nextPermutation(nums []int) []int {
 	length := len(nums)
@@ -104,6 +106,26 @@ func five(num []int) []int {
 	return num
 }
 
+func six(nums []int) []int {
+	length := len(nums)
+	i, j := 0, 0
+	for i = length - 2; i >= 0; i-- {
+		if nums[i] < nums[i+1] {
+			break
+		}
+	}
+	if i >= 0 {
+		for j = length - 1; j > i; j-- {
+			if nums[i] < nums[j] {
+				break
+			}
+		}
+		swap(nums, i, j)
+	}
+	reverse(nums, i+1, length-1)
+	return nums
+}
+
 func reverse(nums []int, i, j int) {
 	for i < j {
 		swap(nums, i, j)
@@ -117,5 +139,5 @@ func swap(nums []int, i, j int) {
 }
 
 func main() {
-	fmt.Println(nextPermutation([]int{1, 2}))
+	fmt.Println(nextPermutation([]int{1, 2, 3, 8, 5, 7, 5, 4}))
 }
