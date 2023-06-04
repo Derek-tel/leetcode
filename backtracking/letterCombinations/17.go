@@ -88,6 +88,38 @@ func three(digits string) []string {
 	return result
 }
 
+var letters map[string]string = map[string]string{
+	"2": "abc",
+	"3": "def",
+	"4": "ghi",
+	"5": "jkl",
+	"6": "mno",
+	"7": "pqrs",
+	"8": "tuv",
+	"9": "wxyz",
+}
+
+func four(digits string) []string {
+	var result []string
+	if len(digits) < 1 {
+		return result
+	}
+	var handler func(int, string)
+	handler = func(i int, s string) {
+		if i == len(digits) {
+			result = append(result, s)
+			return
+		}
+		dig := digits[i]
+		char := letters[string(dig)]
+		for _, v := range char {
+			handler(i+1, s+string(v))
+		}
+	}
+	handler(0, "")
+	return result
+}
+
 func main() {
 	fmt.Println(letterCombinations("23"))
 }
