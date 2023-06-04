@@ -174,8 +174,8 @@ func main() {
 	//test := []int{-1, 0, 0, 1, 0}
 	//result := six(test, 2)
 	//fmt.Printf("resulut: %v", result)
-	test := []int{-3, 0, 1, 1, 1, 2}
-	result := six(test, 2)
+	testDemo := []int{-3, 0, 1, 1, 1, 2}
+	result := six(testDemo, 2)
 	fmt.Printf("resulut: %v \n", result)
 
 	left := 1
@@ -184,4 +184,18 @@ func main() {
 		continue
 	}
 	fmt.Println(left)
+
+	testDemo = []int{-3, 0, 1, 1, 1, 1, 1, 2}
+
+	fmt.Println(cap(testDemo))
+
+	tag := len(testDemo)
+	for i, i2 := range testDemo {
+		if i2 == 2 {
+			tag = i
+		}
+	}
+	fmt.Println(tag)
+	testDemo = append(testDemo[:tag], testDemo[tag+1:]...)
+	fmt.Println(testDemo)
 }

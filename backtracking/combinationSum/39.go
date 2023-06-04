@@ -188,10 +188,37 @@ func five(nums []int, target int) [][]int {
 	return result
 }
 
+func six(nums []int, target int) [][]int {
+	var com []int
+	var result [][]int
+	var handler func(int, int)
+	handler = func(index int, tar int) {
+		if index == len(nums) {
+			return
+		}
+		if tar == 0 {
+			result = append(result, append([]int(nil), com...))
+			return
+		}
+
+		//不选
+		handler(index+1, tar)
+
+		//选
+		if tar >= nums[index] {
+			com = append(com, nums[index])
+			handler(index, tar-nums[index])
+			com = com[:len(com)-1]
+		}
+	}
+	handler(0, target)
+	return result
+}
+
 func main() {
 	test := []int{2, 5, 3}
 	tar := 8
-	fmt.Println(combinationSum1(test, tar))
+	fmt.Println(six(test, tar))
 
 	fmt.Println(1 &^ 4)
 }
