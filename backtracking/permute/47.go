@@ -113,6 +113,32 @@ func four(nums []int) [][]int {
 	return result
 }
 
+func five(nums []int) [][]int {
+	sort.Ints(nums)
+	use := make([]bool, len(nums))
+	var temp []int
+	var result [][]int
+	var helper func(int)
+	helper = func(index int) {
+		if index == len(nums) {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+		for i := 0; i < len(nums); i++ {
+			if use[i] || i > 0 && use[i-1] && nums[i] == nums[i-1] {
+				continue
+			}
+			use[i] = true
+			temp = append(temp, nums[i])
+			helper(index + 1)
+			temp = temp[:len(temp)-1]
+			use[i] = false
+		}
+	}
+	helper(0)
+	return result
+}
+
 func main() {
 	test := []int{1, 1, 1, 2}
 	fmt.Println(permuteUnique(test))
