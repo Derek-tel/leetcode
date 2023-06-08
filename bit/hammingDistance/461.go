@@ -49,3 +49,11 @@ func six(x, y int) int {
 	}
 	return ans
 }
+
+func seven(x, y int) int {
+	ans := 0
+	for i := x ^ y; i > 0; i = i >> 1 {
+		ans = ans + i&1
+	}
+	return ans
+}
