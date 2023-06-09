@@ -208,3 +208,34 @@ func six(numCourses int, prerequisites [][]int) bool {
 	}
 	return valid
 }
+
+func seven(numCourses int, prerequisites [][]int) bool {
+	var valid = true
+	var edge = make([][]int, numCourses)
+	var visit = make([]int, numCourses)
+	var helper func(int)
+	helper = func(index int) {
+		visit[index] = 1
+		for _, next := range edge[index] {
+			if visit[next] == 0 {
+				helper(next)
+				if !valid {
+					return
+				}
+			} else if visit[next] == 1 {
+				valid = false
+				return
+			}
+		}
+		visit[index] = 2
+	}
+	for _, site := range prerequisites {
+		edge[site[1]] = append(edge[site[1]], site[0])
+	}
+	for i := 0; i < numCourses && valid; i++ {
+		if visit[i] == 0 {
+			helper(i)
+		}
+	}
+	return valid
+}
