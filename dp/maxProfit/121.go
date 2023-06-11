@@ -127,3 +127,20 @@ func seven(prices []int) int {
 	}
 	return result
 }
+
+func eight(price []int) int {
+	if len(price) == 0 {
+		return 0
+	}
+	var result = 0
+	min := price[0]
+	for i := 1; i < len(price); i++ {
+		if price[i]-min > result {
+			result = price[i] - min
+		}
+		if price[i] < min {
+			min = price[i]
+		}
+	}
+	return result
+}
