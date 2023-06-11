@@ -233,6 +233,7 @@ func eight(matrix [][]byte) int {
 				area := getHeight(top) * (i - stack[len(stack)-1] - 1)
 				res = max(res, area)
 			}
+			stack = append(stack, i)
 		}
 		return res
 	}
@@ -247,7 +248,7 @@ func eight(matrix [][]byte) int {
 				high[j] = 0
 			}
 		}
-		handler(high)
+		result = max(result, handler(high))
 	}
 	return result
 }
