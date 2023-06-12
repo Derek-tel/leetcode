@@ -195,6 +195,37 @@ func six(grid [][]int) int {
 	return dp[row-1][col-1]
 }
 
+func seven(grid [][]int) int {
+	row, col := len(grid), len(grid[0])
+	if row == 0 || col == 0 {
+		return 0
+	}
+	dp := make([][]int, row)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]int, col)
+	}
+	for i := 0; i < row; i++ {
+		if i == 0 {
+			dp[i][0] = grid[0][0]
+		} else {
+			dp[i][0] = dp[i-1][0] + grid[i][0]
+		}
+	}
+	for j := 0; j < col; j++ {
+		if j == 0 {
+			dp[0][j] = grid[0][0]
+		} else {
+			dp[0][j] = dp[0][j-1] + grid[0][j]
+		}
+	}
+	for i := 1; i < row; i++ {
+		for j := 1; j < col; j++ {
+			dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+		}
+	}
+	return dp[row-1][col-1]
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
