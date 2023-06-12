@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 type pair struct {
@@ -318,4 +319,12 @@ func main() {
 	for _, r := range "hello,世界" {
 		fmt.Printf("%T", r)
 	}
+	fmt.Println("----")
+	current := time.Now()
+	fmt.Println(current)
+	updateTime := time.Unix(current.Unix(), 0)
+	fmt.Println(updateTime)
+
+	fmt.Println(updateTime.UnixNano() / 1e6)
+
 }
