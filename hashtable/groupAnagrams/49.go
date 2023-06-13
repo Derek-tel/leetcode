@@ -143,3 +143,33 @@ func five(str []string) [][]string {
 	}
 	return result
 }
+
+type sixHelper []rune
+
+func (s sixHelper) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s sixHelper) Less(i, j int) bool {
+	return s[i] < s[j]
+}
+
+func (s sixHelper) Len() int {
+	return len(s)
+}
+
+func six(str []string) [][]string {
+	var result [][]string
+	dic := make(map[string][]string)
+	for _, s := range str {
+		temp := helper(s)
+		sort.Sort(temp)
+		tag := dic[string(temp)]
+		tag = append(tag, s)
+		dic[string(temp)] = tag
+	}
+
+	for _, strings := range dic {
+		result = append(result, strings)
+	}
+	return result
+}
