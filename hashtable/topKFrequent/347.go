@@ -244,3 +244,45 @@ func five(nums []int, k int) []int {
 	}
 	return result
 }
+
+type SixCounter struct {
+	Value, Count int
+}
+type sixCounters []*SixCounter
+
+func (s sixCounters) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s sixCounters) Less(i, j int) bool {
+	return s[i].Count > s[j].Count
+}
+func (s sixCounters) Len() int {
+	return len(s)
+}
+func (s *sixCounters) Push(x interface{}) {
+	v := x.(*SixCounter)
+	*s = append(*s, v)
+}
+func (s *sixCounters) Pop() interface{} {
+	v := (*s)[len(*s)-1]
+	*s = (*s)[:len(*s)-1]
+	return v
+}
+
+func six(nums []int, k int) []int {
+	count := make(map[int]int)
+	for _, num := range nums {
+		count[num]++
+	}
+	var s sixCounters
+	for i, v := range count {
+		temp := &SixCounter{Value: i, Count: v}
+		heap.Push(&s, temp)
+	}
+	var result []int
+	for len(result) < k {
+		v := heap.Pop(&s).(*SixCounter)
+		result = append(result, v.Value)
+	}
+	return result
+}
