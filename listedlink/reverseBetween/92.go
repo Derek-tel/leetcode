@@ -122,3 +122,25 @@ func five(head *ListNode, left int, right int) *ListNode {
 	}
 	return preHead.Next
 }
+
+func six(head *ListNode, left int, right int) *ListNode {
+	if head == nil || left >= right {
+		return head
+	}
+	preHead := &ListNode{Next: head}
+	pre := preHead
+	for i := 1; pre.Next != nil && i < left; i++ {
+		pre = pre.Next
+	}
+	if pre.Next == nil {
+		return head
+	}
+	cur := pre.Next
+	for i := 0; i < right-left; i++ {
+		next := cur.Next
+		cur.Next = next.Next
+		next.Next = pre.Next
+		pre.Next = next
+	}
+	return preHead.Next
+}
