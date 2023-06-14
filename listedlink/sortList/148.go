@@ -190,7 +190,7 @@ func six(head *ListNode) *ListNode {
 	}
 	length := 0
 	cur := head
-	for cur.Next != nil {
+	for cur != nil {
 		cur = cur.Next
 		length++
 	}
