@@ -105,3 +105,21 @@ func five(head *ListNode, n int) *ListNode {
 	slow.Next = slow.Next.Next
 	return preHead.Next
 }
+
+func six(head *ListNode, n int) *ListNode {
+	if head == nil {
+		return nil
+	}
+	preHead := &ListNode{Next: head}
+	slow := preHead
+	fast := head
+	for i := n; i > 0; i-- {
+		fast = fast.Next
+	}
+	for fast != nil {
+		fast = fast.Next
+		slow = slow.Next
+	}
+	slow.Next = slow.Next.Next
+	return preHead.Next
+}
