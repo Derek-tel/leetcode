@@ -240,6 +240,54 @@ func five(nums []int, k int) []int {
 	return result
 }
 
+var sixTag []int
+
+type sixHead []int
+
+func (s sixHead) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s sixHead) Less(i, j int) bool {
+	return sixTag[s[i]] > sixTag[s[j]]
+}
+
+func (s sixHead) Len() int {
+	return len(s)
+}
+
+func (s *sixHead) Push(x interface{}) {
+	item := x.(int)
+	*s = append(*s, item)
+}
+func (s *sixHead) Pop() interface{} {
+	length := len(*s)
+	v := (*s)[length-1]
+	*s = (*s)[:length-1]
+	return v
+}
+
+func six(nums []int, k int) []int {
+	sixTag = nums
+
+	handler := sixHead{}
+	for i := 0; i < k; i++ {
+		handler = append(handler, i)
+	}
+
+	heap.Init(&handler)
+
+	result := []int{nums[handler[0]]}
+	for i := k; i < len(nums); i++ {
+		heap.Push(&handler, i)
+		for handler[0] <= i-k {
+			heap.Pop(&handler)
+		}
+		result = append(result, nums[handler[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)
