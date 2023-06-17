@@ -272,6 +272,48 @@ func five(interval [][]int) int {
 	return len(ends)
 }
 
+func six(interval [][]int) int {
+	var heapModify func([]int, int, int)
+	heapModify = func(ints []int, i int, size int) {
+		left := i*2 + 1
+		right := i*2 + 2
+		smallest := i
+		if left < size && ints[left] < ints[smallest] {
+			smallest = left
+		}
+		if right < size && ints[right] < ints[smallest] {
+			smallest = right
+		}
+		if smallest != i {
+			ints[smallest], ints[i] = ints[i], ints[smallest]
+			heapModify(ints, smallest, size)
+		}
+	}
+	var buildHead func([]int, int)
+	buildHead = func(ints []int, size int) {
+		for i := len(ints) / 2; i >= 0; i-- {
+			heapify(ints, i, size)
+		}
+	}
+	sort.Slice(interval, func(i, j int) bool {
+		return interval[i][0] < interval[j][0]
+	})
+	var ends []int
+	for i := 0; i < len(interval); i++ {
+		if len(ends) == 0 {
+			ends = append(ends, interval[i][1])
+		} else {
+			if interval[i][1] < ends[0] {
+				ends = append(ends, interval[i][1])
+			} else {
+				ends[0] = interval[i][1]
+			}
+		}
+		buildHead(ends, len(ends))
+	}
+	return len(ends)
+}
+
 func main() {
 
 	test := [][]int{
