@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type TreeNode struct {
 	Val   int
@@ -105,6 +107,38 @@ func six(root *TreeNode) []int {
 }
 
 func seven(root *TreeNode) []int {
+	var result []int
+	var stack []*TreeNode
+
+	for len(stack) > 0 || root != nil {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		result = append(result, top.Val)
+		root = top.Right
+	}
+	return result
+}
+
+func eight(root *TreeNode) []int {
+	var inorder func(*TreeNode)
+	var result []int
+	inorder = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		inorder(node.Left)
+		result = append(result, node.Val)
+		inorder(node.Right)
+	}
+	inorder(root)
+	return result
+}
+
+func nine(root *TreeNode) []int {
 	var result []int
 	var stack []*TreeNode
 
