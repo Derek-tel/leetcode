@@ -272,10 +272,8 @@ func six(nums []int, k int) []int {
 
 	handler := sixHead{}
 	for i := 0; i < k; i++ {
-		handler = append(handler, i)
+		heap.Push(&handler, i)
 	}
-
-	heap.Init(&handler)
 
 	result := []int{nums[handler[0]]}
 	for i := k; i < len(nums); i++ {

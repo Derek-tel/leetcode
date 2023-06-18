@@ -78,6 +78,21 @@ func five(path string) string {
 	}
 	return "/" + strings.Join(stack, "/")
 }
+
+func six(path string) string {
+	var stack []string
+	for _, v := range strings.Split(path, "/") {
+		if v == ".." {
+			if len(stack) > 0 {
+				stack = stack[:len(stack)-1]
+			}
+		} else if v != "." && v != "" {
+			stack = append(stack, v)
+		}
+	}
+	return "/" + strings.Join(stack, "/")
+}
+
 func main() {
 	test := "//root/"
 	fmt.Println(strings.Split(test, "/"))
