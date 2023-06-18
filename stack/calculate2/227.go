@@ -196,6 +196,38 @@ func six(s string) int {
 	return result
 }
 
+func seven(s string) int {
+	pre := '+'
+	stack := []int{0}
+	num := 0
+	for i, ch := range s {
+		isNumber := ch >= '0' && ch <= '9'
+		if isNumber {
+			num = num*10 + int(ch-'0')
+		}
+		if !isNumber && ch != ' ' || i == len(s)-1 {
+			switch pre {
+			case '+':
+				stack = append(stack, num)
+			case '-':
+				stack = append(stack, -num)
+			case '*':
+				stack[len(stack)-1] *= num
+			default:
+				stack[len(stack)-1] /= num
+			}
+
+			pre = ch
+			num = 0
+		}
+	}
+	result := 0
+	for _, v := range stack {
+		result += v
+	}
+	return result
+}
+
 func main() {
 	test := "3*2*2"
 	fmt.Println(calculate(test))
