@@ -79,6 +79,25 @@ func four(height []int) int {
 	return result
 }
 
+func five(height []int) int {
+	var stack []int
+	result := 0
+	for index, high := range height {
+		for len(stack) > 0 && high > height[stack[len(stack)-1]] {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				break
+			}
+			seek := stack[len(stack)-1]
+			weight := index - seek - 1
+			result = result + (min(high, height[seek])-height[top])*weight
+		}
+		stack = append(stack, index)
+	}
+	return result
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
