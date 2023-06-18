@@ -108,6 +108,34 @@ func four(height []int) int {
 	}
 	return result
 }
+
+func five(heights []int) int {
+	var stack []int
+	length := len(heights) + 2
+	getHeight := func(i int) int {
+		if i == 0 || i == length-1 {
+			return -1
+		}
+		return heights[i-1]
+	}
+	maxInt := func(x, y int) int {
+		if x > y {
+			return x
+		}
+		return y
+	}
+	result := 0
+	for i := 0; i < length; i++ {
+		for len(stack) > 0 && getHeight(i) < getHeight(stack[len(stack)-1]) {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			result = maxInt(result, getHeight(top)*(i-stack[len(stack)-1]-1))
+		}
+		stack = append(stack, i)
+	}
+	return result
+}
+
 func main() {
 	st := make([]int, 0, 7/2)
 	fmt.Println(cap(st))
