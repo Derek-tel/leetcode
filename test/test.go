@@ -7,7 +7,6 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"fmt"
-	"github.com/imroc/biu"
 	"io"
 	"strconv"
 	"strings"
@@ -67,8 +66,7 @@ func main() {
 	a = a | (1 << 15)
 	a = a | (1 << 13)
 	a = a | (1 << 0)
-	fmt.Println(biu.ToBinaryString(a)) //a输出结果:[10100000 00000001]
-	fmt.Println(fmt.Sprintf("%x", a))  //a输出结果:[a001]
+	fmt.Println(fmt.Sprintf("%x", a)) //a输出结果:[a001]
 
 	var sss uint64
 	sss = 18446744073709551615
