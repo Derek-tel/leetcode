@@ -1,6 +1,8 @@
 package MinStack
 
-import "math"
+import (
+	"math"
+)
 
 type MinStack struct {
 	Stack []int
