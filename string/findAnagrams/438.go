@@ -230,6 +230,40 @@ func seven(s, p string) []int {
 	return result
 }
 
+func eight(s, p string) []int {
+	lengthS := len(s)
+	lengthP := len(p)
+
+	freq := make(map[uint8]int)
+	for i := 0; i < lengthP; i++ {
+		freq[p[i]-'a']++
+	}
+	left, right := 0, 0
+	count := 0
+
+	var result []int
+	tempFreq := make(map[uint8]int)
+	for ; right < lengthS; right++ {
+		if num, ok := freq[s[right]-'a']; ok {
+			for tempFreq[s[right]-'a'] >= num {
+				tempFreq[s[left]-'a']--
+				count--
+				left++
+			}
+			tempFreq[s[right]-'a']++
+			count++
+		} else {
+			left = right + 1
+			count = 0
+			tempFreq = make(map[uint8]int)
+		}
+		if count == lengthP {
+			result = append(result, left)
+		}
+	}
+	return result
+}
+
 func main() {
 	test := "abab"
 	fmt.Println(findAnagrams1(test, "ab"))
