@@ -24,13 +24,6 @@ func lengthOfLongestSubstring(s string) int {
 	return result
 }
 
-func max(a int, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func test(s string) int {
 	var freq [256]byte
 	left, right := 0, 0
@@ -98,6 +91,30 @@ func six(s string) int {
 		result = max(result, right-left)
 	}
 	return result
+}
+
+func seven(s string) int {
+	var freq [256]int
+	left, right := 0, 0
+	var result int
+	for right < len(s) {
+		if freq[s[right]] == 0 {
+			freq[s[right]]++
+			right++
+		} else {
+			freq[s[left]]--
+			left++
+		}
+		result = max(result, right-left)
+	}
+	return result
+}
+
+func max(a int, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 func main() {
