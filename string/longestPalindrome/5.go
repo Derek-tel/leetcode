@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func longestPalindrome(s string) string {
 	if len(s) < 2 {
@@ -137,6 +139,38 @@ func five(s string) string {
 		}
 	}
 	return s[begin : begin+maxLen]
+}
+
+func six(s string) string {
+	if len(s) < 2 {
+		return s
+	}
+	start, end := 0, 0
+	handler := func(str string, i int, j int) (int, int) {
+		for i >= 0 && j < len(str) {
+			if str[i] != str[j] {
+				break
+			}
+			i--
+			j++
+		}
+		return i + 1, j - 1
+	}
+	for i := 0; i < len(s)-1; i++ {
+		left1, right1 := handler(s, i, i)
+		left2, right2 := handler(s, i, i+1)
+		if right1-left1 > end-start {
+			start = left1
+			end = right1
+		}
+
+		if right2-left2 > end-start {
+			start = left2
+			end = right2
+		}
+
+	}
+	return s[start : end+1]
 }
 
 func main() {
