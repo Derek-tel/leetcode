@@ -182,6 +182,48 @@ func (c *FourCouple) helper() *TreeNode {
 	}
 }
 
+type FiveCouple struct {
+	Input   []string
+	Builder strings.Builder
+}
+
+func FiveConstructor() FiveCouple {
+	return FiveCouple{}
+}
+
+func (c *FiveCouple) serialize(tree *TreeNode) string {
+	if tree == nil {
+		c.Builder.WriteString("null,")
+		return ""
+	}
+	c.Builder.WriteString(strconv.Itoa(tree.Val) + ",")
+	c.serialize(tree.Left)
+	c.serialize(tree.Right)
+	return c.Builder.String()
+}
+
+func (c *FiveCouple) deserialize(data string) *TreeNode {
+	if len(data) == 0 {
+		return nil
+	}
+	c.Input = strings.Split(data, ",")
+	return c.helper()
+}
+
+func (c *FiveCouple) helper() *TreeNode {
+	if c.Input[0] == "null" {
+		c.Input = c.Input[1:]
+		return nil
+	}
+	val, _ := strconv.Atoi(c.Input[0])
+	c.Input = c.Input[1:]
+	return &TreeNode{
+		Val:   val,
+		Left:  c.helper(),
+		Right: c.helper(),
+	}
+}
+
 /**
  * Your Codec object will be instantiated and called as such:
  * ser := Constructor();

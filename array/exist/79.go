@@ -327,4 +327,12 @@ func main() {
 
 	fmt.Println(updateTime.UnixNano() / 1e6)
 
+	vid := map[int]int{
+		1: 2,
+		3: 4,
+	}
+	for i := range vid {
+		fmt.Println(i)
+	}
+
 }
