@@ -25,13 +25,6 @@ func diameterOfBinaryTree(root *TreeNode) int {
 	return res
 }
 
-func max(i, j int) int {
-	if i > j {
-		return i
-	}
-	return j
-}
-
 func test(root *TreeNode) int {
 	sum := 0
 	var helper func(*TreeNode) int
@@ -96,4 +89,27 @@ func five(root *TreeNode) int {
 	}
 	helper(root)
 	return sum
+}
+
+func six(root *TreeNode) int {
+	sum := 0
+	var helper func(*TreeNode) int
+	helper = func(node *TreeNode) int {
+		if node == nil {
+			return 0
+		}
+		left := helper(node.Left)
+		right := helper(node.Right)
+		sum = max(sum, left+right)
+		return max(right, left) + 1
+	}
+	helper(root)
+	return sum
+}
+
+func max(i, j int) int {
+	if i > j {
+		return i
+	}
+	return j
 }
