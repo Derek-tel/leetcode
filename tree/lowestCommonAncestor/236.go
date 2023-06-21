@@ -99,3 +99,21 @@ func five(root, p, q *TreeNode) *TreeNode {
 	}
 	return left
 }
+
+func six(root, q, p *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if root.Val == q.Val || root.Val == p.Val {
+		return root
+	}
+	left := six(root.Left, p, q)
+	right := six(root.Right, p, q)
+	if left != nil && right != nil {
+		return root
+	}
+	if left == nil {
+		return right
+	}
+	return left
+}
