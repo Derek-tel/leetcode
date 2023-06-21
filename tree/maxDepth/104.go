@@ -47,3 +47,12 @@ func six(root *TreeNode) int {
 	}
 	return max(six(root.Left), six(root.Right)) + 1
 }
+
+func seven(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	left := seven(root.Left)
+	right := seven(root.Right)
+	return max(left, right) + 1
+}
