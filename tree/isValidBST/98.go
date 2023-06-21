@@ -112,3 +112,14 @@ func six(root *TreeNode) bool {
 	}
 	return handler(root, math.MinInt, math.MaxInt)
 }
+
+func seven(root *TreeNode) bool {
+	var handler func(*TreeNode, int, int) bool
+	handler = func(node *TreeNode, min int, max int) bool {
+		if node == nil {
+			return true
+		}
+		return node.Val > min && node.Val < max && handler(node.Left, min, node.Val) && handler(node.Right, node.Val, max)
+	}
+	return handler(root, math.MinInt, math.MaxInt)
+}
