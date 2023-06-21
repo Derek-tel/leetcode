@@ -120,3 +120,27 @@ func five(root *TreeNode, targetSum int) int {
 	resp += five(root.Right, targetSum)
 	return resp
 }
+
+func six(root *TreeNode, targetSum int) int {
+	if root == nil {
+		return 0
+	}
+	var handler func(*TreeNode, int) int
+	handler = func(node *TreeNode, target int) int {
+		resp := 0
+		if node == nil {
+			return resp
+		}
+		if node.Val == target {
+			resp += 1
+		}
+		resp += handler(node.Left, target-node.Val)
+		resp += handler(node.Right, target-node.Val)
+		return resp
+	}
+	result := 0
+	result += handler(root, targetSum)
+	result += six(root.Left, targetSum)
+	result += six(root.Right, targetSum)
+	return result
+}
