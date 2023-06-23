@@ -147,6 +147,53 @@ func (this *three) StartsWith(prefix string) bool {
 	return true
 }
 
+type four struct {
+	IsEnd    bool
+	Children map[rune]*four
+}
+
+func ConstructorFour() four {
+	return four{IsEnd: false, Children: make(map[rune]*four)}
+}
+
+func (this *four) Insert(word string) {
+	parent := this
+	for _, v := range word {
+		if child, ok := parent.Children[v]; ok {
+			parent = child
+		} else {
+			newChild := &four{IsEnd: false, Children: make(map[rune]*four)}
+			this.Children[v] = newChild
+			parent = newChild
+		}
+	}
+	parent.IsEnd = true
+}
+
+func (this *four) Search(word string) bool {
+	parent := this
+	for _, ch := range word {
+		if child, ok := parent.Children[ch]; ok {
+			parent = child
+		} else {
+			return false
+		}
+	}
+	return parent.IsEnd
+}
+
+func (this *four) StartWith(prefix string) bool {
+	parent := this
+	for _, ch := range prefix {
+		if child, ok := parent.Children[ch]; ok {
+			parent = child
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
 func main() {
 	obj := Constructor()
 	obj.Insert("apple")
