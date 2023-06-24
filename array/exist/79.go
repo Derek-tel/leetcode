@@ -294,6 +294,47 @@ func six(board [][]byte, word []byte) bool {
 	return false
 }
 
+type dirPairSeven struct {
+	x, y int
+}
+
+var dirSeven = []dirPairSeven{{-1, 0}, {1, 0}, {0, 1}, {0, -1}}
+
+func seven(board [][]byte, word []byte) bool {
+	h, w := len(board), len(board[0])
+	visit := make([][]bool, h)
+	for i := 0; i < len(visit); i++ {
+		visit[i] = make([]bool, w)
+	}
+	var handler func(int, int, int) bool
+	handler = func(x int, y int, k int) bool {
+		if board[x][y] != word[k] {
+			return false
+		}
+		if k == len(word)-1 {
+			return true
+		}
+		visit[x][y] = true
+		defer func() { visit[x][y] = false }()
+		for _, p := range dirSeven {
+			if newX, newY := x+p.x, y+p.y; newX >= 0 && newX < h && newY >= 0 && newY < w && !visit[newX][newY] {
+				if handler(newX, newY, k+1) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	for i := 0; i < h; i++ {
+		for j := 0; j < w; j++ {
+			if handler(i, j, 0) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func returnValues() (result int) {
 	//var result int
 	defer func() {
@@ -301,11 +342,6 @@ func returnValues() (result int) {
 		fmt.Println("defer")
 	}()
 	return
-}
-
-type Trie struct {
-	IsWord   bool
-	Children map[rune]*Trie
 }
 
 func main() {
