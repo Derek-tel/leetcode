@@ -215,10 +215,35 @@ func six(nums []int, target int) [][]int {
 	return result
 }
 
+func seven(nums []int, target int) [][]int {
+	var com []int
+	var result [][]int
+	var handler func(int, int)
+	handler = func(index int, tar int) {
+		if index == len(nums) {
+			return
+		}
+		if tar == 0 {
+			result = append(result, append([]int(nil), com...))
+			return
+		}
+
+		handler(index+1, tar)
+
+		if tar >= nums[index] {
+			com = append(com, nums[index])
+			handler(index, tar-nums[index])
+			com = com[:len(com)-1]
+		}
+	}
+	handler(0, target)
+	return result
+}
+
 func main() {
-	test := []int{2, 5, 3}
-	tar := 8
-	fmt.Println(six(test, tar))
+	test := []int{4, 3, 2, -2}
+	tar := 7
+	fmt.Println(seven(test, tar))
 
 	fmt.Println(1 &^ 4)
 }
