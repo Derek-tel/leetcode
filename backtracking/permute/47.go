@@ -140,7 +140,29 @@ func five(nums []int) [][]int {
 }
 
 func eve(nums []int) [][]int {
-
+	sort.Ints(nums)
+	use := make([]bool, len(nums))
+	var temp []int
+	var result [][]int
+	var helper func(int)
+	helper = func(i int) {
+		if i == len(nums) {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+		for j := 0; j < len(nums); j++ {
+			if use[j] || j > 0 && nums[j] == nums[j-1] && use[j-1] {
+				continue
+			}
+			use[j] = true
+			temp = append(temp, nums[j])
+			helper(i + 1)
+			temp = temp[:len(temp)-1]
+			use[j] = false
+		}
+	}
+	helper(0)
+	return result
 }
 
 func main() {
