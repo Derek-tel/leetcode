@@ -120,6 +120,27 @@ func four(digits string) []string {
 	return result
 }
 
+func five(digits string) []string {
+	var result []string
+	if len(digits) < 1 {
+		return result
+	}
+	var handler func(int, string)
+	handler = func(index int, s string) {
+		if index == len(digits) {
+			result = append(result, s)
+			return
+		}
+		dig := digits[index]
+		char := letters[string(dig)]
+		for _, v := range char {
+			handler(index+1, s+string(v))
+		}
+	}
+	handler(0, "")
+	return result
+}
+
 func main() {
 	fmt.Println(letterCombinations("23"))
 }
