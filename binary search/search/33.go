@@ -188,6 +188,31 @@ func seven(nums []int, target int) int {
 	return -1
 }
 
+func eight(nums []int, target int) int {
+	length := len(nums)
+	left, right := 0, length-1
+	for left <= right {
+		mid := left + (right-left)>>1
+		if nums[mid] == target {
+			return mid
+		}
+		if nums[0] <= nums[mid] {
+			if target >= nums[0] && target < nums[mid] {
+				right = mid - 1
+			} else {
+				left = mid + 1
+			}
+		} else {
+			if nums[mid] < target && nums[length-1] >= target {
+				left = mid + 1
+			} else {
+				right = mid - 1
+			}
+		}
+	}
+	return -1
+}
+
 func main() {
 	test := []int{3, 1}
 	fmt.Println(search(test, 1))
