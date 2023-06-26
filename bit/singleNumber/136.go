@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func singleNumber(nums []int) int {
 	length := len(nums)
@@ -45,6 +47,15 @@ func five(nums []int) int {
 	}
 	return res
 }
+
+func six(nums []int) int {
+	res := 0
+	for _, num := range nums {
+		res = res ^ num
+	}
+	return res
+}
+
 func main() {
 	fmt.Println(singleNumber([]int{2, 2, 1}))
 }
