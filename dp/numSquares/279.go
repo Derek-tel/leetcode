@@ -89,6 +89,18 @@ func seven(n int) int {
 	return dp[n]
 }
 
+func eight(n int) int {
+	dp := make([]int, n+1)
+	dp[0] = 0
+	for i := 1; i <= n; i++ {
+		dp[i] = i
+		for j := 0; j*j <= i; j++ {
+			dp[i] = min(dp[i], dp[i-j*j]+1)
+		}
+	}
+	return dp[n]
+}
+
 func min(i, j int) int {
 	if i > j {
 		return j
