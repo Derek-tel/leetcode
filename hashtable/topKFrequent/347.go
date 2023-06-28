@@ -286,3 +286,48 @@ func six(nums []int, k int) []int {
 	}
 	return result
 }
+
+type SevenCounter struct {
+	Value, Count int
+}
+type SevenCounters []*SevenCounter
+
+func (s SevenCounters) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s SevenCounters) Less(i, j int) bool {
+	return s[i].Count > s[j].Count
+}
+
+func (s SevenCounters) Len() int {
+	return len(s)
+}
+
+func (s *SevenCounters) Push(x interface{}) {
+	v := x.(*SevenCounter)
+	*s = append(*s, v)
+}
+func (s *SevenCounters) Pop() interface{} {
+	v := (*s)[len(*s)-1]
+	*s = (*s)[:len(*s)-1]
+	return v
+}
+
+func seven(nums []int, k int) []int {
+	count := make(map[int]int)
+	for _, n := range nums {
+		count[n]++
+	}
+	var s SevenCounters
+	for i, v := range count {
+		temp := &SevenCounter{Value: i, Count: v}
+		heap.Push(&s, temp)
+	}
+	var result []int
+	for len(result) < k {
+		v := heap.Pop(&s).(*SixCounter)
+		result = append(result, v.Value)
+	}
+	return result
+}
