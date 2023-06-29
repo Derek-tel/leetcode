@@ -286,6 +286,50 @@ func six(nums []int, k int) []int {
 	return result
 }
 
+var sevenTag []int
+
+type sevenHeap []int
+
+func (s sevenHeap) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s sevenHeap) Less(i, j int) bool {
+	return sixTag[s[i]] > sixTag[s[j]]
+}
+
+func (s sevenHeap) Len() int {
+	return len(s)
+}
+
+func (s *sevenHeap) Push(x interface{}) {
+	item := x.(int)
+	*s = append(*s, item)
+}
+
+func (s *sevenHeap) Pop() interface{} {
+	item := (*s)[len(*s)-1]
+	*s = (*s)[:len(*s)-1]
+	return item
+}
+
+func seven(nums []int, k int) []int {
+	sevenTag = nums
+	sh := sevenHeap{}
+	for i := 0; i < k; i++ {
+		heap.Push(&sh, i)
+	}
+	result := []int{nums[sh[0]]}
+	for i := k; i < len(nums); i++ {
+		heap.Push(&sh, i)
+		for sh[0] <= i-k {
+			heap.Pop(&sh)
+		}
+		result = append(result, nums[sh[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)

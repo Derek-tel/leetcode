@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func isPalindrome(x int) bool {
 	if x < 0 || (x%10 == 0 && x != 0) {
@@ -24,6 +26,18 @@ func one(x int) bool {
 		x = x / 10
 	}
 	fmt.Println(x, flag)
+	return x == flag || x == flag/10
+}
+
+func two(x int) bool {
+	if x < 0 || (x%10 == 0 && x != 0) {
+		return false
+	}
+	flag := 0
+	for x > flag {
+		flag = flag*10 + x%10
+		x = x / 10
+	}
 	return x == flag || x == flag/10
 }
 

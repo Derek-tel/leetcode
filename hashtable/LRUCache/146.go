@@ -2,18 +2,21 @@ package LRUCache
 
 type LRUNode struct {
 	Key, Value int
-	prev, next *LRUNode
-}
-
-func initNode(key, value int) *LRUNode {
-	return &LRUNode{Key: key, Value: value}
+	Prev, Next *LRUNode
 }
 
 type LRUCache struct {
-	Size       int
 	Capacity   int
+	Size       int
 	Table      map[int]*LRUNode
 	Head, Tail *LRUNode
+}
+
+func initNode(key, value int) *LRUNode {
+	return &LRUNode{
+		Key:   key,
+		Value: value,
+	}
 }
 
 func Constructor(capacity int) LRUCache {
@@ -24,47 +27,47 @@ func Constructor(capacity int) LRUCache {
 		Head:     initNode(0, 0),
 		Tail:     initNode(0, 0),
 	}
-	cache.Head.next = cache.Tail
-	cache.Tail.prev = cache.Head
+	cache.Head.Next = cache.Tail
+	cache.Tail.Prev = cache.Head
 	return cache
 }
 
 func (this *LRUCache) Get(key int) int {
 	if node, ok := this.Table[key]; ok {
-		this.moveToHead(node)
+		this.MoveToHead(node)
 		return node.Value
 	} else {
 		return -1
 	}
 }
 
-func (this *LRUCache) moveToHead(node *LRUNode) {
+func (this *LRUCache) MoveToHead(node *LRUNode) {
 	this.remove(node)
 	this.addToHead(node)
 }
 
+func (this *LRUCache) remove(node *LRUNode) {
+	node.Next.Prev = node.Prev
+	node.Prev.Next = node.Next
+}
+
 func (this *LRUCache) addToHead(node *LRUNode) {
-	node.prev = this.Head
-	node.next = this.Head.next
-	this.Head.next.prev = node
-	this.Head.next = node
+	node.Prev = this.Head
+	node.Next = this.Head.Next
+	this.Head.Next.Prev = node
+	this.Head.Next = node
 }
 
 func (this *LRUCache) removeFromTail() *LRUNode {
-	node := this.Tail.prev
+	node := this.Tail.Prev
 	this.remove(node)
 	return node
 }
 
-func (this *LRUCache) remove(node *LRUNode) {
-	node.next.prev = node.prev
-	node.prev.next = node.next
-}
-
-func (this *LRUCache) Put(key, value int) {
+func (this *LRUCache) Put(key int, value int) {
 	if node, ok := this.Table[key]; ok {
 		node.Value = value
-		this.moveToHead(node)
+		this.MoveToHead(node)
 	} else {
 		n := initNode(key, value)
 		this.addToHead(n)
