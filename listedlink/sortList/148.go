@@ -203,6 +203,32 @@ func six(head *ListNode) *ListNode {
 	return mergeTwo(six(head), six(flag))
 }
 
+func seven(head *ListNode) *ListNode {
+	var getMiddle func(*ListNode) *ListNode
+	getMiddle = func(node *ListNode) *ListNode {
+		fast, slow := node, node
+		for fast.Next != nil && fast.Next.Next != nil {
+			fast = fast.Next.Next
+			slow = slow.Next
+		}
+		return slow
+	}
+
+	length := 0
+	cur := head
+	for cur != nil {
+		cur = cur.Next
+		length++
+	}
+	if length <= 1 {
+		return head
+	}
+	half := getMiddle(head)
+	flag := half.Next
+	half.Next = nil
+	return mergeTwo(seven(head), seven(flag))
+}
+
 func mergeTwo(listA *ListNode, listB *ListNode) *ListNode {
 	preHead := &ListNode{}
 	pre := preHead
