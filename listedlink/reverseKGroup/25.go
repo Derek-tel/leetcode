@@ -230,3 +230,38 @@ func six(head *ListNode, k int) *ListNode {
 	}
 	return preHead.Next
 }
+
+func seven(head *ListNode, k int) *ListNode {
+	var handler func(*ListNode, *ListNode) (*ListNode, *ListNode)
+	handler = func(left *ListNode, right *ListNode) (*ListNode, *ListNode) {
+		preHead := &ListNode{Next: left}
+		pre := preHead
+		cur := left
+		flag := right.Next
+		for cur.Next != flag {
+			next := cur.Next
+			cur.Next = next.Next
+			next.Next = pre.Next
+			pre.Next = next
+		}
+		return preHead.Next, cur
+	}
+	dumpy := &ListNode{Next: head}
+	prev := dumpy
+	for head != nil {
+		tail := prev
+		for i := 0; i < k; i++ {
+			tail = tail.Next
+			if tail == nil {
+				return dumpy.Next
+			}
+		}
+		next := tail.Next
+		head, tail = handler(head, tail)
+		prev.Next = head
+		tail.Next = next
+		prev = tail
+		head = tail.Next
+	}
+	return dumpy.Next
+}
