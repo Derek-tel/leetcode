@@ -314,6 +314,26 @@ func six(interval [][]int) int {
 	return len(ends)
 }
 
+func seven(interval [][]int) int {
+	sort.Slice(interval, func(i, j int) bool {
+		return interval[i][0] < interval[j][0]
+	})
+	var ends []int
+	for i := 0; i < len(interval); i++ {
+		if len(ends) == 0 {
+			ends = append(ends, interval[i][1])
+		} else {
+			if interval[i][0] < ends[0] {
+				ends = append(ends, interval[i][1])
+			} else {
+				ends[0] = interval[i][1]
+			}
+		}
+		build(ends, 0, len(ends))
+	}
+	return len(ends)
+}
+
 func main() {
 
 	test := [][]int{
