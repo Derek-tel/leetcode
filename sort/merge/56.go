@@ -209,6 +209,28 @@ func six(intervals [][]int) [][]int {
 	return result
 }
 
+func seven(intervals [][]int) [][]int {
+	sort2.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	var result [][]int
+	temp := intervals[0]
+	for i := 1; i < len(intervals); i++ {
+		if intervals[i][0] > temp[1] {
+			result = append(result, temp)
+			temp = intervals[i]
+		} else {
+			if intervals[i][1] < temp[1] {
+				continue
+			} else {
+				temp[1] = intervals[i][1]
+			}
+		}
+	}
+	result = append(result, temp)
+	return result
+}
+
 func sixQuick(intervals [][]int, start int, end int) {
 	temp := intervals[start]
 	pivot := start
