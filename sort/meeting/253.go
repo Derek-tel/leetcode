@@ -329,7 +329,7 @@ func seven(interval [][]int) int {
 				ends[0] = interval[i][1]
 			}
 		}
-		build(ends, 0, len(ends))
+		heap(ends)
 	}
 	return len(ends)
 }
