@@ -120,7 +120,7 @@ func eight(s string) int {
 			right++
 		} else {
 			freq[s[left]]--
-			left--
+			left++
 		}
 		result = max(result, right-left)
 	}
