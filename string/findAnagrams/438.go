@@ -270,11 +270,10 @@ func nine(s, p string) []int {
 	for i := 0; i < lengthP; i++ {
 		freq[p[i]-'a']++
 	}
-	left, right := 0, 0
 	count := 0
 	var result []int
 	temp := make(map[uint8]int)
-	for ; right < lengthS; right++ {
+	for left, right := 0, 0; right < lengthS; right++ {
 		if num, ok := freq[s[right]-'a']; ok {
 			for temp[s[right]-'a'] >= num {
 				temp[s[left]-'a']--
