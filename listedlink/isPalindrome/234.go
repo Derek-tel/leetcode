@@ -236,15 +236,19 @@ func seven(head *ListNode) bool {
 	}
 	var handler func(*ListNode) *ListNode
 	handler = func(node *ListNode) *ListNode {
-		var pre *ListNode
-		cur := node
-		for cur != nil {
-			next := cur.Next
-			cur.Next = pre
-			pre = cur
-			cur = next
+		if node == nil {
+			return node
 		}
-		return pre
+		var dumpy = &ListNode{Next: head}
+		pre := dumpy
+		cur := node
+		for cur.Next != nil {
+			next := cur.Next
+			cur.Next = next.Next
+			next.Next = pre.Next
+			pre.Next = next
+		}
+		return dumpy.Next
 	}
 	fast, slow := head, head
 	for fast.Next != nil && fast.Next.Next != nil {
