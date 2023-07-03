@@ -25,13 +25,6 @@ func largestRectangleArea(heights []int) int {
 	return area
 }
 
-func max(i, j int) int {
-	if i > j {
-		return i
-	}
-	return j
-}
-
 func get(height []int) int {
 	var stack []int
 	length := len(height) + 2
@@ -134,6 +127,34 @@ func five(heights []int) int {
 		stack = append(stack, i)
 	}
 	return result
+}
+
+func six(heights []int) int {
+	var stack []int
+	length := len(heights) + 2
+	getHeight := func(i int) int {
+		if i == 0 || i == length-1 {
+			return -1
+		}
+		return heights[i-1]
+	}
+	result := 0
+	for i := 0; i < length; i++ {
+		for len(stack) > 0 && getHeight(i) < getHeight(stack[len(stack)-1]) {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			result = max(result, getHeight(top)*(i-stack[len(stack)-1]-1))
+		}
+		stack = append(stack, i)
+	}
+	return result
+}
+
+func max(i, j int) int {
+	if i > j {
+		return i
+	}
+	return j
 }
 
 func main() {
