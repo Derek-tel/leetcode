@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func trap(height []int) int {
 	stack := []int{}
@@ -92,6 +94,25 @@ func five(height []int) int {
 			seek := stack[len(stack)-1]
 			weight := index - seek - 1
 			result = result + (min(high, height[seek])-height[top])*weight
+		}
+		stack = append(stack, index)
+	}
+	return result
+}
+
+func six(height []int) int {
+	var stack []int
+	result := 0
+	for index, high := range height {
+		for len(stack) > 0 && high > height[stack[len(stack)-1]] {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				break
+			}
+			prev := stack[len(stack)-1]
+			weight := index - prev - 1
+			result = result + (min(high, height[prev])-height[top])*weight
 		}
 		stack = append(stack, index)
 	}
