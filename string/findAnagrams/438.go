@@ -264,6 +264,36 @@ func eight(s, p string) []int {
 	return result
 }
 
+func nine(s, p string) []int {
+	lengthS, lengthP := len(s), len(p)
+	freq := make(map[uint8]int)
+	for i := 0; i < lengthP; i++ {
+		freq[p[i]-'a']++
+	}
+	count := 0
+	var result []int
+	temp := make(map[uint8]int)
+	for left, right := 0, 0; right < lengthS; right++ {
+		if num, ok := freq[s[right]-'a']; ok {
+			for temp[s[right]-'a'] >= num {
+				temp[s[left]-'a']--
+				count--
+				left++
+			}
+			temp[s[right]-'a']++
+			count++
+		} else {
+			left = right + 1
+			count = 0
+			temp = make(map[uint8]int)
+		}
+		if count == lengthP {
+			result = append(result, left)
+		}
+	}
+	return result
+}
+
 func main() {
 	test := "abab"
 	fmt.Println(findAnagrams1(test, "ab"))
