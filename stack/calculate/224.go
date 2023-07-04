@@ -4,7 +4,7 @@ func calculate(s string) int {
 	result := 0
 	length := len(s)
 	sign := 1
-	stack := []int{1}
+	stack := []int{sign}
 	for i := 0; i < length; {
 		switch s[i] {
 		case ' ':
