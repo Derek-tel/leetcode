@@ -106,3 +106,19 @@ func six(root *TreeNode) *TreeNode {
 	handler(root)
 	return root
 }
+
+func seven(root *TreeNode) *TreeNode {
+	sum := 0
+	var handler func(*TreeNode)
+	handler = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		handler(node.Right)
+		sum = sum + node.Val
+		node.Val = sum
+		handler(node.Left)
+	}
+	handler(root)
+	return root
+}
