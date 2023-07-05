@@ -107,6 +107,22 @@ func six(root *TreeNode) int {
 	return sum
 }
 
+func seven(root *TreeNode) int {
+	sum := 0
+	var handler func(*TreeNode) int
+	handler = func(node *TreeNode) int {
+		if node == nil {
+			return 0
+		}
+		left := handler(node.Left)
+		right := handler(node.Right)
+		sum = max(sum, left+right)
+		return max(left, right) + 1
+	}
+	handler(root)
+	return sum
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
