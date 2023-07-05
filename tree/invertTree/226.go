@@ -80,3 +80,13 @@ func six(root *TreeNode) *TreeNode {
 	root.Left, root.Right = root.Right, root.Left
 	return root
 }
+
+func seven(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	seven(root.Left)
+	seven(root.Right)
+	root.Left, root.Right = root.Right, root.Left
+	return root
+}
