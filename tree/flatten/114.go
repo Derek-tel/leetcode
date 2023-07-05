@@ -140,3 +140,26 @@ func six(root *TreeNode) {
 		cur = cur.Right
 	}
 }
+
+func seven(root *TreeNode) {
+	if root == nil {
+		return
+	}
+	var handler func(*TreeNode)
+	var list []int
+	handler = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		list = append(list, node.Val)
+		handler(node.Left)
+		handler(node.Right)
+	}
+	handler(root)
+	cur := root
+	for i := 1; i < len(list); i++ {
+		cur.Left = nil
+		cur.Right = &TreeNode{list[i], nil, nil}
+		cur = cur.Right
+	}
+}
