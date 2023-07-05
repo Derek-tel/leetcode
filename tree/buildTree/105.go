@@ -95,3 +95,18 @@ func six(preorder []int, inorder []int) *TreeNode {
 	}
 	return root
 }
+
+func seven(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 || len(inorder) == 0 {
+		return nil
+	}
+	rootVal := preorder[0]
+	root := &TreeNode{rootVal, nil, nil}
+	for i, v := range inorder {
+		if v == rootVal {
+			root.Left = seven(preorder[1:i+1], inorder[0:i])
+			root.Right = seven(preorder[i+1:], inorder[i+1:])
+		}
+	}
+	return root
+}
