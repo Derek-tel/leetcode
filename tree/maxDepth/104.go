@@ -13,13 +13,6 @@ func maxDepth(root *TreeNode) int {
 	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
 }
 
-func max(i int, j int) int {
-	if i > j {
-		return i
-	}
-	return j
-}
-
 func test(root *TreeNode) int {
 	if root == nil {
 		return 0
@@ -55,4 +48,20 @@ func seven(root *TreeNode) int {
 	left := seven(root.Left)
 	right := seven(root.Right)
 	return max(left, right) + 1
+}
+
+func eight(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	left := eight(root.Left)
+	right := eight(root.Right)
+	return max(left, right) + 1
+}
+
+func max(i int, j int) int {
+	if i > j {
+		return i
+	}
+	return j
 }
