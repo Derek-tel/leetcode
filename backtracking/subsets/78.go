@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/base64"
+	"encoding/hex"
 	"fmt"
 )
 
@@ -165,4 +167,20 @@ func eight(nums []int) [][]int {
 func main() {
 	test := []int{1, 2, 3}
 	fmt.Println(test1(test))
+
+	blePhoneKeyByte, _ := base64.StdEncoding.DecodeString("ZGQMRnE0CAeu/Av+Vz2glzo3OyXKgQ/ew3y7mII5Ft0=")
+
+	//ble phone key and para
+	blePhoneKey := hex.EncodeToString(blePhoneKeyByte)
+	fmt.Println(blePhoneKey)
+	origin := "74680000030020230324000000000239743e1fd2328c6e2e61014253"
+	origin = origin + "80"
+	originByteLen := len(origin) / 2
+	n := 16
+	mod := originByteLen % n
+	for i := 0; i < n-mod; i++ {
+		origin += "00"
+	}
+	fmt.Println(origin)
+
 }

@@ -117,3 +117,21 @@ func six(root, q, p *TreeNode) *TreeNode {
 	}
 	return left
 }
+
+func seven(root, q, p *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if root.Val == q.Val || root.Val == p.Val {
+		return root
+	}
+	left := seven(root.Left, q, p)
+	right := seven(root.Right, q, p)
+	if left != nil && right != nil {
+		return root
+	}
+	if left == nil {
+		return right
+	}
+	return left
+}
