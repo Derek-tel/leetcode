@@ -173,7 +173,7 @@ func main() {
 	//ble phone key and para
 	blePhoneKey := hex.EncodeToString(blePhoneKeyByte)
 	fmt.Println(blePhoneKey)
-	origin := "74680000030020230324000000000239743e1fd2328c6e2e61014253"
+	origin := "746800000300202303240000000005821735ffb991ef8d0069aa9a4e"
 	origin = origin + "80"
 	originByteLen := len(origin) / 2
 	n := 16
@@ -182,5 +182,6 @@ func main() {
 		origin += "00"
 	}
 	fmt.Println(origin)
-
+	blePhoneKeyDataByte, _ := hex.DecodeString(origin)
+	fmt.Println(base64.StdEncoding.EncodeToString(blePhoneKeyDataByte))
 }
