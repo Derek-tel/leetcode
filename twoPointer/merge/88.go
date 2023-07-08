@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
 	p := m + n - 1
@@ -106,6 +108,26 @@ func five(nums1 []int, m int, nums2 []int, n int) {
 }
 
 func six(nums1 []int, m int, nums2 []int, n int) {
+	p := m + n - 1
+	pm := m - 1
+	pn := n - 1
+	for ; pm >= 0 && pn >= 0; p-- {
+		currentM := nums1[pm]
+		currentN := nums2[pn]
+		if currentM >= currentN {
+			nums1[p] = currentM
+			pm--
+		} else {
+			nums1[p] = currentN
+			pn--
+		}
+	}
+	for ; pn >= 0; pn-- {
+		nums1[pn] = nums2[pn]
+	}
+}
+
+func seven(nums1 []int, m int, nums2 []int, n int) {
 	p := m + n - 1
 	pm := m - 1
 	pn := n - 1
