@@ -51,6 +51,23 @@ func uintptrTest() {
 	fmt.Println(*ptr)
 }
 
+func uintptrTestOne() {
+	admin := Admin{
+		Name: "uintptrTestOne",
+		Age:  19,
+	}
+	ptr := &admin
+	fmt.Println(uintptr(unsafe.Pointer(ptr)))
+	fmt.Println(unsafe.Offsetof(ptr.Age))
+	name := (*string)(unsafe.Pointer(ptr))
+	*name = "test"
+	fmt.Println(*ptr)
+	age := (*int)(unsafe.Pointer(uintptr(unsafe.Pointer(ptr)) + unsafe.Offsetof(ptr.Age)))
+	*age = 33
+
+	fmt.Println(*ptr)
+}
+
 func Feibo(n int, ch chan<- int) {
 	if n <= 0 {
 		ch <- 0
