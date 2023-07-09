@@ -46,6 +46,8 @@ func main() {
 		g
 		h = iota
 		i
+	)
+	const (
 		mutexLocked           = 1 << iota // 持有锁的标记
 		mutexWoken                        //唤醒标记
 		mutexStarving                     // 饥饿标记
