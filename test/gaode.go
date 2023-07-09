@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/imroc/biu"
 	"sync"
 )
 
@@ -61,4 +62,10 @@ func main() {
 	fmt.Println(cap(leakSlice))
 	leakSlice1 := slc[:10:10]
 	fmt.Println(cap(leakSlice1))
+
+	x := int8(+1)
+	y := int8(-10)
+	fmt.Println(biu.ToBinaryString(x))
+	fmt.Println(biu.ToBinaryString(y))
+
 }
