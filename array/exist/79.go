@@ -335,6 +335,47 @@ func seven(board [][]byte, word []byte) bool {
 	return false
 }
 
+type dirPairEight struct {
+	x, y int
+}
+
+var dirEight = []dirPairEight{{-1, 0}, {1, 0}, {0, 1}, {0, -1}}
+
+func eight(board [][]byte, word []byte) bool {
+	h, w := len(board), len(board[0])
+	visit := make([][]bool, h)
+	for i := 0; i < h; i++ {
+		visit[i] = make([]bool, w)
+	}
+	var handler func(int, int, int) bool
+	handler = func(index int, x int, y int) bool {
+		if board[x][y] != word[index] {
+			return false
+		}
+		if index == len(word)-1 {
+			return true
+		}
+		visit[x][y] = true
+		defer func() { visit[x][y] = false }()
+		for _, d := range dirEight {
+			if newX, newY := x+d.x, y+d.y; newX >= 0 && newX < h && newY >= 0 && newY < w && !visit[newX][newY] {
+				if handler(index+1, newX, newY) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	for i := 0; i < h; i++ {
+		for j := 0; j < w; j++ {
+			if handler(0, i, j) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func returnValues() (result int) {
 	//var result int
 	defer func() {
