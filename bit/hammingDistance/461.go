@@ -65,3 +65,11 @@ func eight(x, y int) int {
 	}
 	return ans
 }
+
+func nine(x, y int) int {
+	ans := 0
+	for i := x ^ y; i > 0; i = i >> 1 {
+		ans = ans + i&1
+	}
+	return ans
+}
