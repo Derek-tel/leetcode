@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var phoneMap map[string]string = map[string]string{
 	"2": "abc",
@@ -135,6 +137,27 @@ func five(digits string) []string {
 		char := letters[string(dig)]
 		for _, v := range char {
 			handler(index+1, s+string(v))
+		}
+	}
+	handler(0, "")
+	return result
+}
+
+func six(digits string) []string {
+	var result []string
+	if len(digits) < 1 {
+		return result
+	}
+	var handler func(int, string)
+	handler = func(index int, s string) {
+		if index == len(digits) {
+			result = append(result, s)
+			return
+		}
+		dig := digits[index]
+		char := letters[string(dig)]
+		for _, ch := range char {
+			handler(index+1, s+string(ch))
 		}
 	}
 	handler(0, "")
