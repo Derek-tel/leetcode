@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func countSubstrings(s string) int {
 	res := 0
@@ -138,6 +140,23 @@ func eight(s string) int {
 		}
 	}
 	return res
+}
+
+func nine(s string) int {
+	dp := make([][]bool, len(s))
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]bool, len(s))
+	}
+	result := 0
+	for i := len(s) - 1; i >= 0; i-- {
+		for j := i; j < len(s); j++ {
+			dp[i][j] = s[i] == s[j] && (j-i < 3 || dp[i+1][j-1])
+			if dp[i][j] {
+				result++
+			}
+		}
+	}
+	return result
 }
 
 func main() {
