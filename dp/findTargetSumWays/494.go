@@ -190,3 +190,23 @@ func nine(nums []int, target int) int {
 	}
 	return dp[neg]
 }
+
+func ten(nums []int, target int) int {
+	count := 0
+	for _, num := range nums {
+		count += num
+	}
+	diff := count - target
+	if diff < 0 || diff%2 == 1 {
+		return 0
+	}
+	neg := diff / 2
+	dp := make([]int, neg+1)
+	dp[0] = 1
+	for _, num := range nums {
+		for i := neg; i >= num; i-- {
+			dp[i] = dp[i] + dp[i-num]
+		}
+	}
+	return dp[neg]
+}
