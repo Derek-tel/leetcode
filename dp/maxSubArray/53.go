@@ -151,6 +151,24 @@ func eight(nums []int) int {
 	return result
 }
 
+func nine(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	dp := make([]int, len(nums))
+	dp[0] = nums[0]
+	result := nums[0]
+	for i := 1; i < len(nums); i++ {
+		if dp[i-1] < 0 {
+			dp[i] = nums[i]
+		} else {
+			dp[i] = dp[i-1] + nums[i]
+		}
+		result = max(result, dp[i])
+	}
+	return result
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
