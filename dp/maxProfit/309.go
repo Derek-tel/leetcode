@@ -133,3 +133,20 @@ func eight309(price []int) int {
 	}
 	return max(dp[len(price)-1][2], dp[len(price)-1][1])
 }
+
+func nine309(price []int) int {
+	dp := make([][3]int, len(price))
+	// 0 持有
+	dp[0][0] = -price[0]
+	// 1 冻结
+	dp[0][1] = 0
+	// 2 空仓
+	dp[0][2] = 0
+
+	for i := 1; i < len(price); i++ {
+		dp[i][0] = max(dp[i-1][0], dp[i-1][2]-price[i])
+		dp[i][1] = dp[i-1][0] + price[i]
+		dp[i][2] = max(dp[i-1][2], dp[i-1][1])
+	}
+	return max(dp[len(price)-1][2], dp[len(price)-1][1])
+}
