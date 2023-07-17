@@ -186,3 +186,25 @@ func eight(root *TreeNode) int {
 	do, doNot := handler(root)
 	return max(do, doNot)
 }
+
+func nine(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	var handler func(*TreeNode) (int, int)
+	handler = func(node *TreeNode) (int, int) {
+		if node == nil {
+			return 0, 0
+		}
+		robLeft, notRobLeft := handler(node.Left)
+		robRight, notRobRight := handler(node.Right)
+
+		doRob := node.Val + notRobRight + notRobLeft
+		notRob := max(robLeft, notRobLeft) + max(robRight, notRobRight)
+
+		return doRob, notRob
+	}
+
+	doRob, notRob := handler(root)
+	return max(doRob, notRob)
+}
