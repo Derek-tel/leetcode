@@ -202,3 +202,31 @@ func seven(str []string) [][]string {
 	}
 	return result
 }
+
+type eightList []rune
+
+func (e eightList) Swap(i, j int) {
+	e[i], e[j] = e[j], e[i]
+}
+func (e eightList) Less(i, j int) bool {
+	return e[i] < e[j]
+}
+func (e eightList) Len() int {
+	return len(e)
+}
+func eight(str []string) [][]string {
+	var result [][]string
+
+	dic := make(map[string][]string)
+	for _, s := range str {
+		temp := eightList(s)
+		sort.Sort(temp)
+		tag := dic[string(temp)]
+		tag = append(tag, s)
+		dic[string(temp)] = tag
+	}
+	for _, strings := range dic {
+		result = append(result, strings)
+	}
+	return result
+}
