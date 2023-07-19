@@ -331,3 +331,47 @@ func seven(nums []int, k int) []int {
 	}
 	return result
 }
+
+type eightCounter struct {
+	Value, Count int
+}
+type EightCounterList []*eightCounter
+
+func (e EightCounterList) Swap(i, j int) {
+	e[i], e[j] = e[j], e[i]
+}
+func (e EightCounterList) Less(i, j int) bool {
+	return e[i].Count > e[j].Count
+}
+func (e EightCounterList) Len() int {
+	return len(e)
+}
+
+func (e *EightCounterList) Push(x interface{}) {
+	v := x.(*eightCounter)
+	*e = append(*e, v)
+}
+
+func (e *EightCounterList) Pop() interface{} {
+	v := (*e)[len(*e)-1]
+	*e = (*e)[:len(*e)-1]
+	return v
+}
+
+func eight(nums []int, k int) []int {
+	count := make(map[int]int)
+	for _, v := range nums {
+		count[v]++
+	}
+	var e EightCounterList
+	for i, v := range count {
+		temp := &eightCounter{Value: i, Count: v}
+		heap.Push(&e, temp)
+	}
+	var result []int
+	for len(result) < k {
+		v := heap.Pop(&e).(*eightCounter)
+		result = append(result, v.Value)
+	}
+	return result
+}
