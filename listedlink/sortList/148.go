@@ -229,23 +229,49 @@ func seven(head *ListNode) *ListNode {
 	return mergeTwo(seven(head), seven(flag))
 }
 
-func mergeTwo(listA *ListNode, listB *ListNode) *ListNode {
+func eight(head *ListNode) *ListNode {
+	var getMiddle func(*ListNode) *ListNode
+	getMiddle = func(node *ListNode) *ListNode {
+		fast, slow := node, node
+		for fast.Next != nil && fast.Next.Next != nil {
+			fast = fast.Next.Next
+			slow = slow.Next
+		}
+		return slow
+	}
+
+	length := 0
+	cur := head
+	for cur != nil {
+		cur = cur.Next
+		length++
+	}
+	if length <= 1 {
+		return head
+	}
+	mid := getMiddle(head)
+	secondHalf := mid.Next
+	mid.Next = nil
+	return mergeTwo(eight(head), eight(secondHalf))
+}
+
+func mergeTwo(listA, listB *ListNode) *ListNode {
 	preHead := &ListNode{}
-	pre := preHead
+	prev := preHead
 	for listA != nil && listB != nil {
 		if listA.Val < listB.Val {
-			pre.Next = listA
+			prev.Next = listA
 			listA = listA.Next
 		} else {
-			pre.Next = listB
+			prev.Next = listB
 			listB = listB.Next
 		}
-		pre = pre.Next
+		prev = prev.Next
 	}
-	if listA == nil {
-		pre.Next = listB
+	if listA != nil {
+		prev.Next = listA
 	} else {
-		pre.Next = listA
+		prev.Next = listB
 	}
 	return preHead.Next
 }
