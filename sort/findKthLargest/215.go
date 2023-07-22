@@ -242,6 +242,39 @@ func seven(nums []int, k int) int {
 	return nums[0]
 }
 
+func eight(nums []int, k int) int {
+	var heapModify func([]int, int, int)
+	heapModify = func(ints []int, i int, size int) {
+		left := i*2 + 1
+		right := i*2 + 2
+		largest := i
+		if left < size && nums[left] > nums[largest] {
+			largest = left
+		}
+		if right < size && nums[right] > nums[largest] {
+			largest = right
+		}
+		if largest != i {
+			nums[i], nums[largest] = nums[largest], nums[i]
+			heapModify(ints, largest, size)
+		}
+	}
+	var buildUp func([]int, int)
+	buildUp = func(ints []int, size int) {
+		for x := size / 2; x >= 0; x-- {
+			heapModify(ints, x, size)
+		}
+	}
+	size := len(nums)
+	buildUp(nums, size)
+	for i := len(nums) - 1; i > len(nums)-k; i-- {
+		nums[0], nums[i] = nums[i], nums[0]
+		size--
+		heapModify(nums, 0, size)
+	}
+	return nums[0]
+}
+
 func main() {
 	test := []int{1, 4, 2, 7, 9, -1}
 	fmt.Println(get(test, 2))
