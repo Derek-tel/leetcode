@@ -330,6 +330,50 @@ func seven(nums []int, k int) []int {
 	return result
 }
 
+var eightTag []int
+
+type eightList []int
+
+func (l eightList) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
+}
+
+func (l eightList) Less(i, j int) bool {
+	return eightTag[l[i]] > eightTag[l[j]]
+}
+
+func (l eightList) Len() int {
+	return len(l)
+}
+
+func (l *eightList) Push(x interface{}) {
+	v := x.(int)
+	*l = append(*l, v)
+}
+
+func (l *eightList) Pop() interface{} {
+	v := (*l)[len(*l)-1]
+	*l = (*l)[:len(*l)-1]
+	return v
+}
+
+func eight(nums []int, k int) []int {
+	eightTag = nums
+	sh := eightList{}
+	for i := 0; i < k; i++ {
+		heap.Push(&sh, i)
+	}
+	result := []int{nums[sh[0]]}
+	for i := k; i < len(nums); i++ {
+		heap.Push(&sh, i)
+		for i-sh[0] >= k {
+			heap.Pop(&sh)
+		}
+		result = append(result, nums[sh[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)
