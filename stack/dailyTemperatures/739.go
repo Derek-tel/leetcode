@@ -125,3 +125,18 @@ func seven(temperatures []int) []int {
 	}
 	return result
 }
+
+func eight(temperatures []int) []int {
+	result := make([]int, len(temperatures))
+	var stack []int
+	for i := 0; i < len(temperatures); i++ {
+		today := temperatures[i]
+		for len(stack) > 0 && today > temperatures[stack[len(stack)-1]] {
+			prev := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			result[prev] = i - prev
+		}
+		stack = append(stack, i)
+	}
+	return result
+}
