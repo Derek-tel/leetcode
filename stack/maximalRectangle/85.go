@@ -290,6 +290,43 @@ func nine(matrix [][]byte) int {
 	return v
 }
 
+func ten(matrix [][]byte) int {
+	handler := func(h []int) int {
+		length := len(h) + 2
+		stack := []int{}
+		result := 0
+		getHigh := func(i int) int {
+			if i == 0 || i == length-1 {
+				return -1
+			}
+			return h[i-1]
+		}
+		for i := 0; i < length; i++ {
+			for len(stack) > 0 && getHigh(i) < getHigh(stack[len(stack)-1]) {
+				top := stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+				result = max(result, getHigh(top)*(i-stack[len(stack)-1]-1))
+			}
+			stack = append(stack, i)
+		}
+		return result
+	}
+
+	high := make([]int, len(matrix[0]))
+	var v int
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] == '1' {
+				high[j] += 1
+			} else {
+				high[j] = 0
+			}
+		}
+		v = max(v, handler(high))
+	}
+	return v
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
