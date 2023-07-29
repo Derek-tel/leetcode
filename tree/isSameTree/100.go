@@ -75,3 +75,13 @@ func seven(p, q *TreeNode) bool {
 	}
 	return p.Val == q.Val && seven(p.Left, q.Left) && seven(p.Right, q.Right)
 }
+
+func eight(p, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	return p.Val == q.Val && eight(p.Left, q.Left) && eight(p.Right, q.Right)
+}
