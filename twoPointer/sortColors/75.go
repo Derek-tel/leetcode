@@ -118,6 +118,20 @@ func seven(nums []int) {
 	}
 }
 
+func eight(nums []int) {
+	p0, p2 := 0, len(nums)-1
+	for i := 0; i < len(nums); i++ {
+		for ; i <= p2 && nums[i] == 2; p2-- {
+			nums[p2], nums[i] = nums[i], nums[p2]
+		}
+
+		if nums[i] == 0 {
+			nums[p0], nums[i] = nums[i], nums[p0]
+			p0++
+		}
+	}
+}
+
 func main() {
 	test := []int{2, 0, 2, 1, 1, 0}
 	sortColor(test)
