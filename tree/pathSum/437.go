@@ -168,3 +168,29 @@ func seven(root *TreeNode, targetSum int) int {
 	result += seven(root.Right, targetSum)
 	return result
 }
+
+func eight(root *TreeNode, targetSum int) int {
+	if root == nil {
+		return 0
+	}
+	path := 0
+	var handler func(*TreeNode, int) int
+	handler = func(node *TreeNode, target int) int {
+		resp := 0
+		if node == nil {
+			return resp
+		}
+		if node.Val == target {
+			resp++
+		}
+		resp += handler(node.Left, target-node.Val)
+		resp += handler(node.Right, target-node.Val)
+		return resp
+	}
+
+	path += handler(root, targetSum)
+	path += eight(root.Left, targetSum)
+	path += eight(root.Right, targetSum)
+
+	return path
+}
