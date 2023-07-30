@@ -59,6 +59,15 @@ func eight(root *TreeNode) int {
 	return max(left, right) + 1
 }
 
+func nine(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	left := nine(root.Left)
+	right := nine(root.Right)
+	return max(left, right) + 1
+}
+
 func max(i int, j int) int {
 	if i > j {
 		return i
