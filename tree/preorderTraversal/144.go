@@ -117,3 +117,19 @@ func seven(root *TreeNode) []int {
 	}
 	return result
 }
+
+func eight(root *TreeNode) []int {
+	var stack []*TreeNode
+	var result []int
+	for len(stack) > 0 || root != nil {
+		for root != nil {
+			stack = append(stack, root)
+			result = append(result, root.Val)
+			root = root.Left
+		}
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		root = top.Right
+	}
+	return result
+}
