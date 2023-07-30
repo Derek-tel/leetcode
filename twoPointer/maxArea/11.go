@@ -150,3 +150,22 @@ func seven(height []int) int {
 	}
 	return result
 }
+
+func eight(height []int) int {
+	length := len(height)
+	if length == 0 {
+		return 0
+	}
+	left, right := 0, length-1
+	result := 0
+	for left < right {
+		area := min(height[left], height[right]) * (right - left)
+		result = max(area, result)
+		if height[left] < height[right] {
+			left++
+		} else {
+			right--
+		}
+	}
+	return result
+}
