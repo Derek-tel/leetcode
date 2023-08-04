@@ -1,4 +1,6 @@
-package deleteDuplicates
+package main
+
+import "fmt"
 
 type ListNode struct {
 	Val  int
@@ -63,4 +65,35 @@ func three(head *ListNode) *ListNode {
 		}
 	}
 	return head
+}
+
+func removeDuplicate(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+	cur := head
+	find := make(map[int]bool)
+	find[cur.Val] = true
+	for cur.Next != nil {
+		if _, ok := find[cur.Next.Val]; ok {
+			cur.Next = cur.Next.Next
+		} else {
+			find[cur.Next.Val] = true
+			cur = cur.Next
+		}
+	}
+	return head
+}
+
+func main() {
+	node4 := &ListNode{1, nil}
+	node3 := &ListNode{3, node4}
+	node2 := &ListNode{3, node3}
+	node1 := &ListNode{4, node2}
+
+	head := removeDuplicate(node1)
+	for head != nil {
+		fmt.Println(head.Val)
+		head = head.Next
+	}
 }
