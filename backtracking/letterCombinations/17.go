@@ -164,6 +164,26 @@ func six(digits string) []string {
 	return result
 }
 
+func seven(digits string) []string {
+	var result []string
+	if len(digits) < 1 {
+		return result
+	}
+	var handler func(int, string)
+	handler = func(index int, str string) {
+		if index == len(digits) {
+			result = append(result, str)
+			return
+		}
+		dig := digits[index]
+		char := letters[string(dig)]
+		for _, ch := range char {
+			handler(index+1, str+string(ch))
+		}
+	}
+	handler(0, "")
+	return result
+}
 func main() {
 	fmt.Println(letterCombinations("23"))
 }
