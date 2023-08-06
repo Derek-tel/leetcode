@@ -215,3 +215,27 @@ func eleven(nums []int) [][]int {
 	handler(0)
 	return result
 }
+
+func thirteen(nums []int) [][]int {
+	use := make([]bool, len(nums))
+	var temp []int
+	var result [][]int
+	var handler func(int)
+	handler = func(index int) {
+		if index == len(nums) {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+		for i := 0; i < len(nums); i++ {
+			if !use[i] {
+				use[i] = true
+				temp = append(temp, nums[i])
+				handler(index + 1)
+				temp = temp[:len(temp)-1]
+				use[i] = false
+			}
+		}
+	}
+	handler(0)
+	return result
+}
