@@ -304,6 +304,43 @@ func eight(nums1 []int, nums2 []int) float64 {
 	}
 }
 
+func nine(nums1 []int, nums2 []int) float64 {
+	var helper func(int) int
+	helper = func(i int) int {
+		indexA, indexB := 0, 0
+		for {
+			if indexA == len(nums1) {
+				return nums2[indexB+i-1]
+			}
+			if indexB == len(nums2) {
+				return nums1[indexA+i-1]
+			}
+			if i == 1 {
+				return min(nums1[indexA], nums2[indexB])
+			}
+			half := i / 2
+			newIndexA := min(len(nums1), indexA+half) - 1
+			newIndexB := min(len(nums2), indexB+half) - 1
+			if nums1[newIndexA] < nums2[newIndexB] {
+				i = i - (newIndexA - indexA + 1)
+				indexA = newIndexA + 1
+			} else {
+				i = i - (newIndexB - indexB + 1)
+				indexB = newIndexB + 1
+			}
+		}
+	}
+	lengthA, lengthB := len(nums1), len(nums2)
+	total := lengthA + lengthB
+	if total%2 == 1 {
+		k := total/2 + 1
+		return float64(helper(k))
+	} else {
+		k := total / 2
+		return float64(helper(k)+helper(k+1)) / 2
+	}
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
