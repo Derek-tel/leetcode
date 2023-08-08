@@ -8,12 +8,12 @@ func searchRange(nums []int, target int) []int {
 	if len(nums) == 0 {
 		return []int{-1, -1}
 	}
-	a := firstOne(nums, target)
-	b := lastOne(nums, target)
+	a := firstEqual(nums, target)
+	b := lastEqual(nums, target)
 	return []int{a, b}
 }
 
-func firstOne(nums []int, target int) int {
+func firstEqual(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
@@ -31,14 +31,14 @@ func firstOne(nums []int, target int) int {
 	return -1
 }
 
-func lastOne(nums []int, target int) int {
+func lastEqual(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
-		if nums[mid] > target {
-			right = mid - 1
-		} else if nums[mid] < target {
+		if nums[mid] < target {
 			left = mid + 1
+		} else if nums[mid] > target {
+			right = mid - 1
 		} else {
 			if mid == len(nums)-1 || nums[mid+1] != target {
 				return mid
@@ -116,38 +116,6 @@ func searchLastLessElement(nums []int, target int) int {
 			low = mid + 1
 		} else {
 			high = mid - 1
-		}
-	}
-	return -1
-}
-
-func searchFirstGreater(nums []int, target int) int {
-	left, right := 0, len(nums)-1
-	for left <= right {
-		mid := left + (right-left)>>1
-		if nums[mid] >= target {
-			if mid == 0 || nums[mid-1] < target {
-				return mid
-			}
-			right = mid - 1
-		} else {
-			left = mid + 1
-		}
-	}
-	return -1
-}
-
-func searchLastLess(nums []int, target int) int {
-	left, right := 0, len(nums)-1
-	for left <= right {
-		mid := left + (right-left)>>1
-		if nums[mid] <= target {
-			if mid == len(nums)-1 || nums[mid+1] > target {
-				return mid
-			}
-			left = mid + 1
-		} else {
-			right = mid - 1
 		}
 	}
 	return -1
