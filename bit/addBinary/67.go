@@ -1,6 +1,8 @@
 package addBinary
 
-import "strconv"
+import (
+	"strconv"
+)
 
 func addBinary(a string, b string) string {
 	resp := ""
@@ -102,6 +104,27 @@ func five(a string, b string) string {
 		}
 		resp = strconv.Itoa(carry%2) + resp
 		carry /= 2
+	}
+	if carry > 0 {
+		resp = "1" + resp
+	}
+	return resp
+}
+
+func six(a, b string) string {
+	var resp string
+	carry := 0
+	lengthA, lengthB := len(a), len(b)
+	n := max(lengthA, lengthB)
+	for i := 0; i < n; i++ {
+		if i < lengthA {
+			carry += int(a[lengthA-i-1] - '0')
+		}
+		if i < lengthB {
+			carry += int(a[lengthB-i-1] - '0')
+		}
+		resp = strconv.Itoa(carry%2) + resp
+		carry = carry / 2
 	}
 	if carry > 0 {
 		resp = "1" + resp
