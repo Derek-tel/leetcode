@@ -277,7 +277,7 @@ func ten(word1, word2 string) int {
 		for j := 1; j <= lengthB; j++ {
 			left := dp[i-1][j] + 1
 			down := dp[i][j-1] + 1
-			leftDown := dp[i-1][j-1]
+			leftDown := dp[i-1][j-1] + 1
 			if word1[i-1] == word2[j-1] {
 				leftDown--
 			}
