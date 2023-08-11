@@ -183,6 +183,9 @@ func ten(s string, wordDict []string) bool {
 }
 
 func eleven(s string, wordDict []string) bool {
+	if len(s) == 0 {
+		return false
+	}
 	dic := make(map[string]bool)
 	for _, w := range wordDict {
 		dic[w] = true
