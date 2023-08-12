@@ -230,3 +230,36 @@ func eight(str []string) [][]string {
 	}
 	return result
 }
+
+type nineList []rune
+
+func (n nineList) Swap(i, j int) {
+	n[i], n[j] = n[j], n[i]
+}
+func (n nineList) Less(i, j int) bool {
+	return n[i] < n[j]
+}
+func (n nineList) Len() int {
+	return len(n)
+}
+
+func nine(strs []string) [][]string {
+	var result [][]string
+
+	if len(strs) == 0 {
+		return result
+	}
+	dic := make(map[string][]string)
+	for _, str := range strs {
+		temp := nineList(str)
+		sort.Sort(temp)
+		tag := dic[string(temp)]
+		tag = append(tag, str)
+		dic[string(temp)] = tag
+	}
+
+	for _, strings := range dic {
+		result = append(result, strings)
+	}
+	return result
+}
