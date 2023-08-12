@@ -135,6 +135,22 @@ func eight(tasks []byte, n int) int {
 	return max(len(tasks), minLength)
 }
 
+func nine(tasks []byte, n int) int {
+	counter := make([]int, 26)
+	for i := 0; i < len(tasks); i++ {
+		counter[tasks[i]-'A']++
+	}
+	sort.Ints(counter)
+	most := counter[len(counter)-1]
+	minLength := (n+1)*(most-1) + 1
+	for i := 0; i < len(counter)-1; i++ {
+		if counter[i] == most {
+			minLength++
+		}
+	}
+	return max(len(tasks), minLength)
+}
+
 func max(i, j int) int {
 	if i < j {
 		return j
