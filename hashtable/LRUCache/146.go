@@ -32,35 +32,31 @@ func Constructor(capacity int) LRUCache {
 
 func (this *LRUCache) Get(key int) int {
 	if node, ok := this.Table[key]; ok {
-		this.MoveToHead(node)
+		this.moveToHead(node)
 		return node.Value
+	} else {
+		return -1
 	}
-	return -1
 }
-func (this *LRUCache) Put(key, value int) {
+
+func (this *LRUCache) Put(key int, value int) {
 	if node, ok := this.Table[key]; ok {
 		node.Value = value
-		this.MoveToHead(node)
+		this.moveToHead(node)
 	} else {
-		n := initNode(key, value)
-		this.addToHead(n)
-		this.Table[key] = n
+		top := initNode(key, value)
+		this.addToHead(top)
 		this.Size++
+		this.Table[key] = top
 		if this.Size > this.Capacity {
-			m := this.RemoveFromTail()
-			delete(this.Table, m.Key)
+			del := this.removeFromTail()
+			delete(this.Table, del.Key)
 			this.Size--
 		}
 	}
 }
 
-func (this *LRUCache) RemoveFromTail() *LRUNode {
-	node := this.Tail.Prev
-	this.remove(node)
-	return node
-}
-
-func (this *LRUCache) MoveToHead(node *LRUNode) {
+func (this *LRUCache) moveToHead(node *LRUNode) {
 	this.remove(node)
 	this.addToHead(node)
 }
@@ -75,6 +71,12 @@ func (this *LRUCache) addToHead(node *LRUNode) {
 	node.Next = this.Head.Next
 	this.Head.Next.Prev = node
 	this.Head.Next = node
+}
+
+func (this *LRUCache) removeFromTail() *LRUNode {
+	node := this.Tail.Prev
+	this.remove(node)
+	return node
 }
 
 /**
