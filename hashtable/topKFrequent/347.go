@@ -375,3 +375,50 @@ func eight(nums []int, k int) []int {
 	}
 	return result
 }
+
+type nineCounter struct {
+	Val, Count int
+}
+
+type nineList []nineCounter
+
+func (n nineList) Swap(i, j int) {
+	n[i], n[j] = n[j], n[i]
+}
+func (n nineList) Less(i, j int) bool {
+	return n[i].Count > n[j].Count
+}
+func (n nineList) Len() int {
+	return len(n)
+}
+
+func (n *nineList) Push(x interface{}) {
+	tag := x.(nineCounter)
+	*n = append(*n, tag)
+}
+
+func (n *nineList) Pop() interface{} {
+	length := len(*n)
+	tag := (*n)[length-1]
+	*n = (*n)[:length-1]
+	return tag
+}
+
+func nine(nums []int, k int) []int {
+	var result []int
+	dic := make(map[int]int)
+	for i := 0; i < len(nums); i++ {
+		dic[nums[i]]++
+	}
+	var l nineList
+	for i, c := range dic {
+		tag := nineCounter{Val: i, Count: c}
+		heap.Push(&l, tag)
+	}
+
+	for len(result) < k {
+		tag := heap.Pop(&l).(nineCounter)
+		result = append(result, tag.Val)
+	}
+	return result
+}
