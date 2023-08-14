@@ -144,3 +144,19 @@ func eight(head *ListNode) *ListNode {
 	}
 	return nil
 }
+
+func nine(head *ListNode) *ListNode {
+	fast, slow, p := head, head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+		if fast == slow {
+			for p != slow {
+				p = p.Next
+				slow = slow.Next
+			}
+			return p
+		}
+	}
+	return nil
+}
