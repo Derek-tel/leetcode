@@ -374,6 +374,50 @@ func eight(nums []int, k int) []int {
 	return result
 }
 
+var nineTag []int
+
+type nineList []int
+
+func (n nineList) Swap(i, j int) {
+	n[i], n[j] = n[j], n[i]
+}
+
+func (n nineList) Less(i, j int) bool {
+	return nineTag[n[i]] > nineTag[n[j]]
+}
+
+func (n nineList) Len() int {
+	return len(n)
+}
+
+func (n *nineList) Push(x interface{}) {
+	v := x.(int)
+	*n = append(*n, v)
+}
+
+func (n *nineList) Pop() interface{} {
+	v := (*n)[len(*n)-1]
+	*n = (*n)[:len(*n)-1]
+	return v
+}
+
+func nine(nums []int, k int) []int {
+	nineTag = nums
+	tem := nineList{}
+	for i := 0; i < k; i++ {
+		heap.Push(&tem, i)
+	}
+	result := []int{nums[tem[0]]}
+	for i := k; i < len(nums); i++ {
+		heap.Push(&tem, i)
+		for i-tem[0] >= k {
+			heap.Pop(&tem)
+		}
+		result = append(result, nums[tem[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)
