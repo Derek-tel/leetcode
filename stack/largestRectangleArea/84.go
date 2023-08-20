@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func largestRectangleArea(heights []int) int {
 	stack := []int{}
@@ -151,6 +153,27 @@ func six(heights []int) int {
 }
 
 func seven(heights []int) int {
+	var stack []int
+	length := len(heights) + 2
+	getHeight := func(i int) int {
+		if i == 0 || i == length-1 {
+			return -1
+		}
+		return heights[i-1]
+	}
+	result := 0
+	for i := 0; i < length; i++ {
+		for len(stack) > 0 && getHeight(i) < getHeight(stack[len(stack)-1]) {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			result = max(result, getHeight(top)*(i-stack[len(stack)-1]-1))
+		}
+		stack = append(stack, i)
+	}
+	return result
+}
+
+func eight(heights []int) int {
 	var stack []int
 	length := len(heights) + 2
 	getHeight := func(i int) int {
