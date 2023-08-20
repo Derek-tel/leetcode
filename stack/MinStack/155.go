@@ -16,7 +16,7 @@ func Constructor() MinStack {
 
 func (this *MinStack) Push(val int) {
 	this.stack = append(this.stack, val)
-	this.min = append(this.min, min(val, this.min[len(this.min)-1]))
+	this.min = append(this.min, min(this.min[len(this.min)-1], val))
 }
 
 func (this *MinStack) Pop() {
@@ -47,12 +47,3 @@ func min(x, j int) int {
 	}
 	return j
 }
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * obj := Constructor();
- * obj.Push(val);
- * obj.Pop();
- * param_3 := obj.Top();
- * param_4 := obj.GetMin();
- */
