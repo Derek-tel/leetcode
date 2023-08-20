@@ -123,6 +123,20 @@ func eight(s string) int {
 	}
 	return len(stack)
 }
+
+func nine(s string) int {
+	var stack []rune
+	for _, ch := range s {
+		if ch == '(' {
+			stack = append(stack, ch)
+		} else if ch == ')' && len(stack) > 0 && stack[len(stack)-1] == '(' {
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, ch)
+		}
+	}
+	return len(stack)
+}
 func main() {
 	test := "(()"
 	fmt.Println(minAddToMakeValid(test))
