@@ -100,3 +100,13 @@ func eight(root *TreeNode) *TreeNode {
 	root.Left, root.Right = root.Right, root.Left
 	return root
 }
+
+func nine(root *TreeNode) *TreeNode {
+	if root == nil {
+		return root
+	}
+	nine(root.Left)
+	nine(root.Right)
+	root.Left, root.Right = root.Right, root.Left
+	return root
+}
