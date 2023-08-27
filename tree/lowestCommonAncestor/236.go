@@ -153,3 +153,21 @@ func eight(root, q, p *TreeNode) *TreeNode {
 	}
 	return left
 }
+
+func nine(root, q, p *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if root.Val == q.Val || root.Val == p.Val {
+		return root
+	}
+	left := nine(root.Left, q, p)
+	right := nine(root.Right, q, p)
+	if left != nil && right != nil {
+		return root
+	}
+	if left == nil {
+		return right
+	}
+	return left
+}
