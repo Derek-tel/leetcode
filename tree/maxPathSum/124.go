@@ -33,13 +33,6 @@ func getMax(root *TreeNode, max *int) int {
 	return maxCurr
 }
 
-func Max(i, j int) int {
-	if i > j {
-		return i
-	}
-	return j
-}
-
 func test(root *TreeNode) int {
 	if root == nil {
 		return 0
@@ -161,4 +154,28 @@ func eight(root *TreeNode) int {
 	}
 	handler(root)
 	return max
+}
+
+func nine(root *TreeNode) int {
+	max := math.MinInt
+	var handler func(*TreeNode) int
+	handler = func(node *TreeNode) int {
+		if node == nil {
+			return 0
+		}
+		left := handler(node.Left)
+		right := handler(node.Right)
+		currMax := Max(Max(left+node.Val, right+node.Val), node.Val)
+		max = Max(max, Max(currMax, left+right+node.Val))
+		return currMax
+	}
+	handler(root)
+	return max
+}
+
+func Max(i, j int) int {
+	if i > j {
+		return i
+	}
+	return j
 }
