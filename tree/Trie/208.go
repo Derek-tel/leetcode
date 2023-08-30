@@ -5,47 +5,50 @@ import (
 )
 
 type Trie struct {
-	Child map[rune]*Trie
-	IsEnd bool
+	child map[rune]*Trie
+	isEnd bool
 }
 
 func Constructor() Trie {
 	return Trie{
-		IsEnd: true,
-		Child: make(map[rune]*Trie),
+		child: make(map[rune]*Trie),
+		isEnd: false,
 	}
 }
 
 func (this *Trie) Insert(word string) {
 	parent := this
-	for _, v := range word {
-		if node, ok := parent.Child[v]; ok {
+	for _, ch := range word {
+		if node, ok := parent.child[ch]; ok {
 			parent = node
 		} else {
-			newChild := &Trie{IsEnd: true, Child: make(map[rune]*Trie)}
-			parent.Child[v] = newChild
+			newChild := &Trie{
+				child: make(map[rune]*Trie),
+				isEnd: false,
+			}
+			parent.child[ch] = newChild
 			parent = newChild
 		}
 	}
-	parent.IsEnd = true
+	parent.isEnd = true
 }
 
 func (this *Trie) Search(word string) bool {
 	parent := this
-	for _, v := range word {
-		if node, ok := parent.Child[v]; ok {
+	for _, ch := range word {
+		if node, ok := parent.child[ch]; ok {
 			parent = node
 		} else {
 			return false
 		}
 	}
-	return parent.IsEnd
+	return parent.isEnd
 }
 
 func (this *Trie) StartsWith(prefix string) bool {
 	parent := this
-	for _, v := range prefix {
-		if node, ok := parent.Child[v]; ok {
+	for _, ch := range prefix {
+		if node, ok := parent.child[ch]; ok {
 			parent = node
 		} else {
 			return false
@@ -53,6 +56,14 @@ func (this *Trie) StartsWith(prefix string) bool {
 	}
 	return true
 }
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.Insert(word);
+ * param_2 := obj.Search(word);
+ * param_3 := obj.StartsWith(prefix);
+ */
 
 func main() {
 	obj := Constructor()
