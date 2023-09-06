@@ -466,6 +466,64 @@ func eight(s string) []string {
 	return result
 }
 
+func nine(s string) []string {
+	var valid func(string) bool
+	valid = func(str string) bool {
+		count := 0
+		for i := 0; i < len(str); i++ {
+			if str[i] == '(' {
+				count++
+			} else if str[i] == ')' {
+				count--
+				if count < 0 {
+					return false
+				}
+			}
+		}
+		return count == 0
+	}
+
+	leftMove, rightMove := 0, 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			leftMove++
+		} else if s[i] == ')' {
+			if leftMove > 0 {
+				leftMove--
+			} else {
+				rightMove++
+			}
+		}
+	}
+
+	var result []string
+	var backtrack func(string, int, int, int)
+	backtrack = func(str string, index int, left int, right int) {
+		if left == 0 && right == 0 {
+			if valid(str) {
+				result = append(result, str)
+			}
+			return
+		}
+		for i := index; i < len(str); i++ {
+			if i > index && str[i] == str[i-1] {
+				continue
+			}
+			if left+right > len(str)-i {
+				return
+			}
+			if str[i] == '(' && left > 0 {
+				backtrack(str[:i]+str[i+1:], i, left-1, right)
+			}
+			if str[i] == ')' && right > 0 {
+				backtrack(str[:i]+str[i+1:], i, left, right-1)
+			}
+		}
+	}
+	backtrack(s, 0, leftMove, rightMove)
+	return result
+}
+
 func main() {
 	test := "()())()"
 	fmt.Println(removeInvalidParentheses(test))
