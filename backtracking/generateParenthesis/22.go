@@ -228,6 +228,28 @@ func ten(n int) []string {
 	return result
 }
 
+func eleven(n int) []string {
+	var result []string
+	var handler func(int, int, string)
+	handler = func(left int, right int, str string) {
+		if left == 0 && right == 0 {
+			result = append(result, str)
+			return
+		}
+		if left > right {
+			return
+		}
+		if left > 0 {
+			handler(left-1, right, str+"(")
+		}
+		if right > 0 {
+			handler(left, right-1, str+")")
+		}
+	}
+	handler(n, n, "")
+	return result
+}
+
 func main() {
 	test := 3
 	fmt.Println(generateParenthesis(test))
