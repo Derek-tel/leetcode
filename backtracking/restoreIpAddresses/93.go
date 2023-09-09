@@ -370,6 +370,48 @@ func eight(s string) []string {
 	return resp
 }
 
+func nine(s string) []string {
+	var segment = 4
+	var resp []string
+	var temp = make([]int, segment)
+	var handler func(int, int)
+	handler = func(seg int, index int) {
+		if seg == segment {
+			if index == len(s) {
+				final := ""
+				for i := 0; i < len(temp); i++ {
+					final = final + strconv.Itoa(temp[i])
+					if i < segment-1 {
+						final += "."
+					}
+				}
+				resp = append(resp, final)
+			}
+			return
+		}
+		if index == len(s) {
+			return
+		}
+		if s[index] == '0' {
+			temp[seg] = 0
+			handler(seg+1, index+1)
+		} else {
+			address := 0
+			for i := index; i < len(s); i++ {
+				address = address*10 + int(s[i]-'0')
+				if address > 0 && address <= 0xff {
+					temp[seg] = address
+					handler(seg+1, i+1)
+				} else {
+					break
+				}
+			}
+		}
+	}
+	handler(0, 0)
+	return resp
+}
+
 func main() {
 	test := "0000"
 	fmt.Println(restoreIpAddresses(test))
