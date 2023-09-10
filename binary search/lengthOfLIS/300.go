@@ -176,3 +176,32 @@ func six(nums []int) int {
 	}
 	return len(temp)
 }
+
+func seven(nums []int) int {
+	var searchFirst func([]int, int) int
+	searchFirst = func(ints []int, i int) int {
+		low, high := 0, len(ints)-1
+		for low <= high {
+			mid := low + (high-low)>>1
+			if ints[mid] >= i {
+				if mid == 0 || ints[mid-1] < i {
+					return mid
+				}
+				high = mid - 1
+			} else {
+				low = mid + 1
+			}
+		}
+		return -1
+	}
+	var temp []int
+	for _, num := range nums {
+		index := searchFirst(temp, num)
+		if index == -1 {
+			temp = append(temp, num)
+		} else {
+			temp[index] = num
+		}
+	}
+	return len(temp)
+}
