@@ -8,12 +8,12 @@ func searchRange(nums []int, target int) []int {
 	if len(nums) == 0 {
 		return []int{-1, -1}
 	}
-	a := firstEqual(nums, target)
-	b := lastEqual(nums, target)
+	a := getFirstEqual(nums, target)
+	b := getLastEqual(nums, target)
 	return []int{a, b}
 }
 
-func firstEqual(nums []int, target int) int {
+func getFirstEqual(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
@@ -31,7 +31,7 @@ func firstEqual(nums []int, target int) int {
 	return -1
 }
 
-func lastEqual(nums []int, target int) int {
+func getLastEqual(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
@@ -91,9 +91,9 @@ func searchLastEqualElement(nums []int, target int) int {
 func searchFirstGreaterElement(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
-		mid := low + ((high - low) >> 1)
+		mid := low + (high-low)>>1
 		if nums[mid] >= target {
-			if (mid == 0) || (nums[mid-1] < target) { // 找到第一个大于等于 target 的元素
+			if mid == 0 || nums[mid-1] < target { // 找到第一个大于等于 target 的元素
 				return mid
 			}
 			high = mid - 1
@@ -108,9 +108,10 @@ func searchFirstGreaterElement(nums []int, target int) int {
 func searchLastLessElement(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
-		mid := low + ((high - low) >> 1)
+		mid := low + (high-low)>>1
+
 		if nums[mid] <= target {
-			if (mid == len(nums)-1) || (nums[mid+1] > target) { // 找到最后一个小于等于 target 的元素
+			if mid == len(nums)-1 || nums[mid+1] > target { // 找到最后一个小于等于 target 的元素
 				return mid
 			}
 			low = mid + 1
