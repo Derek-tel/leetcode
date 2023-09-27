@@ -138,6 +138,19 @@ func ten(nums []int) int {
 	return result
 }
 
+func eleven(nums []int) int {
+	maxN, minN, result := nums[0], nums[0], nums[0]
+
+	for i := 1; i < len(nums); i++ {
+		mm := maxN
+		mn := minN
+		maxN = max(max(nums[i]*mm, nums[i]*mn), nums[i])
+		minN = min(min(nums[i]*mm, nums[i]*mn), nums[i])
+		result = max(result, maxN)
+	}
+	return result
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
