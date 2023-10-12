@@ -202,3 +202,24 @@ func nine(nums []int) int {
 	}
 	return longest
 }
+
+func ten(nums []int) int {
+	dic := make(map[int]bool)
+	for _, num := range nums {
+		dic[num] = true
+	}
+	longest := 0
+	for _, num := range nums {
+		if !dic[num-1] {
+			current := 1
+			for dic[num+1] {
+				current++
+				num++
+			}
+			if current > longest {
+				longest = current
+			}
+		}
+	}
+	return longest
+}
