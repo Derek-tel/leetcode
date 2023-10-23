@@ -422,3 +422,48 @@ func nine(nums []int, k int) []int {
 	}
 	return result
 }
+
+type tenCounter struct {
+	Val, Count int
+}
+
+type tenList []tenCounter
+
+func (t tenList) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+func (t tenList) Less(i, j int) bool {
+	return t[i].Count > t[j].Count
+}
+func (t tenList) Len() int {
+	return len(t)
+}
+func (t *tenList) Push(x interface{}) {
+	tag := x.(tenCounter)
+	*t = append(*t, tag)
+}
+func (t *tenList) Pop() interface{} {
+	length := len(*t)
+	tag := (*t)[length-1]
+	*t = (*t)[:length-1]
+	return tag
+}
+
+func ten(nums []int, k int) []int {
+	var result []int
+	dic := make(map[int]int)
+	for i := 0; i < len(nums); i++ {
+		dic[nums[i]]++
+	}
+	var t tenList
+	for i, c := range dic {
+		tag := tenCounter{Val: i, Count: c}
+		heap.Push(&t, tag)
+	}
+
+	for len(result) < k {
+		tag := heap.Pop(&t).(tenCounter)
+		result = append(result, tag.Val)
+	}
+	return result
+}
