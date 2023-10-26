@@ -328,3 +328,39 @@ func nine(lists []*ListNode) *ListNode {
 		return handler(nine(lists[:mid]), nine(lists[mid:]))
 	}
 }
+
+func ten(lists []*ListNode) *ListNode {
+	var handler func(*ListNode, *ListNode) *ListNode
+
+	handler = func(left *ListNode, right *ListNode) *ListNode {
+		preHead := &ListNode{}
+		prev := preHead
+		for left != nil && right != nil {
+			if left.Val < right.Val {
+				prev.Next = left
+				left = left.Next
+			} else {
+				prev.Next = right
+				right = right.Next
+			}
+			prev = prev.Next
+		}
+		if left != nil {
+			prev.Next = left
+		} else {
+			prev.Next = right
+		}
+		return preHead.Next
+	}
+
+	if len(lists) == 0 {
+		return nil
+	} else if len(lists) == 1 {
+		return lists[0]
+	} else if len(lists) == 2 {
+		return handler(lists[0], lists[1])
+	} else {
+		mid := len(lists) / 2
+		return handler(ten(lists[:mid]), ten(lists[mid:]))
+	}
+}
