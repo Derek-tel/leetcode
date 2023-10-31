@@ -334,8 +334,8 @@ func ten(nums []int, k int) int {
 	}
 	size := len(nums)
 	buildUp(nums, size)
-	for i := len(nums) - 1; i > len(nums)-k; i++ {
-		nums[0], nums[i] = nums[i], nums[k]
+	for i := len(nums) - 1; i > len(nums)-k; i-- {
+		nums[0], nums[i] = nums[i], nums[0]
 		size--
 		headModify(nums, 0, size)
 	}
