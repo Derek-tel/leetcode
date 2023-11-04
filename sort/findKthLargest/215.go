@@ -309,6 +309,39 @@ func nine(nums []int, k int) int {
 	return nums[0]
 }
 
+func ten(nums []int, k int) int {
+	var headModify func([]int, int, int)
+	headModify = func(ints []int, i int, size int) {
+		left := i*2 + 1
+		right := i*2 + 2
+		largest := i
+		if left < size && ints[left] > ints[largest] {
+			largest = left
+		}
+		if right < size && ints[right] > ints[largest] {
+			largest = right
+		}
+		if largest != i {
+			nums[i], nums[largest] = nums[largest], nums[i]
+			headModify(ints, largest, size)
+		}
+	}
+	var buildUp func([]int, int)
+	buildUp = func(ints []int, size int) {
+		for i := size / 2; i >= 0; i-- {
+			headModify(ints, i, size)
+		}
+	}
+	size := len(nums)
+	buildUp(nums, size)
+	for i := len(nums) - 1; i > len(nums)-k; i-- {
+		nums[0], nums[i] = nums[i], nums[0]
+		size--
+		headModify(nums, 0, size)
+	}
+	return nums[0]
+}
+
 func main() {
 	test := []int{1, 4, 2, 7, 9, -1}
 	fmt.Println(get(test, 2))
