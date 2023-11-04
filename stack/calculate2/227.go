@@ -321,6 +321,37 @@ func ten(s string) int {
 	return result
 }
 
+func eleven(s string) int {
+	pre := '+'
+	stack := []int{0}
+	num := 0
+	for i, ch := range s {
+		isDigit := ch >= '0' && ch <= '9'
+		if isDigit {
+			num = num*10 + int(ch-'0')
+		}
+		if !isDigit && ch != ' ' || i == len(s)-1 {
+			switch pre {
+			case '+':
+				stack = append(stack, num)
+			case '-':
+				stack = append(stack, -num)
+			case '*':
+				stack[len(stack)-1] *= num
+			case '/':
+				stack[len(stack)-1] /= num
+			}
+			pre = ch
+			num = 0
+		}
+	}
+	var result int
+	for _, v := range stack {
+		result += v
+	}
+	return result
+}
+
 func main() {
 	test := "3*2*2"
 	fmt.Println(calculate(test))
