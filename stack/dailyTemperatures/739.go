@@ -155,3 +155,19 @@ func nine(temperatures []int) []int {
 	}
 	return result
 }
+
+func ten(temperatures []int) []int {
+	result := make([]int, len(temperatures))
+	var stack []int
+
+	for i := 0; i < len(temperatures); i++ {
+		today := temperatures[i]
+		for len(stack) > 0 && today > temperatures[stack[len(stack)-1]] {
+			prevIndex := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			result[prevIndex] = i - prevIndex
+		}
+		stack = append(stack, i)
+	}
+	return result
+}
