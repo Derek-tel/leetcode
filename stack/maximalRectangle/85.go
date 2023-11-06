@@ -365,6 +365,44 @@ func eleven(matrix [][]byte) int {
 	return resp
 }
 
+func twelve(matrix [][]byte) int {
+	var handler func([]int) int
+	handler = func(h []int) int {
+		result := 0
+		stack := make([]int, 0)
+		length := len(h) + 2
+		getHeight := func(i int) int {
+			if i == 0 || i == length-1 {
+				return -1
+			}
+			return h[i-1]
+		}
+		for i := 0; i < length; i++ {
+			for len(stack) > 0 && getHeight(i) < getHeight(stack[len(stack)-1]) {
+				top := stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+				result = max(result, getHeight(top)*(i-stack[len(stack)-1]-1))
+			}
+			stack = append(stack, i)
+		}
+		return result
+	}
+
+	var high = make([]int, len(matrix[0]))
+	var resp = 0
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
+			if matrix[i][j]-'0' == 0 {
+				high[j] = 0
+			} else {
+				high[j] += 1
+			}
+		}
+		resp = max(resp, handler(high))
+	}
+	return resp
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
