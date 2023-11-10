@@ -361,6 +361,43 @@ func ten(s string, words []string) []int {
 	}
 	return result
 }
+
+func eleven(s string, words []string) []int {
+	var result []int
+	wordLen, wordCount := len(words[0]), len(words)
+	if wordCount < 1 || len(s) < wordLen*wordCount {
+		return result
+	}
+	dic := make(map[string]int)
+	for _, word := range words {
+		dic[word]++
+	}
+	for i := 0; i < wordLen; i++ {
+		temp := make(map[string]int)
+		count := 0
+		for left, right := i, i; right+wordLen <= len(s); right += wordLen {
+			word := s[right : right+wordLen]
+			if num, ok := dic[word]; ok {
+				for temp[word] >= num {
+					temp[s[left:left+wordLen]]--
+					count--
+					left = left + wordLen
+				}
+				temp[word]++
+				count++
+			} else {
+				left = right + wordLen
+				count = 0
+				temp = make(map[string]int)
+			}
+			if count == wordCount {
+				result = append(result, left)
+			}
+		}
+	}
+	return result
+}
+
 func main() {
 	test := "wordgoodgoodgoodbestword"
 	words := []string{"word", "good", "best", "good"}
