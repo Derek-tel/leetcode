@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/binary"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"io"
 	"strconv"
@@ -71,6 +72,13 @@ func main() {
 	var sss uint64
 	sss = 18446744073709551615
 	fmt.Println(fmt.Sprintf("%x", sss))
+
+	var trialDetail = &TrialAuditDetail{}
+	fmt.Println(fmt.Sprintf("%+v", trialDetail))
+	trialDetail.ProjectDetail.ProjectName = "123"
+
+	fmt.Println(json.Marshal("{\"project_detail\":{\"business_line_name\":\"测试\",\"project_name\":\"11111\",\"project_type\":\"other\",\"demand_side\":\"quhongli\",\"label_product_operator\":\"quhongli\",\"project_manager\":\"quhongli\",\"task_name\":\"\",\"project_task_type\":\"单轮对话\",\"task_admin_list\":\"quhongli,baihao\",\"target_accuracy\":7,\"target_efficiency\":7,\"worker_comments\":\"111111\",\"assignee_user\":\"zhupeng\"},\"target_detail\":{\"target_accuracy\":7,\"final_accuracy\":8,\"target_efficiency\":7,\"final_efficiency\":9,\"worker_comments\":\"111111\",\"demand_comments\":\"hahaha\"}}"))
+
 }
 
 func ISO9797M2Padding(origin string, n int) string {
@@ -102,4 +110,53 @@ func StringToAsciiHex(str string) string {
 		result += hexV
 	}
 	return result
+}
+
+type TrialAuditOrder struct {
+	ProjectId    int64             `json:"project_id"`
+	TaskId       int64             `json:"task_id,omitempty"`
+	AssigneeUser string            `json:"assignee_user,omitempty"`
+	AuditDetail  *TrialAuditDetail `json:"audit_detail"`
+}
+
+type TrialAuditDetail struct {
+	ProjectDetail ProjectDetail `json:"project_detail"`
+	TrialDetail   *TrialDetail  `json:"trial_detail,omitempty"`
+	TargetDetail  TargetDetail  `json:"target_detail"`
+}
+
+type ProjectDetail struct {
+	BusinessLineName     string `json:"business_line_name"`
+	ProjectName          string `json:"project_name"`
+	ProjectType          string `json:"project_type"`
+	DemandSide           string `json:"demand_side"`
+	LabelProductOperator string `json:"label_product_operator"`
+	ProjectManager       string `json:"project_manager"`
+	TaskName             string `json:"task_name"`
+	ProjectTaskType      string `json:"project_task_type"`
+	TaskAdminList        string `json:"task_admin_list"`
+}
+
+type TrialDetail struct {
+	DemandSide *EfficiencyDetail `json:"demand_side"`
+	WorkerSide *EfficiencyDetail `json:"worker_side"`
+}
+
+type EfficiencyDetail struct {
+	LabelUser                string  `json:"label_user"`
+	LabelTotalTime           float64 `json:"label_total_time"`
+	LabelTotalNum            int64   `json:"label_total_num"`
+	LabelAvgEfficiency       float64 `json:"label_avg_efficiency"`
+	LabelFirstHourEfficiency float64 `json:"label_first_hour_efficiency"`
+	LabelLastHourEfficiency  float64 `json:"label_last_hour_efficiency"`
+	LabelAccuracy            float64 `json:"label_accuracy"`
+}
+
+type TargetDetail struct {
+	TargetAccuracy   float64 `json:"target_accuracy"`
+	FinalAccuracy    float64 `json:"final_accuracy,omitempty"`
+	TargetEfficiency float64 `json:"target_efficiency"`
+	FinalEfficiency  float64 `json:"final_efficiency,omitempty"`
+	WorkerComments   string  `json:"worker_comments"`
+	DemandComments   string  `json:"demand_comments,omitempty"`
 }
