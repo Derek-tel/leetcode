@@ -12,8 +12,8 @@ type TreeNode struct {
 }
 
 type Codec struct {
-	input  []string
-	buffer strings.Builder
+	input   []string
+	builder strings.Builder
 }
 
 func Constructor() Codec {
@@ -23,13 +23,13 @@ func Constructor() Codec {
 // Serializes a tree to a single string.
 func (this *Codec) serialize(root *TreeNode) string {
 	if root == nil {
-		this.buffer.WriteString("null,")
+		this.builder.WriteString("null,")
 		return ""
 	}
-	this.buffer.WriteString(strconv.Itoa(root.Val) + ",")
+	this.builder.WriteString(strconv.Itoa(root.Val) + ",")
 	this.serialize(root.Left)
 	this.serialize(root.Right)
-	return this.buffer.String()
+	return this.builder.String()
 }
 
 // Deserializes your encoded data to tree.
