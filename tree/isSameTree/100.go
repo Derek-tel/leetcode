@@ -95,3 +95,13 @@ func nine(p, q *TreeNode) bool {
 	}
 	return p.Val == q.Val && nine(p.Left, q.Left) && nine(p.Right, q.Right)
 }
+
+func ten(p, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	return p.Val == q.Val && ten(p.Left, q.Left) && ten(p.Right, q.Right)
+}
