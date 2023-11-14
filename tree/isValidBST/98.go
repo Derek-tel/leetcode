@@ -165,5 +165,5 @@ func eleven(root *TreeNode) bool {
 		}
 		return node.Val > min && node.Val < max && handler(node.Left, min, node.Val) && handler(node.Right, node.Val, max)
 	}
-	return handler(root, math.MinInt32, math.MaxInt32)
+	return handler(root, math.MinInt, math.MaxInt)
 }
