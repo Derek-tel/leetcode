@@ -77,6 +77,15 @@ func ten(root *TreeNode) int {
 	return max(left, right) + 1
 }
 
+func eleven(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	left := ten(root.Left)
+	right := ten(root.Right)
+	return max(left, right) + 1
+}
+
 func max(i int, j int) int {
 	if i > j {
 		return i
