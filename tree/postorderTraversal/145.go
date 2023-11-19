@@ -137,3 +137,25 @@ func five(root *TreeNode) []int {
 	}
 	return result
 }
+
+func six(root *TreeNode) []int {
+	var stack []*TreeNode
+	var result []int
+	var prev *TreeNode
+	for len(stack) > 0 || root != nil {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		if top.Right == nil || top.Right == prev {
+			result = append(result, top.Val)
+			prev = top
+		} else {
+			stack = append(stack, top)
+			root = top.Right
+		}
+	}
+	return result
+}
