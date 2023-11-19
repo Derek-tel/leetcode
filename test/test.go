@@ -79,6 +79,7 @@ func main() {
 
 	fmt.Println(json.Marshal("{\"project_detail\":{\"business_line_name\":\"测试\",\"project_name\":\"11111\",\"project_type\":\"other\",\"demand_side\":\"quhongli\",\"label_product_operator\":\"quhongli\",\"project_manager\":\"quhongli\",\"task_name\":\"\",\"project_task_type\":\"单轮对话\",\"task_admin_list\":\"quhongli,baihao\",\"target_accuracy\":7,\"target_efficiency\":7,\"worker_comments\":\"111111\",\"assignee_user\":\"zhupeng\"},\"target_detail\":{\"target_accuracy\":7,\"final_accuracy\":8,\"target_efficiency\":7,\"final_efficiency\":9,\"worker_comments\":\"111111\",\"demand_comments\":\"hahaha\"}}"))
 
+	fmt.Printf("%.2f", 0)
 }
 
 func ISO9797M2Padding(origin string, n int) string {
