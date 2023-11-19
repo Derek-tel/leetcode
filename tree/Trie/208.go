@@ -5,13 +5,13 @@ import (
 )
 
 type Trie struct {
-	child map[rune]*Trie
+	Child map[rune]*Trie
 	isEnd bool
 }
 
 func Constructor() Trie {
 	return Trie{
-		child: make(map[rune]*Trie),
+		Child: make(map[rune]*Trie),
 		isEnd: false,
 	}
 }
@@ -19,14 +19,14 @@ func Constructor() Trie {
 func (this *Trie) Insert(word string) {
 	parent := this
 	for _, ch := range word {
-		if node, ok := parent.child[ch]; ok {
+		if node, ok := parent.Child[ch]; ok {
 			parent = node
 		} else {
 			newChild := &Trie{
-				child: make(map[rune]*Trie),
+				Child: make(map[rune]*Trie),
 				isEnd: false,
 			}
-			parent.child[ch] = newChild
+			parent.Child[ch] = newChild
 			parent = newChild
 		}
 	}
@@ -36,7 +36,7 @@ func (this *Trie) Insert(word string) {
 func (this *Trie) Search(word string) bool {
 	parent := this
 	for _, ch := range word {
-		if node, ok := parent.child[ch]; ok {
+		if node, ok := parent.Child[ch]; ok {
 			parent = node
 		} else {
 			return false
@@ -48,7 +48,7 @@ func (this *Trie) Search(word string) bool {
 func (this *Trie) StartsWith(prefix string) bool {
 	parent := this
 	for _, ch := range prefix {
-		if node, ok := parent.child[ch]; ok {
+		if node, ok := parent.Child[ch]; ok {
 			parent = node
 		} else {
 			return false
