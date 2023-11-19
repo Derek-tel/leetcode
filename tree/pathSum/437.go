@@ -220,3 +220,27 @@ func nine(root *TreeNode, targetSum int) int {
 
 	return path
 }
+
+func ten(root *TreeNode, targetSum int) int {
+	if root == nil {
+		return 0
+	}
+	var handler func(*TreeNode, int) int
+	handler = func(node *TreeNode, target int) int {
+		resp := 0
+		if node == nil {
+			return resp
+		}
+		if node.Val == target {
+			resp++
+		}
+		resp += handler(node.Left, target-node.Val)
+		resp += handler(node.Right, target-node.Val)
+		return resp
+	}
+	path := 0
+	path = handler(root, targetSum)
+	path += ten(root.Left, targetSum)
+	path += ten(root.Right, targetSum)
+	return path
+}
