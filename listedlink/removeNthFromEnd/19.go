@@ -188,10 +188,10 @@ func ten(head *ListNode, n int) *ListNode {
 	preHead := &ListNode{Next: head}
 	slow := preHead
 	fast := head
-	for i := 1; i <= n; i++ {
+	for i := 1; i < n && fast != nil; i++ {
 		fast = fast.Next
 	}
-	for fast != nil {
+	for fast.Next != nil {
 		fast = fast.Next
 		slow = slow.Next
 	}

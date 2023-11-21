@@ -175,6 +175,25 @@ func nine(height []int) int {
 	return result
 }
 
+func ten(height []int) int {
+	length := len(height)
+	if length == 0 {
+		return 0
+	}
+	left, right := 0, length-1
+	result := 0
+	for left < right {
+		area := min(height[left], height[right]) * (right - left)
+		result = max(result, area)
+		if height[left] < height[right] {
+			left++
+		} else {
+			right--
+		}
+	}
+	return result
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
