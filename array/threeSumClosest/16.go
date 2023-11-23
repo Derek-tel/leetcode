@@ -273,6 +273,34 @@ func ten(nums []int, target int) int {
 	return result
 }
 
+func eleven(nums []int, target int) int {
+	var result int
+	sort.Ints(nums)
+	flag := math.MaxInt
+	if len(nums) > 2 {
+		for i := 0; i < len(nums)-2; i++ {
+			if i > 0 && nums[i] == nums[i-1] {
+				continue
+			}
+			for left, right := i+1, len(nums)-1; left < right; {
+				sum := nums[i] + nums[left] + nums[right]
+				if abs(sum-target) < flag {
+					flag = abs(sum - target)
+					result = sum
+				}
+				if sum == target {
+					return result
+				} else if sum < target {
+					left++
+				} else {
+					right--
+				}
+			}
+		}
+	}
+	return result
+}
+
 func abs(a int) int {
 	if a > 0 {
 		return a
