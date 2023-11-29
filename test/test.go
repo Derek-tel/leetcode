@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -80,6 +81,21 @@ func main() {
 	fmt.Println(json.Marshal("{\"project_detail\":{\"business_line_name\":\"测试\",\"project_name\":\"11111\",\"project_type\":\"other\",\"demand_side\":\"quhongli\",\"label_product_operator\":\"quhongli\",\"project_manager\":\"quhongli\",\"task_name\":\"\",\"project_task_type\":\"单轮对话\",\"task_admin_list\":\"quhongli,baihao\",\"target_accuracy\":7,\"target_efficiency\":7,\"worker_comments\":\"111111\",\"assignee_user\":\"zhupeng\"},\"target_detail\":{\"target_accuracy\":7,\"final_accuracy\":8,\"target_efficiency\":7,\"final_efficiency\":9,\"worker_comments\":\"111111\",\"demand_comments\":\"hahaha\"}}"))
 
 	fmt.Printf("%.2f", 0)
+
+	delta := 2
+	SubmitTime, _ := time.ParseInLocation("2006-01-02 15:04:05", "2023-11-28 15:01:01", time.Local)
+	fmt.Println(fmt.Sprintf("%+v", SubmitTime))
+	nowTime, _ := time.ParseInLocation("2006-01-02 15:04:05", "2023-11-27 12:01:01", time.Local)
+	fmt.Println(fmt.Sprintf("%+v", nowTime))
+	taskBeginAtDay := TruncateToMidnight(nowTime)
+
+	deltaDuration := time.Duration(delta) * 24 * time.Hour
+	ds := SubmitTime.Sub(taskBeginAtDay)
+	fmt.Println(fmt.Sprintf("%+v", ds))
+
+	packageBeginAtDay := taskBeginAtDay.Add(ds - ds%deltaDuration)
+	packageEndAtDay := packageBeginAtDay.Add(deltaDuration)
+	fmt.Println(packageBeginAtDay, packageEndAtDay)
 }
 
 func ISO9797M2Padding(origin string, n int) string {
@@ -160,4 +176,59 @@ type TargetDetail struct {
 	FinalEfficiency  float64 `json:"final_efficiency,omitempty"`
 	WorkerComments   string  `json:"worker_comments"`
 	DemandComments   string  `json:"demand_comments,omitempty"`
+}
+
+func TruncateToMidnight(t time.Time) time.Time {
+	// use system location
+	location := time.Now().Location()
+	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, location)
+}
+
+func must(err any, messageArgs ...interface{}) {
+	if err == nil {
+		return
+	}
+
+	switch e := err.(type) {
+	case bool:
+		if !e {
+			message := messageFromMsgAndArgs(messageArgs...)
+			if message == "" {
+				message = "not ok"
+			}
+
+			panic(message)
+		}
+
+	case error:
+		message := messageFromMsgAndArgs(messageArgs...)
+		if message != "" {
+			panic(message + ": " + e.Error())
+		} else {
+			panic(e.Error())
+		}
+
+	default:
+		panic("must: invalid err type '" + reflect.TypeOf(err).Name() + "', should either be a bool or an error")
+	}
+}
+
+// Must is a helper that wraps a call to a function returning a value and an error
+// and panics if err is error or false.
+// Play: https://go.dev/play/p/TMoWrRp3DyC
+func Must[T any](val T, err any, messageArgs ...interface{}) T {
+	must(err, messageArgs...)
+	return val
+}
+func messageFromMsgAndArgs(msgAndArgs ...interface{}) string {
+	if len(msgAndArgs) == 1 {
+		if msgAsStr, ok := msgAndArgs[0].(string); ok {
+			return msgAsStr
+		}
+		return fmt.Sprintf("%+v", msgAndArgs[0])
+	}
+	if len(msgAndArgs) > 1 {
+		return fmt.Sprintf(msgAndArgs[0].(string), msgAndArgs[1:]...)
+	}
+	return ""
 }
