@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math"
 	"reflect"
 	"strconv"
 	"strings"
@@ -96,6 +97,46 @@ func main() {
 	packageBeginAtDay := taskBeginAtDay.Add(ds - ds%deltaDuration)
 	packageEndAtDay := packageBeginAtDay.Add(deltaDuration)
 	fmt.Println(packageBeginAtDay, packageEndAtDay)
+
+	labelTimeSpanMap := make(map[int64]map[string]map[int64][]string)
+
+	if labelOrders, has := labelTimeSpanMap[1]["xxx"][1]; has {
+		fmt.Println("xxx")
+	} else {
+		fmt.Println(labelOrders)
+	}
+	fmt.Println(calcSampleSizeByConfidence(float64(2), getZValue(99), 99, 500000))
+}
+
+//e 置信区间 z置信度 p 准确率  n 样本量
+func calcSampleSizeByConfidence(e, z, p float64, n int64) int64 {
+	if n == 1 {
+		return 1
+	}
+
+	fn := float64(n)
+	e = e / 100
+	p = p / 100
+	a := math.Pow(z, 2) * p * (1 - p) / math.Pow(e, 2)
+	b := 1 + ((math.Pow(z, 2)*p*(1-p))/math.Pow(e, 2)-1)/fn
+	result := int64(math.Ceil(a / b))
+	return result
+}
+
+func getZValue(confidenceLevel int) float64 {
+	switch confidenceLevel {
+	case 80:
+		return 1.28
+	case 85:
+		return 1.44
+	case 90:
+		return 1.65
+	case 95:
+		return 1.96
+	case 99:
+		return 2.58
+	}
+	return 0
 }
 
 func ISO9797M2Padding(origin string, n int) string {
