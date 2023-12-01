@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 var (
@@ -412,7 +413,43 @@ func nine(s string) []string {
 	return resp
 }
 
+func ten(s string) []string {
+	var segment = 4
+	var resp []string
+	var temp = make([]string, segment)
+	var handler func(int, int)
+	handler = func(index int, seg int) {
+		if seg == segment {
+			if index == len(s) {
+				fmt.Println(temp)
+				resp = append(resp, strings.Join(temp, "."))
+			}
+			return
+		}
+		if index == len(s) {
+			return
+		}
+		if s[index] == '0' {
+			temp[seg] = "0"
+			handler(index+1, seg+1)
+		} else {
+			address := 0
+			for i := index; i < len(s); i++ {
+				address = address*10 + int(s[i]-'0')
+				if address > 0 && address <= 0xff {
+					temp[seg] = strconv.Itoa(address)
+					handler(i+1, seg+1)
+				} else {
+					break
+				}
+			}
+		}
+	}
+	handler(0, 0)
+	return resp
+}
+
 func main() {
-	test := "0000"
-	fmt.Println(restoreIpAddresses(test))
+	test := "25525511135"
+	fmt.Println(ten(test))
 }
