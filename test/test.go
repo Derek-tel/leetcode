@@ -105,21 +105,77 @@ func main() {
 	} else {
 		fmt.Println(labelOrders)
 	}
-	fmt.Println(calcSampleSizeByConfidence(float64(2), getZValue(99), 99, 500000))
+	//fmt.Println(calcSampleSizeByConfidenceUnLimit(float64(2), getZValue(99), 90))
+	//fmt.Println(calcMarginOfErrorByConfidenceUnLimit(getZValue(99), 80, 500))
+
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 99, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 99, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 95, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 95, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 90, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 90, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 85, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 85, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 80, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 80, 10000))
+
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 99, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 99, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 95, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 95, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 90, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 90, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 85, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 85, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 80, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 80, 500, 10000))
+
 }
 
 //e 置信区间 z置信度 p 准确率  n 样本量
-func calcSampleSizeByConfidence(e, z, p float64, n int64) int64 {
+func calcSampleSizeByConfidenceUnLimit(e, z, p float64) int64 {
+	e = e / 100
+	p = p / 100
+	a := math.Pow(z, 2) * p * (1 - p) / math.Pow(e, 2)
+	result := int64(math.Ceil(a))
+	return result
+}
+
+//e 置信区间 z置信度 p 准确率  n 样本量
+func calcMarginOfErrorByConfidenceUnLimit(z, p float64, n int64) float64 {
 	if n == 1 {
 		return 1
 	}
 
+	p = p / 100
+	e2 := (math.Pow(z, 2) * p * (1 - p)) / float64(n)
+	result := math.Sqrt(e2)
+	return result
+}
+
+//e 置信区间 z置信度 p 准确率  n 样本量
+func calcSampleSizeByConfidence(e, z, p float64, n int64) int64 {
 	fn := float64(n)
 	e = e / 100
 	p = p / 100
 	a := math.Pow(z, 2) * p * (1 - p) / math.Pow(e, 2)
 	b := 1 + ((math.Pow(z, 2)*p*(1-p))/math.Pow(e, 2)-1)/fn
 	result := int64(math.Ceil(a / b))
+	return result
+}
+
+//e 置信区间 z置信度 p 准确率  n 样本量
+func calcMarginOfErrorByConfidence(z, p float64, n int64, N int64) float64 {
+	if n == 1 {
+		return 1
+	}
+
+	fn := float64(n)
+	p = p / 100
+	a := math.Sqrt(p * (1 - p) / fn)
+	b := math.Sqrt(1 - fn/float64(N))
+
+	result := z * a * b
 	return result
 }
 
@@ -132,9 +188,9 @@ func getZValue(confidenceLevel int) float64 {
 	case 90:
 		return 1.65
 	case 95:
-		return 1.96
+		return 1.65
 	case 99:
-		return 2.58
+		return 2.33
 	}
 	return 0
 }
