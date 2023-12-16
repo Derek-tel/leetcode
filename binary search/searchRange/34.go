@@ -8,12 +8,12 @@ func searchRange(nums []int, target int) []int {
 	if len(nums) == 0 {
 		return []int{-1, -1}
 	}
-	a := getFirstEqual(nums, target)
-	b := getLastEqual(nums, target)
+	a := getFirst(nums, target)
+	b := getLast(nums, target)
 	return []int{a, b}
 }
 
-func getFirstEqual(nums []int, target int) int {
+func getFirst(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
@@ -31,7 +31,7 @@ func getFirstEqual(nums []int, target int) int {
 	return -1
 }
 
-func getLastEqual(nums []int, target int) int {
+func getLast(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
