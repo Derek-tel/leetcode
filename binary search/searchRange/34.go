@@ -93,7 +93,7 @@ func searchFirstGreaterElement(nums []int, target int) int {
 	for low <= high {
 		mid := low + (high-low)>>1
 		if nums[mid] >= target {
-			if mid == 0 || nums[mid-1] < target { // 找到第一个大于等于 target 的元素
+			if mid == 0 || nums[mid-1] < target {
 				return mid
 			}
 			high = mid - 1
@@ -111,7 +111,7 @@ func searchLastLessElement(nums []int, target int) int {
 		mid := low + (high-low)>>1
 
 		if nums[mid] <= target {
-			if mid == len(nums)-1 || nums[mid+1] > target { // 找到最后一个小于等于 target 的元素
+			if mid == len(nums)-1 || nums[mid+1] > target {
 				return mid
 			}
 			low = mid + 1
