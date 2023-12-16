@@ -1,4 +1,6 @@
-package lexicalOrder
+package main
+
+import "fmt"
 
 func one(n int) []int {
 	ans := make([]int, n)
@@ -15,4 +17,26 @@ func one(n int) []int {
 		}
 	}
 	return ans
+}
+
+func two(n int) []int {
+	var resp []int
+	var handler func(int)
+	handler = func(index int) {
+		if index > n {
+			return
+		}
+		resp = append(resp, index)
+		for i := 0; i <= 9; i++ {
+			handler(index*10 + i)
+		}
+	}
+	for i := 1; i <= 9; i++ {
+		handler(i)
+	}
+	return resp
+}
+
+func main() {
+	fmt.Println(two(13))
 }
