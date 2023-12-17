@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"math/rand"
 	"reflect"
 	"strconv"
 	"strings"
@@ -105,22 +106,25 @@ func main() {
 	} else {
 		fmt.Println(labelOrders)
 	}
-	//fmt.Println(calcSampleSizeByConfidenceUnLimit(float64(2), getZValue(99), 90))
-	//fmt.Println(calcMarginOfErrorByConfidenceUnLimit(getZValue(99), 80, 500))
+	//fmt.Println(calcSampleSizeByConfidenceUnLimit(float64(0.3), getZValue(99), 99.3))
+	//fmt.Println(calcMarginOfErrorByConfidenceUnLimit(getZValue(99), 99.5, 200))
+	//fmt.Println(calcMarginOfErrorByConfidenceUnLimit(getZValue(99), 80, 134))
 
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 99, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 99, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 95, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 95, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 90, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 90, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 85, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 85, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 80, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 80, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(0.3), getZValue(99), 99.3, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 99, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 95, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 95, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 90, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 90, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 85, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 85, 10000))
+	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 80, 10000))
+	fmt.Println(calcSampleSizeByConfidence(float64(2), getZValue(99), 99, 22))
 
-	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 99, 500, 10000))
-	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 99, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 99.5, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 99.5, 500, 10000))
+
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 99, 264, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 95, 500, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 95, 500, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 90, 500, 10000))
@@ -128,8 +132,18 @@ func main() {
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 85, 500, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 85, 500, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 80, 500, 10000))
-	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 80, 500, 10000))
+	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 99.5, 133, 100000))
 
+	slice := []int64{}
+	randShuffle(slice)
+	fmt.Println(slice)
+}
+
+func randShuffle(slice []int64) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	r.Shuffle(len(slice), func(i, j int) {
+		slice[i], slice[j] = slice[j], slice[i]
+	})
 }
 
 //e 置信区间 z置信度 p 准确率  n 样本量
@@ -190,7 +204,7 @@ func getZValue(confidenceLevel int) float64 {
 	case 95:
 		return 1.65
 	case 99:
-		return 2.33
+		return 2.58
 	}
 	return 0
 }
