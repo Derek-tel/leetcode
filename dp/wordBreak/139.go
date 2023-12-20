@@ -221,3 +221,23 @@ func twelve(s string, wordDict []string) bool {
 	}
 	return dp[len(s)]
 }
+
+func thirteen(s string, wordDict []string) bool {
+	if len(s) == 0 {
+		return false
+	}
+	dic := make(map[string]bool)
+	for _, v := range wordDict {
+		dic[v] = true
+	}
+	dp := make([]bool, len(s)+1)
+	dp[0] = true
+	for i := 1; i <= len(s); i++ {
+		for j := 1; j <= i; j++ {
+			if dp[j-1] && dic[s[j-1:i-1+1]] {
+				dp[i] = true
+			}
+		}
+	}
+	return dp[len(s)]
+}
