@@ -1,8 +1,7 @@
 package LRUCache
 
 type LRUNode struct {
-	Key        int
-	Value      int
+	Key, Val   int
 	Next, Prev *LRUNode
 }
 
@@ -13,22 +12,19 @@ type LRUCache struct {
 	Head, Tail *LRUNode
 }
 
-func initNode(key, value int) *LRUNode {
+func InitNode(key, val int) *LRUNode {
 	return &LRUNode{
-		Key:   key,
-		Value: value,
-		Next:  nil,
-		Prev:  nil,
+		Key: key,
+		Val: val,
 	}
 }
 
 func Constructor(capacity int) LRUCache {
 	cache := LRUCache{
-		Size:     0,
 		Capacity: capacity,
-		Table:    map[int]*LRUNode{},
-		Head:     initNode(0, 0),
-		Tail:     initNode(0, 0),
+		Table:    make(map[int]*LRUNode),
+		Head:     InitNode(0, 0),
+		Tail:     InitNode(0, 0),
 	}
 	cache.Head.Next = cache.Tail
 	cache.Tail.Prev = cache.Head
@@ -38,7 +34,7 @@ func Constructor(capacity int) LRUCache {
 func (this *LRUCache) Get(key int) int {
 	if node, ok := this.Table[key]; ok {
 		this.MoveToHead(node)
-		return node.Value
+		return node.Val
 	} else {
 		return -1
 	}
@@ -46,13 +42,13 @@ func (this *LRUCache) Get(key int) int {
 
 func (this *LRUCache) Put(key int, value int) {
 	if node, ok := this.Table[key]; ok {
-		node.Value = value
+		node.Val = value
 		this.MoveToHead(node)
 	} else {
-		node = initNode(key, value)
-		this.AddToHead(node)
+		tag := InitNode(key, value)
+		this.AddToHead(tag)
 		this.Size++
-		this.Table[key] = node
+		this.Table[key] = tag
 		if this.Size > this.Capacity {
 			del := this.RemoveFromTail()
 			delete(this.Table, del.Key)
