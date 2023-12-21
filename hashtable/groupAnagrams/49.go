@@ -298,3 +298,36 @@ func ten(strs []string) [][]string {
 	}
 	return result
 }
+
+type elevenList []rune
+
+func (t elevenList) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+
+func (t elevenList) Less(i, j int) bool {
+	return t[i] < t[j]
+}
+
+func (t elevenList) Len() int {
+	return len(t)
+}
+
+func eleven(strs []string) [][]string {
+	var result [][]string
+	if len(strs) == 0 {
+		return result
+	}
+	dic := make(map[string][]string)
+	for _, str := range strs {
+		temp := elevenList(str)
+		sort.Sort(temp)
+		tag := dic[string(temp)]
+		tag = append(tag, str)
+		dic[string(temp)] = tag
+	}
+	for _, strings := range dic {
+		result = append(result, strings)
+	}
+	return result
+}
