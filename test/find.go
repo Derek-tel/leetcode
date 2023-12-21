@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/imroc/biu"
+)
 
 type Pair struct {
 	Val, Idx int
@@ -50,4 +53,11 @@ func modify(pairs []Pair, index int, size int) {
 func main() {
 	unsortSlice := []int{13, 5, 7, 9}
 	fmt.Println(demo1(unsortSlice))
+
+	a := 0
+	fmt.Println(a)
+
+	a = a | 1<<0
+
+	fmt.Println(biu.ToBinaryString(a))
 }
