@@ -463,6 +463,51 @@ func ten(nums []int, k int) []int {
 	return result
 }
 
+var elevenList []int
+
+type elevenIndex []int
+
+func (e elevenIndex) Swap(i, j int) {
+	e[i], e[j] = e[j], e[i]
+}
+
+func (e elevenIndex) Less(i, j int) bool {
+	return elevenList[e[i]] > elevenList[e[j]]
+}
+
+func (e elevenIndex) Len() int {
+	return len(e)
+}
+
+func (e *elevenIndex) Push(x interface{}) {
+	v := x.(int)
+	*e = append(*e, v)
+}
+
+func (e *elevenIndex) Pop() interface{} {
+	v := (*e)[len(*e)-1]
+	*e = (*e)[:len(*e)-1]
+	return v
+}
+
+func eleven(nums []int, k int) []int {
+	elevenList = nums
+	var result []int
+	temp := elevenIndex{}
+	for i := 0; i < k; i++ {
+		heap.Push(&temp, i)
+	}
+	result = append(result, nums[temp[0]])
+	for i := k; i < len(nums); i++ {
+		heap.Push(&temp, i)
+		for i-temp[0] >= k {
+			heap.Pop(&temp)
+		}
+		result = append(result, nums[temp[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)
