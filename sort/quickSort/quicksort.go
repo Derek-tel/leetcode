@@ -422,6 +422,36 @@ func fourteen(nums []int, start, end int) []int {
 	return nums
 }
 
+func fifteen(nums []int, start, end int) []int {
+	pivot := start
+	temp := nums[pivot]
+	i, j := start, end
+	for i <= j {
+		for j >= pivot && nums[j] >= temp {
+			j--
+		}
+		if j >= pivot {
+			nums[j], nums[pivot] = nums[pivot], nums[j]
+			pivot = j
+		}
+		for i <= pivot && nums[i] < temp {
+			i++
+		}
+		if i <= pivot {
+			nums[i], nums[pivot] = nums[pivot], nums[i]
+			pivot = i
+		}
+	}
+	nums[pivot] = temp
+	if pivot-start > 1 {
+		fifteen(nums, start, pivot-1)
+	}
+	if end-pivot > 1 {
+		fifteen(nums, pivot+1, end)
+	}
+	return nums
+}
+
 func main() {
 	test := []int{1, 1, 3, 4, 5, -1, -2, 6, 1}
 	fmt.Println(four(test))
