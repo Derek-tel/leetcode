@@ -17,3 +17,19 @@ func convert(s string, numRows int) string {
 	}
 	return string(bytes.Join(mat, nil))
 }
+
+func two(s string, numRow int) string {
+	if numRow < 2 || numRow >= len(s) {
+		return s
+	}
+	snake := make([][]byte, numRow)
+	i, flag := 0, -1
+	for _, ch := range s {
+		snake[i] = append(snake[i], byte(ch))
+		if i == 0 || i == numRow-1 {
+			flag = -flag
+		}
+		i += flag
+	}
+	return string(bytes.Join(snake, nil))
+}
