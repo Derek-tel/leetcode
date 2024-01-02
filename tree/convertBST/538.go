@@ -170,3 +170,19 @@ func ten(root *TreeNode) *TreeNode {
 	handler(root)
 	return root
 }
+
+func eleven(root *TreeNode) *TreeNode {
+	sum := 0
+	var handler func(*TreeNode)
+	handler = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		handler(node.Right)
+		sum += node.Val
+		node.Val = sum
+		handler(node.Left)
+	}
+	handler(root)
+	return root
+}
