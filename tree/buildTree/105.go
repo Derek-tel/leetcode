@@ -155,3 +155,18 @@ func ten(preOrder []int, inOrder []int) *TreeNode {
 	}
 	return root
 }
+
+func eleven(preOrder []int, inOrder []int) *TreeNode {
+	if len(preOrder) == 0 || len(inOrder) == 0 {
+		return nil
+	}
+	rootVal := preOrder[0]
+	root := &TreeNode{rootVal, nil, nil}
+	for i, v := range inOrder {
+		if v == rootVal {
+			root.Left = eleven(preOrder[1:i+1], inOrder[:i])
+			root.Right = eleven(preOrder[i+1:], inOrder[i+1:])
+		}
+	}
+	return root
+}
