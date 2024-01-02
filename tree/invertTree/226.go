@@ -120,3 +120,13 @@ func ten(root *TreeNode) *TreeNode {
 	root.Left, root.Right = root.Right, root.Left
 	return root
 }
+
+func eleven(root *TreeNode) *TreeNode {
+	if root == nil {
+		return root
+	}
+	eleven(root.Left)
+	eleven(root.Right)
+	root.Left, root.Right = root.Right, root.Left
+	return root
+}
