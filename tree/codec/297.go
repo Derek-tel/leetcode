@@ -11,6 +11,15 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
 type Codec struct {
 	input   []string
 	builder strings.Builder
@@ -48,12 +57,10 @@ func (this *Codec) helper() *TreeNode {
 	}
 	value, _ := strconv.Atoi(this.input[0])
 	this.input = this.input[1:]
-	node := &TreeNode{
+	return &TreeNode{
 		Val:   value,
 		Left:  this.helper(),
-		Right: this.helper(),
-	}
-	return node
+		Right: this.helper()}
 }
 
 /**
