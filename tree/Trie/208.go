@@ -6,13 +6,13 @@ import (
 
 type Trie struct {
 	Child map[rune]*Trie
-	isEnd bool
+	IsEnd bool
 }
 
 func Constructor() Trie {
 	return Trie{
 		Child: make(map[rune]*Trie),
-		isEnd: false,
+		IsEnd: false,
 	}
 }
 
@@ -24,13 +24,13 @@ func (this *Trie) Insert(word string) {
 		} else {
 			newChild := &Trie{
 				Child: make(map[rune]*Trie),
-				isEnd: false,
+				IsEnd: false,
 			}
 			parent.Child[ch] = newChild
 			parent = newChild
 		}
 	}
-	parent.isEnd = true
+	parent.IsEnd = true
 }
 
 func (this *Trie) Search(word string) bool {
@@ -42,7 +42,7 @@ func (this *Trie) Search(word string) bool {
 			return false
 		}
 	}
-	return parent.isEnd
+	return parent.IsEnd
 }
 
 func (this *Trie) StartsWith(prefix string) bool {
