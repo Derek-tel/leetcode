@@ -121,3 +121,13 @@ func ten(nums []int) []int {
 	}
 	return nums
 }
+
+func eleven(nums []int) {
+	flag := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] == 0 {
+			nums[i], nums[flag] = nums[flag], nums[i]
+			flag++
+		}
+	}
+}
