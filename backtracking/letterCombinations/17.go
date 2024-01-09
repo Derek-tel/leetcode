@@ -4,17 +4,6 @@ import (
 	"fmt"
 )
 
-var phoneMap map[string]string = map[string]string{
-	"2": "abc",
-	"3": "def",
-	"4": "ghi",
-	"5": "jkl",
-	"6": "mno",
-	"7": "pqrs",
-	"8": "tuv",
-	"9": "wxyz",
-}
-
 func letterCombinations(digits string) []string {
 	if len(digits) < 1 {
 		return []string{}
@@ -225,6 +214,38 @@ func nine(digits string) []string {
 	}
 	handler(0, "")
 	return result
+}
+
+func ten(digits string) []string {
+	var result []string
+	if len(digits) < 1 {
+		return result
+	}
+	var handler func(int, string)
+	handler = func(index int, s string) {
+		if index == len(digits) {
+			result = append(result, s)
+			return
+		}
+		ch := digits[index]
+		char := letters[string(ch)]
+		for _, v := range char {
+			handler(index+1, s+string(v))
+		}
+	}
+	handler(0, "")
+	return result
+}
+
+var phoneMap map[string]string = map[string]string{
+	"2": "abc",
+	"3": "def",
+	"4": "ghi",
+	"5": "jkl",
+	"6": "mno",
+	"7": "pqrs",
+	"8": "tuv",
+	"9": "wxyz",
 }
 
 func main() {
