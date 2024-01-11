@@ -449,7 +449,42 @@ func ten(s string) []string {
 	return resp
 }
 
+func eleven(s string) []string {
+	var segment = 4
+	var resp []string
+	var temp = make([]string, segment)
+	var handler func(int, int)
+	handler = func(start int, seg int) {
+		if seg == segment {
+			if start == len(s) {
+				resp = append(resp, strings.Join(temp, "."))
+			}
+			return
+		}
+		if start == len(s) {
+			return
+		}
+		if s[start] == '0' {
+			temp[seg] = "0"
+			handler(start+1, seg+1)
+		} else {
+			address := 0
+			for i := start; i < len(s); i++ {
+				address = address*10 + int(s[i]-'0')
+				if address > 0 && address <= 0xff {
+					temp[seg] = strconv.Itoa(address)
+					handler(i+1, seg+1)
+				} else {
+					break
+				}
+			}
+		}
+	}
+	handler(0, 0)
+	return resp
+}
+
 func main() {
 	test := "25525511135"
-	fmt.Println(ten(test))
+	fmt.Println(eleven(test))
 }
