@@ -260,6 +260,31 @@ func ten(nums []int) int {
 	return ans
 }
 
+func eleven(nums []int) int {
+	ans := -1
+	length := len(nums)
+	if length < 1 {
+		return ans
+	}
+	left, right := 0, length-1
+	for left <= right {
+		mid := left + (right-left)>>1
+		count := 0
+		for _, num := range nums {
+			if num <= mid {
+				count++
+			}
+		}
+		if count <= mid {
+			left = mid + 1
+		} else {
+			right = mid - 1
+			ans = mid
+		}
+	}
+	return ans
+}
+
 func main() {
 	fmt.Println(findDuplicate([]int{1, 1}))
 }
