@@ -416,6 +416,43 @@ func eleven(nums1, nums2 []int) float64 {
 	}
 }
 
+func twelve(nums1, nums2 []int) float64 {
+	var handler func(int) int
+	handler = func(k int) int {
+		indexA, indexB := 0, 0
+		for {
+			if len(nums1) == indexA {
+				return nums2[indexB+k-1]
+			}
+			if indexB == len(nums2) {
+				return nums1[indexA+k-1]
+			}
+			if k == 1 {
+				return min(nums1[indexA], nums2[indexB])
+			}
+			half := k / 2
+			newIndexA := min(len(nums1), indexA+half) - 1
+			newIndexB := min(len(nums2), indexB+half) - 1
+			if nums1[newIndexA] < nums2[newIndexB] {
+				k = k - (newIndexA - indexA + 1)
+				indexA = newIndexA + 1
+			} else {
+				k = k - (newIndexB - indexB + 1)
+				indexB = newIndexB + 1
+			}
+		}
+	}
+	lengthA, lengthB := len(nums1), len(nums2)
+	total := lengthA + lengthB
+	if total%2 == 1 {
+		k := total/2 + 1
+		return float64(handler(k))
+	} else {
+		k := total / 2
+		return float64(handler(k)+handler(k+1)) / 2
+	}
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
