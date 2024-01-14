@@ -97,3 +97,11 @@ func twelve(x, y int) int {
 	}
 	return ans
 }
+
+func thirteen(x, y int) int {
+	ans := 0
+	for i := x ^ y; i > 0; i = i >> 1 {
+		ans += i & 1
+	}
+	return ans
+}
