@@ -210,6 +210,23 @@ func thirteen(s string) int {
 	return result
 }
 
+func fourteen(s string) int {
+	dp := make([][]bool, len(s))
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]bool, len(s))
+	}
+	var result int
+	for i := len(s) - 1; i >= 0; i-- {
+		for j := i; j < len(s); j++ {
+			dp[i][j] = s[i] == s[j] && (j-i < 3 || dp[i+1][j-1])
+			if dp[i][j] {
+				result++
+			}
+		}
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(countSubstrings("aba"))
 }
