@@ -231,3 +231,21 @@ func thirteen(price []int) int {
 	}
 	return result
 }
+
+func fourteen(price []int) int {
+	if len(price) == 0 {
+		return 0
+	}
+	var result int
+	min := price[0]
+
+	for i := 1; i < len(price); i++ {
+		if price[i]-min > result {
+			result = price[i] - min
+		}
+		if price[i] < min {
+			min = price[i]
+		}
+	}
+	return result
+}
