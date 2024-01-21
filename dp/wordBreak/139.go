@@ -253,8 +253,8 @@ func fourteen(s string, wordDict []string) bool {
 	dp := make([]bool, len(s)+1)
 	dp[0] = true
 	for i := 1; i <= len(s); i++ {
-		for j := 1; j <= i; j++ {
-			if dp[j] && dic[s[j-1:i-1+1]] {
+		for j := 0; j < i; j++ {
+			if dp[j] && dic[s[j+1-1:i-1+1]] {
 				dp[i] = true
 			}
 		}
