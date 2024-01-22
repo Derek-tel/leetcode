@@ -1,10 +1,9 @@
 package LRUCache
 
 type LRUNode struct {
-	Key, Val   int
+	Key, Value int
 	Next, Prev *LRUNode
 }
-
 type LRUCache struct {
 	Size       int
 	Capacity   int
@@ -12,29 +11,29 @@ type LRUCache struct {
 	Head, Tail *LRUNode
 }
 
-func InitNode(key, val int) *LRUNode {
+func initNode(x, y int) *LRUNode {
 	return &LRUNode{
-		Key: key,
-		Val: val,
+		Key:   x,
+		Value: y,
 	}
 }
 
 func Constructor(capacity int) LRUCache {
-	cache := LRUCache{
+	lru := LRUCache{
 		Capacity: capacity,
 		Table:    make(map[int]*LRUNode),
-		Head:     InitNode(0, 0),
-		Tail:     InitNode(0, 0),
+		Head:     initNode(0, 0),
+		Tail:     initNode(0, 0),
 	}
-	cache.Head.Next = cache.Tail
-	cache.Tail.Prev = cache.Head
-	return cache
+	lru.Head.Next = lru.Tail
+	lru.Tail.Prev = lru.Head
+	return lru
 }
 
 func (this *LRUCache) Get(key int) int {
 	if node, ok := this.Table[key]; ok {
 		this.MoveToHead(node)
-		return node.Val
+		return node.Value
 	} else {
 		return -1
 	}
@@ -42,15 +41,18 @@ func (this *LRUCache) Get(key int) int {
 
 func (this *LRUCache) Put(key int, value int) {
 	if node, ok := this.Table[key]; ok {
-		node.Val = value
+		node.Value = value
 		this.MoveToHead(node)
 	} else {
-		tag := InitNode(key, value)
+		tag := &LRUNode{
+			Key:   key,
+			Value: value,
+		}
 		this.AddToHead(tag)
 		this.Size++
 		this.Table[key] = tag
 		if this.Size > this.Capacity {
-			del := this.RemoveFromTail()
+			del := this.removeTail()
 			delete(this.Table, del.Key)
 			this.Size--
 		}
@@ -58,11 +60,11 @@ func (this *LRUCache) Put(key int, value int) {
 }
 
 func (this *LRUCache) MoveToHead(node *LRUNode) {
-	this.Remove(node)
+	this.RemoveNode(node)
 	this.AddToHead(node)
 }
 
-func (this *LRUCache) Remove(node *LRUNode) {
+func (this *LRUCache) RemoveNode(node *LRUNode) {
 	node.Prev.Next = node.Next
 	node.Next.Prev = node.Prev
 }
@@ -74,9 +76,9 @@ func (this *LRUCache) AddToHead(node *LRUNode) {
 	this.Head.Next = node
 }
 
-func (this *LRUCache) RemoveFromTail() *LRUNode {
+func (this *LRUCache) removeTail() *LRUNode {
 	node := this.Tail.Prev
-	this.Remove(node)
+	this.RemoveNode(node)
 	return node
 }
 
