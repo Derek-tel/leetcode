@@ -514,3 +514,50 @@ func eleven(nums []int, k int) []int {
 	}
 	return result
 }
+
+type twelveCounter struct {
+	Val, Count int
+}
+
+type twelveList []twelveCounter
+
+func (t twelveList) Less(i, j int) bool {
+	return t[i].Count > t[j].Count
+}
+
+func (t twelveList) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+
+func (t twelveList) Len() int {
+	return len(t)
+}
+
+func (t *twelveList) Push(v interface{}) {
+	tag := v.(twelveCounter)
+	*t = append(*t, tag)
+}
+
+func (t *twelveList) Pop() interface{} {
+	tag := (*t)[len(*t)-1]
+	*t = (*t)[:len(*t)-1]
+	return tag
+}
+
+func twelve(nums []int, k int) []int {
+	var result []int
+	var dic = make(map[int]int)
+	for _, num := range nums {
+		dic[num]++
+	}
+	var listT twelveList
+	for num, count := range dic {
+		tag := twelveCounter{Val: num, Count: count}
+		heap.Push(&listT, tag)
+	}
+	for len(result) < k {
+		top := heap.Pop(&listT).(twelveCounter)
+		result = append(result, top.Val)
+	}
+	return result
+}
