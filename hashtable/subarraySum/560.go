@@ -167,3 +167,18 @@ func eleven(nums []int, k int) int {
 	}
 	return count
 }
+
+func twelve(nums []int, k int) int {
+	count := 0
+	prefix := make(map[int]int)
+	prefix[0] = 1
+	sum := 0
+	for _, num := range nums {
+		sum += num
+		if tag, ok := prefix[sum-k]; ok {
+			count += tag
+		}
+		prefix[sum]++
+	}
+	return count
+}
