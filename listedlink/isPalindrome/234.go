@@ -417,3 +417,41 @@ func eleven(head *ListNode) bool {
 	}
 	return true
 }
+
+func twelve(head *ListNode) bool {
+	if head == nil {
+		return false
+	}
+	var handler func(*ListNode) *ListNode
+	handler = func(node *ListNode) *ListNode {
+		if node == nil {
+			return node
+		}
+		dumpy := &ListNode{Next: node}
+		prev := dumpy
+		cur := node
+		for cur.Next != nil {
+			next := cur.Next
+			cur.Next = next.Next
+			next.Next = prev.Next
+			prev.Next = next
+		}
+		return dumpy.Next
+	}
+
+	fast, slow := head, head
+	for fast.Next != nil && fast.Next.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+	p1 := head
+	p2 := handler(slow.Next)
+	for p1 != nil && p2 != nil {
+		if p1.Val != p2.Val {
+			return false
+		}
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	return true
+}
