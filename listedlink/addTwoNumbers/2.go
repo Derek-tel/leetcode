@@ -389,3 +389,33 @@ func twelve(l1, l2 *ListNode) *ListNode {
 	}
 	return head
 }
+
+func thirteen(l1, l2 *ListNode) *ListNode {
+	var head, tail *ListNode
+	carry := 0
+	for l1 != nil || l2 != nil {
+		if l1 != nil {
+			carry += l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			carry += l2.Val
+			l2 = l2.Next
+		}
+		mod := carry % 10
+		carry = carry / 10
+		if head == nil {
+			head = &ListNode{Val: mod}
+			tail = head
+		} else {
+			tail.Next = &ListNode{Val: mod}
+			tail = tail.Next
+		}
+	}
+	if carry > 0 {
+		tail.Next = &ListNode{
+			Val: carry,
+		}
+	}
+	return head
+}
