@@ -333,6 +333,33 @@ func eleven(head *ListNode) *ListNode {
 	return mergeTwo(eleven(head), eleven(secondHalf))
 }
 
+func twelve(head *ListNode) *ListNode {
+	var getMiddle func(*ListNode) *ListNode
+	getMiddle = func(node *ListNode) *ListNode {
+		fast, slow := node, node
+		for fast.Next != nil && fast.Next.Next != nil {
+			fast = fast.Next.Next
+			slow = slow.Next
+		}
+		return slow
+	}
+
+	length := 0
+	cur := head
+	for cur != nil {
+		length++
+		cur = cur.Next
+	}
+	if length <= 1 {
+		return head
+	} else {
+		middle := getMiddle(head)
+		secondHalf := middle.Next
+		middle.Next = nil
+		return mergeTwo(twelve(head), twelve(secondHalf))
+	}
+}
+
 func mergeTwo(listA, listB *ListNode) *ListNode {
 	preHead := &ListNode{}
 	prev := preHead
