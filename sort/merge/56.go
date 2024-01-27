@@ -376,6 +376,56 @@ func elevenQuick(intervals [][]int, start int, end int) {
 	}
 }
 
+func twelve(intervals [][]int) [][]int {
+	twelveQuick(intervals, 0, len(intervals)-1)
+
+	var result [][]int
+	temp := intervals[0]
+	for i := 1; i < len(intervals); i++ {
+		if intervals[i][0] > temp[1] {
+			result = append(result, temp)
+			temp = intervals[i]
+		} else {
+			if intervals[i][1] > temp[1] {
+				temp[1] = intervals[i][1]
+			} else {
+				continue
+			}
+		}
+	}
+	result = append(result, temp)
+	return result
+}
+
+func twelveQuick(intervals [][]int, start int, end int) {
+	pivot := start
+	temp := intervals[pivot]
+	i, j := start, end
+	for i <= j {
+		for pivot <= j && temp[0] <= intervals[j][0] {
+			j--
+		}
+		if pivot <= j {
+			intervals[j], intervals[pivot] = intervals[pivot], intervals[j]
+			pivot = j
+		}
+		for i <= pivot && temp[0] > intervals[i][0] {
+			i++
+		}
+		if i <= pivot {
+			intervals[i], intervals[pivot] = intervals[pivot], intervals[i]
+			pivot = i
+		}
+	}
+	//intervals[pivot] = temp
+	if pivot-start >= 1 {
+		twelveQuick(intervals, start, pivot-1)
+	}
+	if end-pivot >= 1 {
+		twelveQuick(intervals, pivot+1, end)
+	}
+}
+
 func main() {
 	test := [][]int{
 		{2, 6},
