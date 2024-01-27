@@ -182,6 +182,30 @@ func eight(strs []string) string {
 	}
 }
 
+func nine(strs []string) string {
+	var lcp func(string, string) string
+	lcp = func(left string, right string) string {
+		minLength := min(len(left), len(right))
+		for i := 0; i < minLength; i++ {
+			if left[i] != right[i] {
+				return left[:i]
+			}
+		}
+		return left[:minLength]
+	}
+
+	if len(strs) == 0 {
+		return ""
+	} else if len(strs) == 1 {
+		return strs[0]
+	} else if len(strs) == 2 {
+		return lcp(strs[0], strs[1])
+	} else {
+		mid := len(strs) / 2
+		return lcp(nine(strs[:mid]), nine(strs[mid:]))
+	}
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
