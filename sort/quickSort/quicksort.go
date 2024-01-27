@@ -472,6 +472,7 @@ func sixteen(nums []int, start, end int) []int {
 			pivot = i
 		}
 	}
+	nums[pivot] = temp
 	if pivot-1 > start {
 		sixteen(nums, start, pivot-1)
 	}
