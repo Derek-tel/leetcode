@@ -420,6 +420,38 @@ func twelve(nums []int) []int {
 	}
 }
 
+func thirteen(nums []int) []int {
+	var handler func([]int, []int) []int
+	handler = func(left []int, right []int) []int {
+		var temp []int
+		i, j := 0, 0
+		for {
+			if i >= len(left) {
+				temp = append(temp, right[j:]...)
+				break
+			}
+			if j >= len(right) {
+				temp = append(temp, left[i:]...)
+				break
+			}
+			if left[i] < right[j] {
+				temp = append(temp, left[i])
+				i++
+			} else {
+				temp = append(temp, right[i])
+				j++
+			}
+		}
+		return temp
+	}
+	if len(nums) <= 1 {
+		return nums
+	} else {
+		mid := len(nums) / 2
+		return handler(thirteen(nums[:mid]), thirteen(nums[mid:]))
+	}
+}
+
 // 测试：
 func main() {
 	arr := []int{0, 1, 5, 2, 3, 8, 0, 4, 9, 2}
