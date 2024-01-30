@@ -165,6 +165,20 @@ func eleven(s string) int {
 	}
 	return len(stack)
 }
+
+func thirteen(s string) int {
+	var stack []rune
+	for _, v := range s {
+		if v == '(' {
+			stack = append(stack, v)
+		} else if v == ')' && len(stack) > 0 && stack[len(stack)-1] == '(' {
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, v)
+		}
+	}
+	return len(stack)
+}
 func main() {
 	test := "(()"
 	fmt.Println(minAddToMakeValid(test))
