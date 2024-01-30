@@ -1,6 +1,8 @@
 package MinStack
 
-import "math"
+import (
+	"math"
+)
 
 type MinStack struct {
 	stack    []int
@@ -16,7 +18,7 @@ func Constructor() MinStack {
 
 func (this *MinStack) Push(val int) {
 	this.stack = append(this.stack, val)
-	this.minStack = append(this.minStack, this.min(val, this.minStack[len(this.minStack)-1]))
+	this.minStack = append(this.minStack, this.min(this.minStack[len(this.minStack)-1], val))
 }
 
 func (this *MinStack) Pop() {
