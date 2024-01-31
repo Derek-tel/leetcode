@@ -414,6 +414,36 @@ func thirteen(s, p string) []int {
 	return result
 }
 
+func fourteen(s, p string) []int {
+	lengthS, lengthP := len(s), len(p)
+	freq := make(map[int]int)
+	for i := 0; i < len(p); i++ {
+		freq[int(p[i]-'a')]++
+	}
+	count := 0
+	var result []int
+	temp := make(map[int]int)
+	for left, right := 0, 0; right < lengthS; right++ {
+		if num, ok := freq[int(s[right]-'a')]; ok {
+			for temp[int(s[right]-'a')] >= num {
+				temp[int(s[left]-'a')]--
+				left++
+				count--
+			}
+			temp[int(s[right]-'a')]++
+			count++
+		} else {
+			left = right + 1
+			count = 0
+			temp = make(map[int]int)
+		}
+		if count == lengthP {
+			result = append(result, left)
+		}
+	}
+	return result
+}
+
 func main() {
 	test := "abab"
 	fmt.Println(findAnagrams1(test, "ab"))
