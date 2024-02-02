@@ -296,7 +296,7 @@ func twelve(n int) []*TreeNode {
 		if start > end {
 			return append(tree, nil)
 		}
-		for i := start; i < end; i++ {
+		for i := start; i <= end; i++ {
 			left := handler(start, i-1)
 			right := handler(i+1, end)
 			for _, l := range left {
