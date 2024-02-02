@@ -285,3 +285,28 @@ func eleven(n int) []*TreeNode {
 	}
 	return handler(1, n)
 }
+
+func twelve(n int) []*TreeNode {
+	if n == 0 {
+		return []*TreeNode{}
+	}
+	var handler func(int, int) []*TreeNode
+	handler = func(start int, end int) []*TreeNode {
+		var tree []*TreeNode
+		if start > end {
+			return append(tree, nil)
+		}
+		for i := start; i < end; i++ {
+			left := handler(start, i-1)
+			right := handler(i+1, end)
+			for _, l := range left {
+				for _, r := range right {
+					flag := &TreeNode{Val: i, Left: l, Right: r}
+					tree = append(tree, flag)
+				}
+			}
+		}
+		return tree
+	}
+	return handler(1, n)
+}
