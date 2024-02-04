@@ -207,6 +207,23 @@ func eleven(root *TreeNode) int {
 	return max
 }
 
+func twelve(root *TreeNode) int {
+	max := math.MinInt32
+	var handler func(*TreeNode) int
+	handler = func(node *TreeNode) int {
+		if node == nil {
+			return 0
+		}
+		left := handler(root.Left)
+		right := handler(root.Right)
+		currMax := Max(Max(left+node.Val, right+node.Val), node.Val)
+		max = Max(max, Max(currMax, left+node.Val+right))
+		return currMax
+	}
+	handler(root)
+	return max
+}
+
 func Max(i, j int) int {
 	if i > j {
 		return i
