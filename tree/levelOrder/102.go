@@ -332,3 +332,27 @@ func fourteen(root *TreeNode) [][]int {
 	}
 	return result
 }
+
+func fifteen(root *TreeNode) [][]int {
+	var result [][]int
+	if root == nil {
+		return result
+	}
+	queue := []*TreeNode{root}
+	for len(queue) > 0 {
+		length := len(queue)
+		var temp []int
+		for i := 0; i < length; i++ {
+			temp = append(temp, queue[i].Val)
+			if queue[i].Left != nil {
+				queue = append(queue, queue[i].Left)
+			}
+			if queue[i].Right != nil {
+				queue = append(queue, queue[i].Right)
+			}
+		}
+		result = append(result, temp)
+		queue = queue[length:]
+	}
+	return result
+}
