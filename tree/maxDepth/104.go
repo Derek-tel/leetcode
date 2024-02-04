@@ -95,6 +95,15 @@ func twelve(root *TreeNode) int {
 	return max(left, right) + 1
 }
 
+func thirteen(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	left := thirteen(root.Left)
+	right := thirteen(root.Right)
+	return max(left, right) + 1
+}
+
 func max(i int, j int) int {
 	if i > j {
 		return i
