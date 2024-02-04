@@ -214,8 +214,8 @@ func twelve(root *TreeNode) int {
 		if node == nil {
 			return 0
 		}
-		left := handler(root.Left)
-		right := handler(root.Right)
+		left := handler(node.Left)
+		right := handler(node.Right)
 		currMax := Max(Max(left+node.Val, right+node.Val), node.Val)
 		max = Max(max, Max(currMax, left+node.Val+right))
 		return currMax
