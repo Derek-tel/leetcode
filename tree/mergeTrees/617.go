@@ -156,3 +156,16 @@ func eleven(root1, root2 *TreeNode) *TreeNode {
 	root1.Right = eleven(root1.Right, root2.Right)
 	return root1
 }
+
+func twelve(root1, root2 *TreeNode) *TreeNode {
+	if root1 == nil {
+		return root2
+	}
+	if root2 == nil {
+		return root1
+	}
+	root1.Val = root1.Val + root2.Val
+	root1.Left = twelve(root1.Left, root2.Left)
+	root1.Right = twelve(root1.Right, root2.Right)
+	return root1
+}
