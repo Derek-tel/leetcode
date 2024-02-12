@@ -291,3 +291,27 @@ func eleven(root *TreeNode) *TreeNode {
 	x.Val, y.Val = y.Val, x.Val
 	return root
 }
+
+func twelve(root *TreeNode) {
+	var stack []*TreeNode
+	var x, y, prev *TreeNode
+	for len(stack) > 0 || root != nil {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		if prev != nil && top.Val < prev.Val {
+			y = top
+			if x == nil {
+				x = prev
+			} else {
+				break
+			}
+		}
+		prev = top
+		root = top.Right
+	}
+	x.Val, y.Val = y.Val, x.Val
+}
