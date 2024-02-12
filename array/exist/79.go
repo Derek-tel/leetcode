@@ -541,6 +541,46 @@ func twelve(board [][]byte, word string) bool {
 	return false
 }
 
+type thirteenPair struct {
+	x, y int
+}
+
+var dirThirteen = []thirteenPair{{-1, 0}, {1, 0}, {0, 1}, {0, -1}}
+
+func thirteen(board [][]byte, word string) bool {
+	h, w := len(board), len(board[0])
+	visit := make([][]bool, h)
+	for i := 0; i < len(visit); i++ {
+		visit[i] = make([]bool, w)
+	}
+	var handler func(int, int, int) bool
+	handler = func(x int, y int, index int) bool {
+		if board[x][y] != word[index] {
+			return false
+		}
+		if index == len(word)-1 {
+			return true
+		}
+		visit[x][y] = true
+		defer func() { visit[x][y] = false }()
+		for _, v := range dirThirteen {
+			if newX, newY := x+v.x, y+v.y; newX >= 0 && newY < h && newY >= 0 && newY < w && !visit[newX][newY] {
+				if handler(newX, newY, index+1) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	for i := 0; i < h; i++ {
+		for j := 0; j < w; j++ {
+			if handler(i, j, 0) {
+				return true
+			}
+		}
+	}
+	return false
+}
 func returnValues() (result int) {
 	//var result int
 	defer func() {
