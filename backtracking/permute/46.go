@@ -329,7 +329,7 @@ func twentyOne(nums []int) [][]int {
 				use[i] = true
 				temp = append(temp, nums[i])
 				handler(index + 1)
-				temp = temp[:len(temp)]
+				temp = temp[:len(temp)-1]
 				use[i] = false
 			}
 		}
