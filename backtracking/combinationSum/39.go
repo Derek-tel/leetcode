@@ -369,6 +369,30 @@ func twelve(nums []int, target int) [][]int {
 	handler(0, target)
 	return result
 }
+
+func thirteen(nums []int, target int) [][]int {
+	var temp []int
+	var result [][]int
+	var handler func(int, int)
+	handler = func(index int, target int) {
+		if index == len(nums) {
+			return
+		}
+		if target == 0 {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+		handler(index+1, target)
+
+		if target >= nums[index] {
+			temp = append(temp, nums[index])
+			handler(index, target-nums[index])
+			temp = temp[:len(temp)-1]
+		}
+	}
+	handler(0, target)
+	return result
+}
 func main() {
 	test := []int{4, 3, 2, -2}
 	tar := 7
