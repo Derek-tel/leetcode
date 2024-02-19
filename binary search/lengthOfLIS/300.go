@@ -267,6 +267,35 @@ func nine(nums []int) int {
 	return len(temp)
 }
 
+func ten(nums []int) int {
+	var searchFirstGreater func([]int, int) int
+	searchFirstGreater = func(ints []int, k int) int {
+		low, high := 0, len(ints)-1
+		for low <= high {
+			mid := low + (high-low)>>1
+			if ints[mid] >= k {
+				if mid == 0 || ints[mid-1] < k {
+					return mid
+				}
+				high = mid - 1
+			} else {
+				low = mid + 1
+			}
+		}
+		return -1
+	}
+	var temp []int
+	for _, num := range nums {
+		index := searchFirstGreater(temp, num)
+		if index == -1 {
+			temp = append(temp, num)
+		} else {
+			temp[index] = num
+		}
+	}
+	return len(temp)
+}
+
 func main() {
 	fmt.Println(nine([]int{10, 9, 2, 5, 3, 7, 101, 18}))
 }
