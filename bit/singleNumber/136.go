@@ -96,6 +96,14 @@ func eleven(nums []int) int {
 	return res
 }
 
+func twelve(nums []int) int {
+	res := 0
+	for _, num := range nums {
+		res = res ^ num
+	}
+	return res
+}
+
 func main() {
 	fmt.Println(singleNumber([]int{2, 2, 1}))
 }
