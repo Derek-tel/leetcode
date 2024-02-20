@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func one(nums []int) []int {
 	tag := 0
 	for i := 0; i < len(nums); i++ {
@@ -36,4 +38,9 @@ func two(nums []int) []int {
 		}
 	}
 	return []int{left, right}
+}
+
+func main() {
+	demo := 6
+	fmt.Println(demo & (-demo))
 }
