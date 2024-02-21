@@ -429,3 +429,34 @@ func fourteen(numsCourses int, prerequisites [][]int) bool {
 	}
 	return valid
 }
+
+func fifteen(numsCourses int, prerequisites [][]int) bool {
+	var valid = true
+	var visit = make([]int, numsCourses)
+	var edge = make([][]int, numsCourses)
+	var helper func(int)
+	helper = func(course int) {
+		visit[course] = 1
+		for _, site := range prerequisites[course] {
+			if visit[site] == 0 {
+				helper(site)
+				if valid == false {
+					return
+				}
+			} else if visit[site] == 1 {
+				valid = false
+				return
+			}
+		}
+		visit[course] = 2
+	}
+	for _, site := range prerequisites {
+		edge[site[1]] = append(edge[site[1]], site[0])
+	}
+	for i := 0; i < numsCourses && valid; i++ {
+		if visit[i] == 0 {
+			helper(i)
+		}
+	}
+	return valid
+}
