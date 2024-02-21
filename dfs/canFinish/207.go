@@ -437,7 +437,7 @@ func fifteen(numsCourses int, prerequisites [][]int) bool {
 	var helper func(int)
 	helper = func(course int) {
 		visit[course] = 1
-		for _, site := range prerequisites[course] {
+		for _, site := range edge[course] {
 			if visit[site] == 0 {
 				helper(site)
 				if valid == false {
