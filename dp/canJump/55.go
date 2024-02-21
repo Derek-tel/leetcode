@@ -201,6 +201,21 @@ func thirteen(nums []int) bool {
 	return true
 }
 
+func fourteen(nums []int) bool {
+	if len(nums) == 0 {
+		return false
+	}
+	farthest := 0
+	for i := 0; i < len(nums); i++ {
+		if i <= farthest {
+			farthest = max(farthest, i+nums[i])
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
