@@ -251,7 +251,7 @@ func sixteen(nums []int) int {
 		dp[i] = 1
 		for j := 0; j < i; j++ {
 			if nums[i] > nums[j] {
-				dp[i] = max(dp[i], dp[i]+1)
+				dp[i] = max(dp[i], dp[j]+1)
 			}
 		}
 		result = max(result, dp[i])
