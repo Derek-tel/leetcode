@@ -217,3 +217,20 @@ func fifteen309(price []int) int {
 	}
 	return max(max(dp[len(price)-1][0], dp[len(price)-1][1]), dp[len(price)-1][2])
 }
+
+func sixteen309(price []int) int {
+	dp := make([][3]int, len(price))
+	// 0 hava
+	dp[0][0] = -price[0]
+	// 1 freeze
+	dp[0][1] = 0
+	// 2 short
+	dp[0][2] = 0
+
+	for i := 1; i < len(price); i++ {
+		dp[i][0] = max(dp[i-1][0], dp[i-1][2]-price[i])
+		dp[i][1] = dp[i-1][0] + price[i]
+		dp[i][2] = max(dp[i-1][1], dp[i-1][2])
+	}
+	return max(max(dp[len(price)-1][0], dp[len(price)-1][1]), dp[len(price)-1][2])
+}
