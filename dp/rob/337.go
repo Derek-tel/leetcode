@@ -291,3 +291,24 @@ func fourteen(root *TreeNode) int {
 	doRob, notRob := handler(root)
 	return max(doRob, notRob)
 }
+
+func fifteen(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	var handler func(*TreeNode) (int, int)
+	handler = func(node *TreeNode) (int, int) {
+		if node == nil {
+			return 0, 0
+		}
+		doRobLeft, notRobLeft := handler(node.Left)
+		doRobRight, notRobRight := handler(node.Right)
+
+		doRob := node.Val + notRobRight + notRobLeft
+		notRob := max(doRobLeft, notRobLeft) + max(doRobRight, notRobRight)
+
+		return doRob, notRob
+	}
+	doRob, notRob := handler(root)
+	return max(doRob, notRob)
+}
