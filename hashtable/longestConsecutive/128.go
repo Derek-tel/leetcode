@@ -265,3 +265,24 @@ func twelve(nums []int) int {
 	}
 	return longest
 }
+
+func thirteen(nums []int) int {
+	dic := make(map[int]bool)
+	for _, num := range nums {
+		dic[num] = true
+	}
+	longest := 0
+	for num := range dic {
+		if !dic[num-1] {
+			current := 1
+			for dic[num+1] {
+				current++
+				num++
+			}
+			if current > longest {
+				longest = current
+			}
+		}
+	}
+	return longest
+}
