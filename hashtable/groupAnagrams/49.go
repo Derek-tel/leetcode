@@ -362,3 +362,34 @@ func twelve(strs []string) [][]string {
 	}
 	return result
 }
+
+type thirteenList []rune
+
+func (t thirteenList) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+func (t thirteenList) Less(i, j int) bool {
+	return t[i] < t[j]
+}
+func (t thirteenList) Len() int {
+	return len(t)
+}
+
+func thirteen(strs []string) [][]string {
+	var result [][]string
+	if len(strs) == 0 {
+		return result
+	}
+	dic := make(map[string][]string)
+	for _, str := range strs {
+		temp := thirteenList(str)
+		sort.Sort(temp)
+		tag := dic[string(temp)]
+		tag = append(tag, str)
+		dic[string(temp)] = tag
+	}
+	for _, v := range dic {
+		result = append(result, v)
+	}
+	return result
+}
