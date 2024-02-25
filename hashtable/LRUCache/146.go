@@ -4,30 +4,32 @@ type LRUNode struct {
 	Key, Value int
 	Next, Prev *LRUNode
 }
+
 type LRUCache struct {
-	Size       int
 	Capacity   int
+	Size       int
 	Table      map[int]*LRUNode
 	Head, Tail *LRUNode
 }
 
-func initNode(x, y int) *LRUNode {
-	return &LRUNode{
-		Key:   x,
-		Value: y,
+func initLRUNode(key, value int) *LRUNode {
+	node := &LRUNode{
+		Key:   key,
+		Value: value,
 	}
+	return node
 }
-
 func Constructor(capacity int) LRUCache {
-	lru := LRUCache{
+	cache := LRUCache{
 		Capacity: capacity,
+		Size:     0,
 		Table:    make(map[int]*LRUNode),
-		Head:     initNode(0, 0),
-		Tail:     initNode(0, 0),
+		Head:     initLRUNode(0, 0),
+		Tail:     initLRUNode(0, 0),
 	}
-	lru.Head.Next = lru.Tail
-	lru.Tail.Prev = lru.Head
-	return lru
+	cache.Head.Next = cache.Tail
+	cache.Tail.Prev = cache.Head
+	return cache
 }
 
 func (this *LRUCache) Get(key int) int {
@@ -44,15 +46,12 @@ func (this *LRUCache) Put(key int, value int) {
 		node.Value = value
 		this.MoveToHead(node)
 	} else {
-		tag := &LRUNode{
-			Key:   key,
-			Value: value,
-		}
-		this.AddToHead(tag)
+		temp := initLRUNode(key, value)
+		this.AddToHead(temp)
+		this.Table[key] = temp
 		this.Size++
-		this.Table[key] = tag
 		if this.Size > this.Capacity {
-			del := this.removeTail()
+			del := this.RemoveTail()
 			delete(this.Table, del.Key)
 			this.Size--
 		}
@@ -65,8 +64,8 @@ func (this *LRUCache) MoveToHead(node *LRUNode) {
 }
 
 func (this *LRUCache) RemoveNode(node *LRUNode) {
-	node.Prev.Next = node.Next
 	node.Next.Prev = node.Prev
+	node.Prev.Next = node.Next
 }
 
 func (this *LRUCache) AddToHead(node *LRUNode) {
@@ -76,10 +75,10 @@ func (this *LRUCache) AddToHead(node *LRUNode) {
 	this.Head.Next = node
 }
 
-func (this *LRUCache) removeTail() *LRUNode {
-	node := this.Tail.Prev
-	this.RemoveNode(node)
-	return node
+func (this *LRUCache) RemoveTail() *LRUNode {
+	tail := this.Tail.Prev
+	this.RemoveNode(tail)
+	return tail
 }
 
 /**
