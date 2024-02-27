@@ -208,3 +208,19 @@ func twelve(head *ListNode) *ListNode {
 	}
 	return nil
 }
+
+func thirteen(head *ListNode) *ListNode {
+	fast, slow, p := head, head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+		if fast == slow {
+			for slow != p {
+				slow = slow.Next
+				p = p.Next
+			}
+			return p
+		}
+	}
+	return nil
+}
