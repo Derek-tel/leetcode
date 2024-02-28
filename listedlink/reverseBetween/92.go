@@ -278,3 +278,25 @@ func twelve(head *ListNode, left, right int) *ListNode {
 	}
 	return preHead.Next
 }
+
+func thirteen(head *ListNode, left, right int) *ListNode {
+	if head == nil || left >= right {
+		return head
+	}
+	preHead := &ListNode{Next: head}
+	prev := preHead
+	for i := 1; i < left && prev.Next != nil; i++ {
+		prev = prev.Next
+	}
+	if prev.Next == nil {
+		return head
+	}
+	cur := prev.Next
+	for i := 0; i < right-left && cur.Next != nil; i++ {
+		next := cur.Next
+		cur.Next = next.Next
+		next.Next = prev.Next
+		prev.Next = next
+	}
+	return preHead.Next
+}
