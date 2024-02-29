@@ -452,3 +452,44 @@ func twelve(head *ListNode, k int) *ListNode {
 	}
 	return dumpy.Next
 }
+
+func thirteen(head *ListNode, k int) *ListNode {
+	var handler func(*ListNode, *ListNode) (*ListNode, *ListNode)
+	handler = func(head *ListNode, tail *ListNode) (*ListNode, *ListNode) {
+		if head == nil && tail == nil {
+			return nil, nil
+		}
+		preHead := &ListNode{Next: head}
+		prev := preHead
+		cur := head
+		flag := tail.Next
+		for cur.Next != flag {
+			next := cur.Next
+			cur.Next = next.Next
+			next.Next = prev.Next
+			prev.Next = next
+		}
+		return preHead.Next, head
+	}
+
+	dumpy := &ListNode{Next: head}
+	prev := dumpy
+	for head != nil {
+		tail := prev
+		for i := 0; i < k; i++ {
+			tail = tail.Next
+			if tail == nil {
+				return dumpy.Next
+			}
+		}
+		next := tail.Next
+		head, tail = handler(head, tail)
+
+		prev.Next = head
+		tail.Next = next
+
+		prev = tail
+		head = tail.Next
+	}
+	return dumpy.Next
+}
