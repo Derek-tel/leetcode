@@ -23,3 +23,17 @@ func one(s string) int {
 	}
 	return result
 }
+
+func two(s string) int {
+	result := 0
+	n := len(s)
+	for i := range s {
+		value := symbolValue[s[i]]
+		if i < n-1 && value < symbolValue[s[i+1]] {
+			result -= value
+		} else {
+			result += value
+		}
+	}
+	return result
+}
