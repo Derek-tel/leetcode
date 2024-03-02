@@ -554,6 +554,48 @@ func twelve(nums []int, k int) []int {
 	return result
 }
 
+var thirteenList []int
+
+type thirteenIndex []int
+
+func (t thirteenIndex) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+func (t thirteenIndex) Less(i, j int) bool {
+	return thirteenList[t[i]] > thirteenList[t[j]]
+}
+func (t thirteenIndex) Len() int {
+	return len(t)
+}
+func (t *thirteenIndex) Push(x interface{}) {
+	v := x.(int)
+	*t = append(*t, v)
+}
+func (t *thirteenIndex) Pop() interface{} {
+	v := (*t)[len(*t)-1]
+	*t = (*t)[:len(*t)-1]
+	return v
+}
+
+func thirteen(nums []int, k int) []int {
+	var result []int
+	thirteenList = nums
+	index := thirteenIndex{}
+	for i := 0; i < k; i++ {
+		heap.Push(&index, i)
+	}
+	result = append(result, nums[index[0]])
+
+	for i := k; i < len(nums); i++ {
+		heap.Push(&index, i)
+		for i-index[0] >= k {
+			heap.Pop(&index)
+		}
+		result = append(result, nums[index[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)
