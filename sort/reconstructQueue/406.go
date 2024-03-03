@@ -150,6 +150,18 @@ func eleven(people [][]int) [][]int {
 	return result
 }
 
+func twelve(people [][]int) [][]int {
+	sort.Slice(people, func(i, j int) bool {
+		return people[i][0] > people[j][0] || (people[i][0] == people[j][0] && people[i][1] < people[j][1])
+	})
+	var result [][]int
+	for i := 0; i < len(people); i++ {
+		index := people[i][1]
+		result = append(result[:index], append([][]int{people[i]}, result[index:]...)...)
+	}
+	return result
+}
+
 func main() {
 
 	test1 := [][]int{
