@@ -425,7 +425,7 @@ func fourteen(s string) int {
 	result := 0
 	sign := 1
 	stack := []int{sign}
-	for i := 0; i < len(s); i++ {
+	for i := 0; i < len(s); {
 		ch := s[i]
 		switch ch {
 		case ' ':
