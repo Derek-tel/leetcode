@@ -265,6 +265,7 @@ func seventeen(root *TreeNode) []int {
 		result = append(result, top.Val)
 		root = top.Right
 	}
+
 	return result
 }
 
