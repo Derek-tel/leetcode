@@ -245,6 +245,29 @@ func ten(s string) bool {
 	return len(stack) == 0
 }
 
+func eleven(s string) bool {
+	if len(s)%2 == 1 {
+		return false
+	}
+	pair := map[byte]byte{
+		'}': '{',
+		']': '[',
+		')': '(',
+	}
+	var stack []byte
+	for i := 0; i < len(s); i++ {
+		if tag, ok := pair[s[i]]; ok {
+			if len(stack) == 0 || stack[len(stack)-1] != tag {
+				return false
+			} else {
+				stack = stack[:len(stack)-1]
+			}
+		} else {
+			stack = append(stack, s[i])
+		}
+	}
+	return len(stack) == 0
+}
 func main() {
 	test := "()"
 	fmt.Println(isValid(test))
