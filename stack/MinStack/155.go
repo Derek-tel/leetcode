@@ -18,7 +18,7 @@ func Constructor() MinStack {
 
 func (this *MinStack) Push(val int) {
 	this.stack = append(this.stack, val)
-	this.minStack = append(this.minStack, this.min(this.minStack[len(this.minStack)-1], val))
+	this.minStack = append(this.minStack, this.min(val, this.minStack[len(this.minStack)-1]))
 }
 
 func (this *MinStack) Pop() {
