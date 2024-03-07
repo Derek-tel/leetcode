@@ -355,6 +355,36 @@ func twelve(s string) string {
 	return s[start : end+1]
 }
 
+func thirteen(s string) string {
+	if len(s) < 2 {
+		return s
+	}
+	handler := func(str string, i, j int) (int, int) {
+		for i >= 0 && j < len(str) {
+			if str[i] != str[j] {
+				break
+			}
+			i--
+			j++
+		}
+		return i + 1, j - 1
+	}
+	start, end := 0, 0
+	for i := 0; i < len(s)-1; i++ {
+		left, right := handler(s, i, i)
+		if right-left > end-start {
+			start = left
+			end = right
+		}
+		left, right = handler(s, i, i+1)
+		if right-left > end-start {
+			start = left
+			end = right
+		}
+	}
+	return s[start : end+1]
+}
+
 func main() {
 	test := "ab"
 	fmt.Println(longestPalindrome(test))
