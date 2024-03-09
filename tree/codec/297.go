@@ -32,7 +32,8 @@ func Constructor() Codec {
 // Serializes a tree to a single string.
 func (this *Codec) serialize(root *TreeNode) string {
 	if root == nil {
-		return "null,"
+		this.Builder.WriteString("null,")
+		return ""
 	}
 	this.Builder.WriteString(strconv.Itoa(root.Val) + ",")
 	this.serialize(root.Left)
