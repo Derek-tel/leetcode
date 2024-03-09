@@ -1,10 +1,5 @@
 package main
 
-import (
-	"strconv"
-	"strings"
-)
-
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -21,45 +16,20 @@ type TreeNode struct {
  */
 
 type Codec struct {
-	Input   []string
-	Builder strings.Builder
 }
 
 func Constructor() Codec {
-	return Codec{}
+
 }
 
 // Serializes a tree to a single string.
 func (this *Codec) serialize(root *TreeNode) string {
-	if root == nil {
-		this.Builder.WriteString("null,")
-		return ""
-	}
-	this.Builder.WriteString(strconv.Itoa(root.Val) + ",")
-	this.serialize(root.Left)
-	this.serialize(root.Right)
-	return this.Builder.String()
+
 }
 
 // Deserializes your encoded data to tree.
 func (this *Codec) deserialize(data string) *TreeNode {
-	if len(data) == 0 {
-		return nil
-	}
-	this.Input = strings.Split(data, ",")
-	return this.helper()
-}
 
-func (this *Codec) helper() *TreeNode {
-	if this.Input[0] == "null" {
-		this.Input = this.Input[1:]
-		return nil
-	}
-	value, _ := strconv.Atoi(this.Input[0])
-	this.Input = this.Input[1:]
-	root := &TreeNode{Val: value, Left: this.helper(), Right: this.helper()}
-
-	return root
 }
 
 /**
