@@ -281,3 +281,29 @@ func twelve(root *TreeNode) {
 	}
 	root = head
 }
+
+func thirteen(root *TreeNode) {
+	if root == nil {
+		return
+	}
+
+	var stack []*TreeNode
+	var list []int
+	head := root
+	for len(stack) > 0 || head != nil {
+		for head != nil {
+			list = append(list, head.Val)
+			stack = append(stack, head)
+			head = head.Left
+		}
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		head = top.Right
+	}
+
+	for i := 1; i < len(list); i++ {
+		root.Left = nil
+		root.Right = &TreeNode{Val: list[i]}
+		root = root.Right
+	}
+}
