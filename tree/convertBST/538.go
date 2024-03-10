@@ -202,3 +202,19 @@ func twelve(root *TreeNode) *TreeNode {
 	handler(root)
 	return root
 }
+
+func thirteen(root *TreeNode) *TreeNode {
+	sum := 0
+	var handler func(*TreeNode)
+	handler = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		handler(node.Right)
+		sum += node.Val
+		node.Val = sum
+		handler(node.Left)
+	}
+	handler(root)
+	return root
+}
