@@ -22,12 +22,12 @@ func (this *Trie) Insert(word string) {
 		if node, ok := parent.Children[ch]; ok {
 			parent = node
 		} else {
-			tmp := &Trie{
+			temp := &Trie{
 				Children: make(map[rune]*Trie),
 				IsEnd:    false,
 			}
-			parent.Children[ch] = tmp
-			parent = tmp
+			parent.Children[ch] = temp
+			parent = temp
 		}
 	}
 	parent.IsEnd = true
