@@ -293,3 +293,29 @@ func twelve(root *TreeNode, targetSum int) int {
 	result += twelve(root.Right, targetSum)
 	return result
 }
+
+func thirteen(root *TreeNode, targetSum int) int {
+	if root == nil {
+		return 0
+	}
+	var handler func(*TreeNode, int) int
+	handler = func(node *TreeNode, target int) int {
+		resp := 0
+		if node == nil {
+			return resp
+		}
+		if node.Val == target {
+			resp++
+		}
+		resp += handler(node.Left, target-node.Val)
+		resp += handler(node.Right, target-node.Val)
+		return resp
+	}
+
+	var result int
+	result += handler(root, targetSum)
+	result += thirteen(root.Left, targetSum)
+	result += thirteen(root.Right, targetSum)
+
+	return result
+}
