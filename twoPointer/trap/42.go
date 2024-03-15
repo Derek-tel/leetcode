@@ -290,6 +290,10 @@ func twelve(height []int) int {
 	return result
 }
 
+func ()  {
+	
+}
+
 func main() {
 	test := []int{0, 1, 0, 2, 1, 0}
 	result := trap(test)
