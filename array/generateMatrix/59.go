@@ -62,6 +62,7 @@ func four(n int) [][]int {
 	for i := 0; i < n; i++ {
 		matrix[i] = make([]int, n)
 	}
+
 	row, col, dirIndex := 0, 0, 0
 	for i := 1; i <= n*n; i++ {
 		matrix[row][col] = i
