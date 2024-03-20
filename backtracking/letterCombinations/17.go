@@ -258,6 +258,27 @@ func eleven(digits string) []string {
 	return result
 }
 
+func twelve(digits string) []string {
+	var result []string
+	if len(digits) < 1 {
+		return result
+	}
+	var handler func(int, string)
+	handler = func(i int, s string) {
+		if i == len(digits) {
+			result = append(result, s)
+			return
+		}
+		ch := digits[i]
+		char := letters[string(ch)]
+		for _, v := range char {
+			handler(i+1, s+string(v))
+		}
+	}
+	handler(0, "")
+	return result
+}
+
 var phoneMap map[string]string = map[string]string{
 	"2": "abc",
 	"3": "def",
