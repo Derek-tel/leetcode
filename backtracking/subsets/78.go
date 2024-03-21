@@ -286,6 +286,26 @@ func fourteen(nums []int) [][]int {
 	return result
 }
 
+func fifteen(nums []int) [][]int {
+	var result [][]int
+	var temp []int
+	var handler func(int)
+
+	handler = func(index int) {
+		if index == len(nums) {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+		handler(index + 1)
+
+		temp = append(temp, nums[index])
+		handler(index + 1)
+		temp = temp[:len(temp)-1]
+	}
+	handler(0)
+	return result
+}
+
 func main() {
 	test := []int{1, 2, 3}
 	fmt.Println(test1(test))
