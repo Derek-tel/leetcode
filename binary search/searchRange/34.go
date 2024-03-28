@@ -88,7 +88,7 @@ func searchLastEqualElement(nums []int, target int) int {
 }
 
 // 二分查找第一个大于等于 target 的元素，时间复杂度 O(logn)
-func searchFirstGreeter(nums []int, target int) int {
+func searchFirstGreaterElement(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
 		mid := low + (high-low)>>1
