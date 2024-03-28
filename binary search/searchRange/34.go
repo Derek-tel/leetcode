@@ -105,11 +105,10 @@ func searchFirstGreaterElement(nums []int, target int) int {
 }
 
 // 二分查找最后一个小于等于 target 的元素，时间复杂度 O(logn)
-func searchLastLess(nums []int, target int) int {
+func searchLastLessElement(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
 		mid := low + (high-low)>>1
-
 		if nums[mid] <= target {
 			if mid == len(nums)-1 || nums[mid+1] > target {
 				return mid
