@@ -81,11 +81,11 @@ func five(n int) []int {
 			return
 		}
 		resp = append(resp, index)
-		for i := 1; i <= 9; i++ {
+		for i := 0; i <= 9; i++ {
 			handler(index*10 + i)
 		}
 	}
-	for i := 0; i <= 9; i++ {
+	for i := 1; i <= 9; i++ {
 		handler(i)
 	}
 	return resp
