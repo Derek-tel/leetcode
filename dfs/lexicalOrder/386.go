@@ -37,7 +37,7 @@ func two(n int) []int {
 	return resp
 }
 
-func thirteen(n int) []int {
+func three(n int) []int {
 	var resp []int
 	var handler func(int)
 	handler = func(index int) {
@@ -55,7 +55,7 @@ func thirteen(n int) []int {
 	return resp
 }
 
-func fourteen(n int) []int {
+func four(n int) []int {
 	var resp []int
 	var handler func(int)
 	handler = func(index int) {
@@ -68,6 +68,24 @@ func fourteen(n int) []int {
 		}
 	}
 	for i := 1; i <= 9; i++ {
+		handler(i)
+	}
+	return resp
+}
+
+func five(n int) []int {
+	var resp []int
+	var handler func(int)
+	handler = func(index int) {
+		if index > n {
+			return
+		}
+		resp = append(resp, index)
+		for i := 1; i <= 9; i++ {
+			handler(index*10 + i)
+		}
+	}
+	for i := 0; i <= 9; i++ {
 		handler(i)
 	}
 	return resp
