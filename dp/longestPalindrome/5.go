@@ -234,7 +234,7 @@ func fifteen(s string) string {
 	}
 	for i := len(s) - 1; i >= 0; i-- {
 		for j := i; j < len(s); j++ {
-			dp[i][j] = s[i] == s[j] && (j-i > 2 || dp[i+1][j-1])
+			dp[i][j] = s[i] == s[j] && (j-i < 3 || dp[i+1][j-1])
 			if dp[i][j] && j+1-i > len(result) {
 				result = s[i : j+1]
 			}
