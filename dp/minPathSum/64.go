@@ -446,6 +446,7 @@ func fourteen(grid [][]int) int {
 	}
 	return dp[row-1][col-1]
 }
+
 func min(i, j int) int {
 	if i < j {
 		return i
