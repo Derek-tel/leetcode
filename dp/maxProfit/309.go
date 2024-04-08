@@ -234,3 +234,26 @@ func sixteen309(price []int) int {
 	}
 	return max(max(dp[len(price)-1][0], dp[len(price)-1][1]), dp[len(price)-1][2])
 }
+
+func seventeen(prices []int) int {
+	if len(prices) < 1 {
+		return 0
+	}
+	dp := make([][3]int, len(prices))
+
+	//0 hava
+	dp[0][0] = -prices[0]
+	//1 freeze
+	dp[0][1] = 0
+	//2 short position
+	dp[0][2] = 0
+
+	for i := 1; i < len(prices); i++ {
+		dp[i][0] = max(dp[i-1][2]-prices[i], dp[i-1][0])
+		//1 freeze
+		dp[i][1] = dp[i-1][0] + prices[i]
+		//2 short position
+		dp[i][2] = max(dp[i-1][2], dp[i-1][1])
+	}
+	return max(max(dp[len(prices)-1][0], dp[len(prices)-1][1]), dp[len(prices)-1][2])
+}
