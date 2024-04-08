@@ -185,6 +185,20 @@ func fourteen(nums []int) int {
 	return result
 }
 
+func fifteen(nums []int) int {
+	if len(nums) < 1 {
+		return 0
+	}
+	maxN, minN, result := nums[0], nums[0], nums[0]
+	for i := 1; i < len(nums); i++ {
+		mm, mn := maxN, minN
+		maxN = max(max(nums[i]*mm, nums[i]*mn), nums[i])
+		minN = min(min(nums[i]*mm, nums[i]*mn), nums[i])
+		result = max(maxN, minN)
+	}
+	return result
+}
+
 func max(i, j int) int {
 	if i > j {
 		return i
