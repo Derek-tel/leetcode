@@ -237,3 +237,21 @@ func thirteen(nums []int) int {
 	}
 	return p
 }
+
+func fourteen(nums []int) int {
+	count := 0
+	var p int
+	for _, num := range nums {
+		if count == 0 {
+			p = num
+			count++
+		} else {
+			if p == num {
+				count++
+			} else {
+				count--
+			}
+		}
+	}
+	return p
+}
