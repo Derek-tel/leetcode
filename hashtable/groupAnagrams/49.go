@@ -393,3 +393,37 @@ func thirteen(strs []string) [][]string {
 	}
 	return result
 }
+
+type fourteenList []rune
+
+func (t fourteenList) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+
+func (t fourteenList) Less(i, j int) bool {
+	return t[i] < t[j]
+}
+
+func (t fourteenList) Len() int {
+	return len(t)
+}
+
+func fourteen(strs []string) [][]string {
+	var result [][]string
+
+	if len(strs) == 0 {
+		return result
+	}
+	dic := make(map[string][]string)
+	for _, str := range strs {
+		temp := fourteenList(str)
+		sort.Sort(temp)
+		tag := dic[string(temp)]
+		tag = append(tag, str)
+		dic[string(temp)] = tag
+	}
+	for _, v := range dic {
+		result = append(result, v)
+	}
+	return result
+}
