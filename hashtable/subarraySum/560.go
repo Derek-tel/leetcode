@@ -197,3 +197,18 @@ func thirteen(nums []int, k int) int {
 	}
 	return count
 }
+
+func fourteen(nums []int, k int) int {
+	count := 0
+	prefix := make(map[int]int)
+	prefix[0] = 1
+	sum := 0
+	for i := 0; i < len(nums); i++ {
+		sum = sum + nums[i]
+		if tag, ok := prefix[sum-k]; ok {
+			count += tag
+		}
+		prefix[sum]++
+	}
+	return count
+}
