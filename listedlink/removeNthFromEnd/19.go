@@ -270,3 +270,22 @@ func fourteen(head *ListNode, n int) *ListNode {
 	slow.Next = slow.Next.Next
 	return preHead.Next
 }
+
+func fifteen(head *ListNode, n int) *ListNode {
+	if head == nil {
+		return head
+	}
+	preHead := &ListNode{Next: head}
+	prev := preHead
+	slow := prev
+	fast := head
+	for i := 1; i <= n && fast != nil; i++ {
+		fast = fast.Next
+	}
+	for fast != nil {
+		fast = fast.Next
+		slow = slow.Next
+	}
+	slow.Next = slow.Next.Next
+	return preHead.Next
+}
