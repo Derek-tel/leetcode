@@ -467,3 +467,35 @@ func thirteen(list []*ListNode) *ListNode {
 		return handler(thirteen(list[:mid]), thirteen(list[mid:]))
 	}
 }
+
+func fourteen(list []*ListNode) *ListNode {
+	var handler func(*ListNode, *ListNode) *ListNode
+	handler = func(left *ListNode, right *ListNode) *ListNode {
+		preHead := &ListNode{}
+		prev := preHead
+		for left != nil && right != nil {
+			if left.Val < right.Val {
+				prev.Next = left
+				left = left.Next
+			} else {
+				prev.Next = right
+				right = right.Next
+			}
+			prev = prev.Next
+		}
+		if left == nil {
+			prev.Next = right
+		} else {
+			prev.Next = left
+		}
+		return preHead.Next
+	}
+	if len(list) == 0 {
+		return nil
+	} else if len(list) == 1 {
+		return list[0]
+	} else {
+		mid := len(list) / 2
+		return handler(fourteen(list[:mid]), fourteen(list[mid:]))
+	}
+}
