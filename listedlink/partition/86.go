@@ -291,7 +291,7 @@ func fourteen(head *ListNode, x int) *ListNode {
 		}
 		head = head.Next
 	}
-	smallHead.Next = largeHead.Next
+	smallHead.Next = large.Next
 	largeHead.Next = nil
 
 	return small.Next
