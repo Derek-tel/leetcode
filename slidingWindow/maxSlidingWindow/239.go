@@ -596,6 +596,49 @@ func thirteen(nums []int, k int) []int {
 	return result
 }
 
+var fourteenList []int
+
+type fourteenIndex []int
+
+func (t fourteenIndex) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+func (t fourteenIndex) Less(i, j int) bool {
+	return fourteenList[t[i]] > fourteenList[t[j]]
+}
+func (t fourteenIndex) Len() int {
+	return len(t)
+}
+func (t *fourteenIndex) Push(x interface{}) {
+	v := x.(int)
+	*t = append(*t, v)
+}
+func (t *fourteenIndex) Pop() interface{} {
+	v := (*t)[len(*t)-1]
+	*t = (*t)[:len(*t)-1]
+	return v
+}
+
+func fourteen(nums []int, k int) []int {
+	var result []int
+	fourteenList = nums
+
+	index := fourteenIndex{}
+	for i := 0; i < k; i++ {
+		heap.Push(&index, i)
+	}
+	result = append(result, nums[index[0]])
+
+	for i := k; i < len(nums); i++ {
+		heap.Push(&index, i)
+		for i-index[0] >= k {
+			heap.Pop(&index)
+		}
+		result = append(result, nums[index[0]])
+	}
+	return result
+}
+
 func main() {
 	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, -1, 3, 6, 7}, 3))
 	d := make([]int, 2)
