@@ -336,6 +336,30 @@ func thirteen(nums []int) int {
 	return right - left + 1
 }
 
+func fourteen(nums []int) int {
+	left, right := 0, 0
+	flag := nums[0]
+	for i := 1; i < len(nums); i++ {
+		if nums[i] >= flag {
+			flag = nums[i]
+		} else {
+			right = i
+		}
+	}
+	flag = nums[len(nums)-1]
+	for i := len(nums) - 1; i >= 0; i-- {
+		if nums[i] <= flag {
+			flag = nums[i]
+		} else {
+			left = i
+		}
+	}
+	if right == 0 {
+		return 0
+	}
+	return right - left + 1
+}
+
 func main() {
 	test := []int{2, 6, 4, 11, 10, 9, 15}
 	fmt.Println(six(test))
