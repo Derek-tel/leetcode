@@ -493,6 +493,43 @@ func thirteen(s string) string {
 	return result
 }
 
+func fourteen(s string) string {
+	var stack []string
+	for _, v := range s {
+		if len(stack) == 0 || v != ']' {
+			stack = append(stack, string(v))
+		} else {
+			var temp string
+			for stack[len(stack)-1] != "[" {
+				temp = stack[len(stack)-1] + temp
+				stack = stack[:len(stack)-1]
+			}
+			stack = stack[:len(stack)-1]
+			var num string
+			var i int
+			for i = len(stack) - 1; i >= 0; i-- {
+				if stack[i] >= "0" && stack[i] <= "9" {
+					num = stack[i] + num
+				} else {
+					break
+				}
+			}
+			number, _ := strconv.Atoi(num)
+			add := temp
+			for j := 0; j < number-1; j++ {
+				add += temp
+			}
+			stack = stack[:i+1]
+			stack = append(stack, add)
+		}
+	}
+	var result string
+	for _, v := range stack {
+		result += v
+	}
+	return result
+}
+
 func main() {
 	s := "3[a]a2[bc]"
 	fmt.Println(twelve(s))
