@@ -233,6 +233,25 @@ func twelve(height []int) int {
 	return result
 }
 
+func thirteen(height []int) int {
+	var stack []int
+	var result int
+	for index, high := range height {
+		for len(stack) > 0 && high > height[stack[len(stack)-1]] {
+			top := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				break
+			}
+			prev := stack[len(stack)-1]
+			weight := index - prev - 1
+			result += (min(high, height[prev]) - height[top]) * weight
+		}
+		stack = append(stack, index)
+	}
+	return result
+}
+
 func min(i, j int) int {
 	if i < j {
 		return i
