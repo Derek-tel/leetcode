@@ -500,6 +500,43 @@ func thirteen(s string, t string) string {
 	return result
 }
 
+func fourteen(s string, t string) string {
+	var result string
+	if len(s) == 0 || len(t) == 0 || len(s) < len(t) {
+		return result
+	}
+	var freqS, freqT [256]int
+	for i := 0; i < len(t); i++ {
+		freqT[t[i]-'a']++
+	}
+	left, right, count := 0, 0, 0
+	start, end, minLen := -1, -1, math.MaxInt
+	for left < len(s) {
+		if right < len(s) && count < len(t) {
+			freqS[s[right]-'a']++
+			if freqS[s[right]-'a'] <= freqT[s[right]-'a'] {
+				count++
+			}
+			right++
+		} else {
+			if count == len(t) && right-left < minLen {
+				start = left
+				end = right
+				minLen = right - left
+			}
+			if freqS[s[left]-'a'] <= freqT[s[left]-'a'] {
+				count--
+			}
+			freqS[s[left]-'a']--
+			left++
+		}
+	}
+	if end != -1 {
+		result = s[start:end]
+	}
+	return result
+}
+
 func main() {
 	s := "ADOBECODEBANC"
 	t := "ABC"
