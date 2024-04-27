@@ -504,6 +504,41 @@ func fourteen(s string, words []string) []int {
 	return result
 }
 
+func fifteen(s string, words []string) []int {
+	var result []int
+	wordLen, wordCount := len(words[0]), len(words)
+	if wordCount < 1 || len(s) < wordLen*wordCount {
+		return result
+	}
+	dic := make(map[string]int)
+	for _, word := range words {
+		dic[word]++
+	}
+	for i := 0; i < wordLen; i++ {
+		temp := make(map[string]int)
+		count := 0
+		for left, right := i, i; right+wordLen <= len(s); right += wordLen {
+			if num, ok := dic[s[right:right+wordLen]]; ok {
+				for temp[s[right:right+wordLen]] >= num {
+					temp[s[left:left+wordLen]]--
+					left += wordLen
+					count--
+				}
+				temp[s[right:right+wordLen]]++
+				count++
+			} else {
+				left = right + wordLen
+				count = 0
+				temp = make(map[string]int)
+			}
+			if count == wordCount {
+				result = append(result, left)
+			}
+		}
+	}
+	return result
+}
+
 func main() {
 	test := "wordgoodgoodgoodbestword"
 	words := []string{"word", "good", "best", "good"}
