@@ -227,8 +227,10 @@ func fourteen(root *TreeNode) *TreeNode {
 			return
 		}
 		handler(node.Right)
+
 		sum = sum + node.Val
 		node.Val = sum
+
 		handler(node.Left)
 	}
 	handler(root)
