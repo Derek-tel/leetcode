@@ -135,3 +135,13 @@ func thirteen(p, q *TreeNode) bool {
 	}
 	return p.Val == q.Val && thirteen(p.Left, q.Left) && thirteen(p.Right, q.Right)
 }
+
+func fourteen(p, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	return p.Val == q.Val && fourteen(p.Left, q.Left) && fourteen(p.Right, q.Right)
+}
