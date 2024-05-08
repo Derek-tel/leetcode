@@ -241,6 +241,23 @@ func thirteen(root *TreeNode) int {
 	return max
 }
 
+func fourteen(root *TreeNode) int {
+	max := math.MaxInt
+	var handler func(*TreeNode) int
+	handler = func(node *TreeNode) int {
+		if node == nil {
+			return 0
+		}
+		left := handler(node.Left)
+		right := handler(node.Right)
+		currentMax := Max(Max(left+node.Val, right+node.Val), node.Val)
+		max = Max(max, Max(currentMax, left+node.Val+right))
+		return currentMax
+	}
+	handler(root)
+	return max
+}
+
 func Max(i, j int) int {
 	if i > j {
 		return i
