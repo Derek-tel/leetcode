@@ -1,8 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
+package Trie
 
 type Trie struct {
 	Children map[rune]*Trie
@@ -55,22 +51,6 @@ func (this *Trie) StartsWith(prefix string) bool {
 		}
 	}
 	return true
-}
-
-/**
- * Your Trie object will be instantiated and called as such:
- * obj := Constructor();
- * obj.Insert(word);
- * param_2 := obj.Search(word);
- * param_3 := obj.StartsWith(prefix);
- */
-
-func main() {
-	obj := Constructor()
-	obj.Insert("apple")
-	param_2 := obj.Search("word")
-	param_3 := obj.StartsWith("app")
-	fmt.Println(param_2, param_3)
 }
 
 /**
