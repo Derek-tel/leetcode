@@ -225,3 +225,25 @@ func nine(root *TreeNode) []int {
 	}
 	return result
 }
+
+func ten(root *TreeNode) []int {
+	var result []int
+	var stack []*TreeNode
+	var prev *TreeNode
+	for len(stack) > 0 || root != nil {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		top := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		if top.Right == nil || prev == top.Right {
+			result = append(result, top.Val)
+			prev = top
+		} else {
+			stack = append(stack, top)
+			root = top.Right
+		}
+	}
+	return result
+}
