@@ -119,7 +119,7 @@ func main() {
 	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 85, 10000))
 	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(95), 85, 10000))
 	//fmt.Println(calcSampleSizeByConfidence(float64(3), getZValue(99), 80, 10000))
-	fmt.Println(calcSampleSizeByConfidence(float64(2), getZValue(99), 99, 22))
+	fmt.Println(calcSampleSizeByConfidence(float64(2), getZValue(99), 100, 9))
 
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 99.5, 500, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 99.5, 500, 10000))
@@ -132,11 +132,7 @@ func main() {
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 85, 500, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 85, 500, 10000))
 	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(99), 80, 500, 10000))
-	//fmt.Println(calcMarginOfErrorByConfidence(getZValue(95), 99.5, 133, 100000))
-
-	slice := []int64{}
-	randShuffle(slice)
-	fmt.Println(slice)
+	fmt.Println(calcMarginOfErrorByConfidence(getZValue(90), 0.57, 176, 8800))
 }
 
 func randShuffle(slice []int64) {
@@ -146,7 +142,7 @@ func randShuffle(slice []int64) {
 	})
 }
 
-//e 置信区间 z置信度 p 准确率  n 样本量
+// e 置信区间 z置信度 p 准确率  n 样本量
 func calcSampleSizeByConfidenceUnLimit(e, z, p float64) int64 {
 	e = e / 100
 	p = p / 100
@@ -155,7 +151,7 @@ func calcSampleSizeByConfidenceUnLimit(e, z, p float64) int64 {
 	return result
 }
 
-//e 置信区间 z置信度 p 准确率  n 样本量
+// e 置信区间 z置信度 p 准确率  n 样本量
 func calcMarginOfErrorByConfidenceUnLimit(z, p float64, n int64) float64 {
 	if n == 1 {
 		return 1
@@ -167,7 +163,7 @@ func calcMarginOfErrorByConfidenceUnLimit(z, p float64, n int64) float64 {
 	return result
 }
 
-//e 置信区间 z置信度 p 准确率  n 样本量
+// e 置信区间 z置信度 p 准确率  n 样本量
 func calcSampleSizeByConfidence(e, z, p float64, n int64) int64 {
 	fn := float64(n)
 	e = e / 100
@@ -178,7 +174,7 @@ func calcSampleSizeByConfidence(e, z, p float64, n int64) int64 {
 	return result
 }
 
-//e 置信区间 z置信度 p 准确率  n 样本量
+// e 置信区间 z置信度 p 准确率  n 样本量
 func calcMarginOfErrorByConfidence(z, p float64, n int64, N int64) float64 {
 	if n == 1 {
 		return 1
@@ -200,7 +196,7 @@ func getZValue(confidenceLevel int) float64 {
 	case 85:
 		return 1.44
 	case 90:
-		return 1.65
+		return 1.
 	case 95:
 		return 1.65
 	case 99:
