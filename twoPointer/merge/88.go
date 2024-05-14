@@ -255,6 +255,26 @@ func thirteen(nums1 []int, nums2 []int, m, n int) {
 	}
 }
 
+func fourteen(nums1 []int, nums2 []int, m, n int) {
+	p := m + n - 1
+	pm := m - 1
+	pn := n - 1
+	for ; pm >= 0 && pn >= 0; p-- {
+		if nums1[pm] > nums2[pn] {
+			nums1[p] = nums1[pm]
+			pm--
+		} else {
+			nums1[p] = nums2[pn]
+			pn--
+		}
+		p--
+	}
+	for i := pn; i >= 0; i-- {
+		nums1[i] = nums2[i]
+
+	}
+}
+
 func main() {
 	a := []int{1, 2, 3, 0, 0, 0}
 	b := []int{2, 5, 6}
