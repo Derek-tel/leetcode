@@ -644,9 +644,9 @@ func fifteen(board [][]byte, word string) bool {
 			return true
 		}
 		visit[x][y] = true
-		defer func() { visit[x][y] = true }()
+		defer func() { visit[x][y] = false }()
 		for _, v := range dirFifteen {
-			if newX, newY := x+v.x, y+v.y; newX >= x && newX < h && newY >= 0 && newY < w && !visit[newX][newY] {
+			if newX, newY := x+v.x, y+v.y; newX >= 0 && newX < h && newY >= 0 && newY < w && !visit[newX][newY] {
 				if handler(newX, newY, index+1) {
 					return true
 				}
