@@ -417,10 +417,34 @@ func fourteen(nums []int, target int) [][]int {
 	handler(0, target)
 	return result
 }
+
+func fifteen(nums []int, target int) [][]int {
+	var temp []int
+	var result [][]int
+	var handler func(int, int)
+	handler = func(index int, tar int) {
+		if index == len(nums) {
+			return
+		}
+		if tar == 0 {
+			result = append(result, append([]int(nil), temp...))
+			return
+		}
+
+		handler(index+1, tar)
+
+		if nums[index] <= tar {
+			temp = append(temp, nums[index])
+			handler(index, tar-nums[index])
+			temp = temp[:len(temp)-1]
+		}
+	}
+	handler(0, target)
+	return result
+}
+
 func main() {
 	test := []int{4, 3, 2, -2}
 	tar := 7
-	fmt.Println(seven(test, tar))
-
-	fmt.Println(1 &^ 4)
+	fmt.Println(fifteen(test, tar))
 }
