@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func generateParenthesis(n int) []string {
 	if n == 0 {
@@ -317,6 +319,28 @@ func fourteen(n int) []string {
 }
 
 func fifteen(n int) []string {
+	var result []string
+	var handler func(int, int, string)
+	handler = func(left int, right int, s string) {
+		if left == 0 && right == 0 {
+			result = append(result, s)
+			return
+		}
+		if left > right {
+			return
+		}
+		if left > 0 {
+			handler(left-1, right, s+"(")
+		}
+		if right > 0 {
+			handler(left, right-1, s+")")
+		}
+	}
+	handler(n, n, "")
+	return result
+}
+
+func sixteen(n int) []string {
 	var result []string
 	var handler func(int, int, string)
 	handler = func(left int, right int, s string) {

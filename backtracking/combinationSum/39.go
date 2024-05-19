@@ -298,6 +298,7 @@ func ten(nums []int, target int) [][]int {
 		if index == len(nums) {
 			return
 		}
+
 		if tar == 0 {
 			result = append(result, append([]int(nil), temp...))
 			return
