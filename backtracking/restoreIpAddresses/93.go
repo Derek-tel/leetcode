@@ -553,6 +553,42 @@ func thirteen(s string) []string {
 	handler(0, 0)
 	return resp
 }
+
+func fourteen(s string) []string {
+	var segment = 4
+	var resp []string
+	var temp = make([]string, segment)
+	var handler func(int, int)
+	handler = func(seg int, index int) {
+		if seg == segment {
+			if index == len(s) {
+				resp = append(resp, strings.Join(temp, "."))
+			}
+			return
+		}
+		if index == len(s) {
+			return
+		}
+		if s[index] == '0' {
+			temp[seg] = "0"
+			handler(seg+1, index+1)
+		} else {
+			address := 0
+			for i := index; i < len(s); i++ {
+				address = address*10 + int(s[i]-'0')
+				if address > 0 && address <= 0xFF {
+					temp[seg] = strconv.Itoa(address)
+					handler(seg+1, i+1)
+				} else {
+					break
+				}
+			}
+		}
+	}
+	handler(0, 0)
+	return resp
+}
+
 func main() {
 	test := "25525511135"
 	fmt.Println(eleven(test))
