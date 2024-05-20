@@ -895,8 +895,10 @@ func sixteen(beginWord, endWord string, wordList []string) int {
 			return dist[top]/2 + 1
 		}
 		for _, v := range graph[top] {
-			queue = append(queue, v)
-			dist[v] = dist[top] + 1
+			if dist[v] == math.MaxInt {
+				queue = append(queue, v)
+				dist[v] = dist[top] + 1
+			}
 		}
 	}
 	return 0
