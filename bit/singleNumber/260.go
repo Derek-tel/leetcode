@@ -40,7 +40,7 @@ func two(nums []int) []int {
 	return []int{left, right}
 }
 
-func fourteen(nums []int) []int {
+func three260(nums []int) []int {
 	tag := 0
 	for i := 0; i < len(nums); i++ {
 		tag ^= nums[i]
@@ -53,6 +53,23 @@ func fourteen(nums []int) []int {
 			left ^= num
 		} else {
 			right ^= num
+		}
+	}
+	return []int{left, right}
+}
+
+func four260(nums []int) []int {
+	tag := 0
+	for i := 0; i < len(nums); i++ {
+		tag ^= nums[i]
+	}
+	flag := tag & (-tag)
+	left, right := 0, 0
+	for _, n := range nums {
+		if n&flag > 0 {
+			left ^= n
+		} else {
+			right ^= n
 		}
 	}
 	return []int{left, right}
