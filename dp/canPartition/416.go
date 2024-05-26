@@ -399,6 +399,32 @@ func sixteen(nums []int) bool {
 	return dp[half]
 }
 
+func seventeen(nums []int) bool {
+	count := 0
+	max := 0
+	for i := 0; i < len(nums); i++ {
+		count += nums[i]
+		if nums[i] > max {
+			max = nums[i]
+		}
+	}
+	if count%2 == 1 {
+		return false
+	}
+	half := count / 2
+	if max > half {
+		return false
+	}
+	dp := make([]bool, half+1)
+	dp[0] = true
+	for _, n := range nums {
+		for i := half; i >= n; i-- {
+			dp[i] = dp[i] || dp[i-n]
+		}
+	}
+	return dp[half]
+}
+
 func main() {
 	fmt.Println(canPartition([]int{3, 3, 3, 4, 5}))
 }
