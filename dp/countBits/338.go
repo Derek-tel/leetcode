@@ -197,6 +197,19 @@ func sixteen(n int) []int {
 	return bit
 }
 
+func seventeen(n int) []int {
+	bit := make([]int, n+1)
+	highBit := 0
+	bit[0] = 0
+	for i := 1; i <= n; i++ {
+		if i&(i-1) == 0 {
+			highBit = i
+		}
+		bit[i] = bit[i-highBit] + 1
+	}
+	return bit
+}
+
 func main() {
 	fmt.Println(countBits(5))
 }
