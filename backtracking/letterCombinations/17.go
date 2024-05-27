@@ -279,6 +279,27 @@ func twelve(digits string) []string {
 	return result
 }
 
+func thirteen(digits string) []string {
+	var result []string
+	if len(digits) < 1 {
+		return result
+	}
+	var handler func(int, string)
+	handler = func(index int, s string) {
+		if index == len(digits) {
+			result = append(result, s)
+			return
+		}
+		ch := digits[index]
+		char := phoneMap[string(ch)]
+		for _, v := range char {
+			handler(index+1, s+string(v))
+		}
+	}
+	handler(0, "")
+	return result
+}
+
 var phoneMap map[string]string = map[string]string{
 	"2": "abc",
 	"3": "def",

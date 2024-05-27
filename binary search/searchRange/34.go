@@ -8,12 +8,12 @@ func searchRange(nums []int, target int) []int {
 	if len(nums) == 0 {
 		return []int{-1, -1}
 	}
-	a := firstEqual(nums, target)
-	b := lastEqual(nums, target)
+	a := first(nums, target)
+	b := last(nums, target)
 	return []int{a, b}
 }
 
-func firstEqual(nums []int, target int) int {
+func first(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
@@ -31,7 +31,7 @@ func firstEqual(nums []int, target int) int {
 	return -1
 }
 
-func lastEqual(nums []int, target int) int {
+func last(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := left + (right-left)>>1
@@ -50,16 +50,16 @@ func lastEqual(nums []int, target int) int {
 }
 
 // 二分查找第一个与 target 相等的元素，时间复杂度 O(logn)
-func searchFirstEqualElement(nums []int, target int) int {
+func firstEqual(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
-		mid := low + ((high - low) >> 1)
+		mid := low + (high-low)>>1
 		if nums[mid] > target {
 			high = mid - 1
 		} else if nums[mid] < target {
 			low = mid + 1
 		} else {
-			if (mid == 0) || (nums[mid-1] != target) { // 找到第一个与 target 相等的元素
+			if (mid == 0) || nums[mid-1] != target {
 				return mid
 			}
 			high = mid - 1
@@ -69,16 +69,16 @@ func searchFirstEqualElement(nums []int, target int) int {
 }
 
 // 二分查找最后一个与 target 相等的元素，时间复杂度 O(logn)
-func searchLastEqualElement(nums []int, target int) int {
+func lastEqual(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
-		mid := low + ((high - low) >> 1)
+		mid := low + (high-low)>>1
 		if nums[mid] > target {
 			high = mid - 1
 		} else if nums[mid] < target {
 			low = mid + 1
 		} else {
-			if (mid == len(nums)-1) || (nums[mid+1] != target) { // 找到最后一个与 target 相等的元素
+			if mid == len(nums)-1 || nums[mid+1] != target {
 				return mid
 			}
 			low = mid + 1
@@ -88,7 +88,7 @@ func searchLastEqualElement(nums []int, target int) int {
 }
 
 // 二分查找第一个大于等于 target 的元素，时间复杂度 O(logn)
-func searchFirstGreaterElement(nums []int, target int) int {
+func firstGreater(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
 		mid := low + (high-low)>>1
@@ -105,10 +105,11 @@ func searchFirstGreaterElement(nums []int, target int) int {
 }
 
 // 二分查找最后一个小于等于 target 的元素，时间复杂度 O(logn)
-func searchLastLessElement(nums []int, target int) int {
+func lastLess(nums []int, target int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
 		mid := low + (high-low)>>1
+
 		if nums[mid] <= target {
 			if mid == len(nums)-1 || nums[mid+1] > target {
 				return mid

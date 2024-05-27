@@ -334,6 +334,30 @@ func thirteen(nums []int) int {
 	return ans
 }
 
+func fourteen(nums []int) int {
+	var ans = -1
+	if len(nums) < 1 {
+		return ans
+	}
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)>>1
+		count := 0
+		for _, n := range nums {
+			if n <= mid {
+				count++
+			}
+		}
+		if count <= mid {
+			left = mid + 1
+		} else {
+			right = mid - 1
+			ans = mid
+		}
+	}
+	return ans
+}
+
 func main() {
 	fmt.Println(findDuplicate([]int{1, 1}))
 }
