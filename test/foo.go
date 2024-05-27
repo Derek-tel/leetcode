@@ -9,6 +9,7 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -19,6 +20,8 @@ func main() {
 	defer cancel()
 
 	foo(ctx)
+	fmt.Println(strings.Split("", ","))
+	fmt.Println(len(strings.Split("", ",")))
 }
 
 // 您需要实现 foo 函数，要求 foo 在 ctx 超时后立即返回
