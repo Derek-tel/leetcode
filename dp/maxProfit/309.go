@@ -235,7 +235,7 @@ func sixteen309(price []int) int {
 	return max(max(dp[len(price)-1][0], dp[len(price)-1][1]), dp[len(price)-1][2])
 }
 
-func seventeen(prices []int) int {
+func seventeen309(prices []int) int {
 	if len(prices) < 1 {
 		return 0
 	}
