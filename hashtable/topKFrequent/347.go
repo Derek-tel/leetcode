@@ -655,3 +655,45 @@ func fourteen(nums []int, k int) []int {
 	}
 	return result
 }
+
+type fifteenCounter struct {
+	Val, Count int
+}
+type fifteenList []fifteenCounter
+
+func (f fifteenList) Less(i, j int) bool {
+	return f[i].Count > f[j].Count
+}
+func (f fifteenList) Swap(i, j int) {
+	f[i], f[j] = f[j], f[i]
+}
+func (f fifteenList) Len() int {
+	return len(f)
+}
+func (f *fifteenList) Push(x interface{}) {
+	tag := x.(fifteenCounter)
+	*f = append(*f, tag)
+}
+func (f *fifteenList) Pop() interface{} {
+	tag := (*f)[len(*f)-1]
+	*f = (*f)[:len(*f)-1]
+	return tag
+}
+
+func fifteen(nums []int, k int) []int {
+	var result []int
+	var dic = make(map[int]int)
+	for _, v := range nums {
+		dic[v]++
+	}
+	var list fifteenList
+	for val, count := range dic {
+		tag := fifteenCounter{val, count}
+		heap.Push(&list, tag)
+	}
+	for len(result) < k {
+		top := heap.Pop(&list).(fifteenCounter)
+		result = append(result, top.Val)
+	}
+	return result
+}
