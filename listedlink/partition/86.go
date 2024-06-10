@@ -296,3 +296,22 @@ func fourteen(head *ListNode, x int) *ListNode {
 
 	return small.Next
 }
+
+func fifteen(head *ListNode, x int) *ListNode {
+	small, large := &ListNode{}, &ListNode{}
+	smallHead, largeHead := small, large
+	for head != nil {
+		if head.Val < x {
+			smallHead.Next = head
+			smallHead = smallHead.Next
+		} else {
+			largeHead.Next = head
+			largeHead = largeHead.Next
+		}
+		head = head.Next
+	}
+	smallHead.Next = large.Next
+	largeHead.Next = nil
+
+	return small.Next
+}
