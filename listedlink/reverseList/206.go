@@ -223,3 +223,19 @@ func thirteen(head *ListNode) *ListNode {
 	}
 	return dumpy.Next
 }
+
+func fourteen(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+	dumpy := &ListNode{Next: head}
+	prev := dumpy
+	cur := head
+	for cur.Next != nil {
+		next := cur.Next
+		cur.Next = next.Next
+		next.Next = prev.Next
+		prev.Next = next
+	}
+	return dumpy.Next
+}
