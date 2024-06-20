@@ -526,6 +526,56 @@ func fourteenQuick(intervals [][]int, start, end int) {
 	}
 }
 
+func fifteen(intervals [][]int) [][]int {
+	fifteenQuick(intervals, 0, len(intervals)-1)
+
+	var result [][]int
+	temp := intervals[0]
+	for i := 1; i < len(intervals); i++ {
+		if intervals[i][0] > temp[1] {
+			result = append(result, temp)
+			temp = intervals[i]
+		} else {
+			if intervals[i][1] > temp[1] {
+				temp[1] = intervals[i][1]
+			} else {
+				continue
+			}
+		}
+	}
+	result = append(result, temp)
+	return result
+}
+
+func fifteenQuick(intervals [][]int, start, end int) {
+	pivot := start
+	temp := intervals[pivot]
+	i, j := start, end
+	for i <= j {
+		for pivot <= j && intervals[j][0] >= temp[0] {
+			j--
+		}
+		if pivot <= j {
+			intervals[j], intervals[pivot] = intervals[pivot], intervals[j]
+			pivot = j
+		}
+		for i <= pivot && intervals[i][0] < temp[0] {
+			i++
+		}
+		if i <= pivot {
+			intervals[i], intervals[pivot] = intervals[pivot], intervals[i]
+			pivot = i
+		}
+	}
+	intervals[pivot] = temp
+	if pivot-start > 1 {
+		fifteenQuick(intervals, start, pivot-1)
+	}
+	if end > pivot+1 {
+		fifteenQuick(intervals, pivot+1, end)
+	}
+}
+
 func main() {
 	test := [][]int{
 		{2, 6},
