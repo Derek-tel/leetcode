@@ -23,6 +23,14 @@ func main() {
 	now := time.Now()
 	yesTime := now.AddDate(0, 0, -1)
 	fmt.Println(now.Sub(yesTime).Seconds())
+
+	content := [][]string{}
+	appendArr(content)
+	fmt.Println(content)
+}
+
+func appendArr(content [][]string) {
+	content = append(content, []string{"1"})
 }
 
 // 您需要实现 foo 函数，要求 foo 在 ctx 超时后立即返回
