@@ -42,6 +42,20 @@ func three(s string) int {
 	return result
 }
 
+func four(s string) int {
+	result := 0
+	n := len(s)
+	for i := range s {
+		value := symbolValue[s[i]]
+		if i < n-1 && value < symbolValue[s[i+1]] {
+			result -= value
+		} else {
+			result += value
+		}
+	}
+	return result
+}
+
 var symbolValue = map[byte]int{
 	'I': 1,
 	'V': 5,
