@@ -1,0 +1,2193 @@
+{
+  "app_platforms": [
+    "android",
+    "iOS"
+  ],
+  "app_version": "3.0.1",
+  "k12_share": {
+    "risk_level": 0,
+    "reward_ended_at": 1757325600,
+    "customer_service_qr": "https://new-front.chatglm.cn/activeimg/effective-web/6837fe9a6da0aa3573a98af1",
+    "filter_prize_ids": [
+      197
+    ],
+    "daily_task_ids": [
+      42,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "credit_rule": {},
+    "team_rule": {
+      "size_limit": 4,
+      "name_suffix": "的学习小组"
+    },
+    "rank_rule": {
+      "rank_size": 20,
+      "rank_type": "total",
+      "score_type": "team",
+      "reward_conf": {
+        "1": "k12_1",
+        "2": "k12_2",
+        "3": "k12_2",
+        "4": "k12_2",
+        "5": "k12_2",
+        "6": "k12_3",
+        "7": "k12_3",
+        "8": "k12_3",
+        "9": "k12_3",
+        "10": "k12_3",
+        "11": "k12_4",
+        "12": "k12_4",
+        "13": "k12_4",
+        "14": "k12_4",
+        "15": "k12_4",
+        "16": "k12_5",
+        "17": "k12_5",
+        "18": "k12_5",
+        "19": "k12_5",
+        "20": "k12_5"
+      }
+    },
+    "invite_rule": {
+      "credit_quota_daily": 200,
+      "inviter_reward_rule": [
+        {
+          "priority": 100,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": ">",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
+        {
+          "priority": 99,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 10,
+                "min_chance": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 98,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 5
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            }
+          ]
+        },
+        {
+          "priority": 97,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 4
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 7,
+                "min_chance": 7
+              }
+            }
+          ]
+        },
+        {
+          "priority": 96,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 3
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            }
+          ]
+        },
+        {
+          "priority": 95,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 2
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 5,
+                "min_chance": 5
+              }
+            }
+          ]
+        },
+        {
+          "priority": 94,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 1
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 3,
+                "min_chance": 3
+              }
+            }
+          ]
+        },
+        {
+          "priority": 93,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": ">",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
+        {
+          "priority": 92,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 10,
+                "min_chance": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 91,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 5
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            }
+          ]
+        },
+        {
+          "priority": 90,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 4
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 7,
+                "min_chance": 7
+              }
+            }
+          ]
+        },
+        {
+          "priority": 89,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 3
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            }
+          ]
+        },
+        {
+          "priority": 88,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 2
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 5,
+                "min_chance": 5
+              }
+            }
+          ]
+        },
+        {
+          "priority": 87,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 2
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "c": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 1
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 1,
+                "min_credit": 1
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 3,
+                "min_chance": 3
+              }
+            }
+          ]
+        },
+        {
+          "priority": 86,
+          "expr": "a && b && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": ">",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
+        {
+          "priority": 85,
+          "expr": "a && b && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 10,
+                "min_chance": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 84,
+          "expr": "a && b && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 5
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            }
+          ]
+        },
+        {
+          "priority": 83,
+          "expr": "a && b && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 4
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 7,
+                "min_chance": 7
+              }
+            }
+          ]
+        },
+        {
+          "priority": 82,
+          "expr": "a && b && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 3
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            }
+          ]
+        },
+        {
+          "priority": 81,
+          "expr": "a && b && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 2
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 5,
+                "min_chance": 5
+              }
+            }
+          ]
+        },
+        {
+          "priority": 80,
+          "expr": "a && b && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 1
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 3,
+                "min_chance": 3
+              }
+            }
+          ]
+        },
+        {
+          "priority": 79,
+          "expr": "a && b && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": ">",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
+        {
+          "priority": 78,
+          "expr": "a && b && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 10,
+                "min_chance": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 77,
+          "expr": "a && b && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 5
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            }
+          ]
+        },
+        {
+          "priority": 76,
+          "expr": "a && b && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 4
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 7,
+                "min_chance": 7
+              }
+            }
+          ]
+        },
+        {
+          "priority": 75,
+          "expr": "a && b && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 3
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            }
+          ]
+        },
+        {
+          "priority": 74,
+          "expr": "a && b && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 2
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 5,
+                "min_chance": 5
+              }
+            }
+          ]
+        },
+        {
+          "priority": 73,
+          "expr": "a && b && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 1
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 40,
+                "min_credit": 35
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 3,
+                "min_chance": 3
+              }
+            }
+          ]
+        },
+        {
+          "priority": 72,
+          "expr": "(!a || !b) && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": ">",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
+        {
+          "priority": 71,
+          "expr": "(!a || !b) && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 10,
+                "min_chance": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 70,
+          "expr": "(!a || !b) && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 5
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 69,
+          "expr": "(!a || !b) && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 4
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 7,
+                "min_chance": 7
+              }
+            }
+          ]
+        },
+        {
+          "priority": 68,
+          "expr": "(!a || !b) && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 3
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 67,
+          "expr": "(!a || !b) && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 2
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 5,
+                "min_chance": 5
+              }
+            }
+          ]
+        },
+        {
+          "priority": 66,
+          "expr": "(!a || !b) && c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 1
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 3,
+                "min_chance": 3
+              }
+            }
+          ]
+        },
+        {
+          "priority": 65,
+          "expr": "(!a || !b) && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": ">",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
+        {
+          "priority": 64,
+          "expr": "(!a || !b) && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 6
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 10,
+                "min_chance": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 63,
+          "expr": "(!a || !b) && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 5
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 62,
+          "expr": "(!a || !b) && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 4
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 7,
+                "min_chance": 7
+              }
+            }
+          ]
+        },
+        {
+          "priority": 61,
+          "expr": "(!a || !b) && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 3
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            }
+          ]
+        },
+        {
+          "priority": 60,
+          "expr": "(!a || !b) && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 2
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 5,
+                "min_chance": 5
+              }
+            }
+          ]
+        },
+        {
+          "priority": 59,
+          "expr": "(!a || !b) && !c && d",
+          "conditions": {
+            "a": {
+              "key": "InviteeRegisterTimeChecker",
+              "op": ">=",
+              "value": 1754549783
+            },
+            "b": {
+              "key": "InvitedTimesChecker",
+              "op": "=",
+              "value": 1
+            },
+            "c": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                42,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59
+              ]
+            },
+            "d": {
+              "key": "InviteTimesChecker",
+              "op": "=",
+              "value": 1
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardCreditFrozenExecutor",
+              "params": {
+                "max_credit": 15,
+                "min_credit": 10
+              }
+            },
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 3,
+                "min_chance": 3
+              }
+            }
+          ]
+        }
+      ],
+      "invitee_task_cfg": {
+        "task_key": "k12_invite_task"
+      },
+      "invitee_reward_rule": [
+        {
+          "priority": 100,
+          "expr": "a",
+          "conditions": {
+            "a": {
+              "key": "BackDoorChecker",
+              "op": "=",
+              "value": 0
+            }
+          },
+          "actions": [
+            {
+              "key": "RewardMemberExecutor",
+              "params": {
+                "prize_key": "member_3d_hidden"
+              }
+            }
+          ]
+        }
+      ],
+      "limit": {
+        "invited_times_daily_limit": {
+          "priority": 1,
+          "expr": "a",
+          "conditions": {
+            "a": {
+              "key": "InvitedTimesTodayChecker",
+              "op": "=",
+              "value": 0
+            }
+          },
+          "actions": []
+        }
+      },
+      "risk_conf": {
+        "device_limit": 3,
+        "ip_limit": 10,
+        "ip_limit_hour": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "lottery_rule": {
+      "lottery_key": "k12_lottery",
+      "marquee_key": "summer_study",
+      "risk_level": 2,
+      "hack_prize_id": 196
+    }
+  }
+}
