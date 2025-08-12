@@ -23,6 +23,31 @@
       58,
       59
     ],
+    "push_include_days": 5,
+    "push_android_link": "zhipuai://qingyan/detail?target=fullscreenH5&path=FestivitiesSchedule",
+    "push_ios_link": "https://bogrug.jgshare.cn?target=fullscreenH5&path=FestivitiesSchedule",
+    "push_messages": [
+      {
+        "title": "📢 叮！您的今日待办已到货！",
+        "content": "【组队活动】再不签收，它们就要自己完成了！（骗你的，快来吧）"
+      },
+      {
+        "title": "🐱你的任务正在暗中观察你… ",
+        "content": "【组队活动】别让它失望，快来给它一个交代！"
+      },
+      {
+        "title": "🍩  甜甜圈可以晚点吃，任务不行！",
+        "content": "【组队活动】趁热完成，奖励自己双倍快乐~ "
+      },
+      {
+        "title": "⏳ 滴答滴答…时间在偷走你的任务！",
+        "content": "【组队活动】快抓住它，别让它得逞！"
+      },
+      {
+        "title": "💡 你的待办正在发光…✨",
+        "content": "【组队活动】不是魔法，是它们在呼唤你！"
+      }
+    ],
     "credit_rule": {},
     "team_rule": {
       "size_limit": 4,
@@ -704,17 +729,12 @@
         },
         {
           "priority": 86,
-          "expr": "a && b && c && d",
+          "expr": "a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -757,17 +777,12 @@
         },
         {
           "priority": 85,
-          "expr": "a && b && c && d",
+          "expr": "a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -810,17 +825,12 @@
         },
         {
           "priority": 84,
-          "expr": "a && b && c && d",
+          "expr": "a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -856,17 +866,12 @@
         },
         {
           "priority": 83,
-          "expr": "a && b && c && d",
+          "expr": "a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -909,17 +914,12 @@
         },
         {
           "priority": 82,
-          "expr": "a && b && c && d",
+          "expr": "a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -955,17 +955,12 @@
         },
         {
           "priority": 81,
-          "expr": "a && b && c && d",
+          "expr": "a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1008,17 +1003,12 @@
         },
         {
           "priority": 80,
-          "expr": "a && b && c && d",
+          "expr": "a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1061,17 +1051,12 @@
         },
         {
           "priority": 79,
-          "expr": "a && b && !c && d",
+          "expr": "a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1114,17 +1099,12 @@
         },
         {
           "priority": 78,
-          "expr": "a && b && !c && d",
+          "expr": "a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1167,17 +1147,12 @@
         },
         {
           "priority": 77,
-          "expr": "a && b && !c && d",
+          "expr": "a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1213,17 +1188,12 @@
         },
         {
           "priority": 76,
-          "expr": "a && b && !c && d",
+          "expr": "a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1266,17 +1236,12 @@
         },
         {
           "priority": 75,
-          "expr": "a && b && !c && d",
+          "expr": "a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1312,17 +1277,12 @@
         },
         {
           "priority": 74,
-          "expr": "a && b && !c && d",
+          "expr": "a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1365,17 +1325,12 @@
         },
         {
           "priority": 73,
-          "expr": "a && b && !c && d",
+          "expr": "a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1418,17 +1373,12 @@
         },
         {
           "priority": 72,
-          "expr": "(!a || !b) && c && d",
+          "expr": "!a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1471,17 +1421,12 @@
         },
         {
           "priority": 71,
-          "expr": "(!a || !b) && c && d",
+          "expr": "!a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1524,17 +1469,12 @@
         },
         {
           "priority": 70,
-          "expr": "(!a || !b) && c && d",
+          "expr": "!a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1570,17 +1510,12 @@
         },
         {
           "priority": 69,
-          "expr": "(!a || !b) && c && d",
+          "expr": "!a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1623,17 +1558,12 @@
         },
         {
           "priority": 68,
-          "expr": "(!a || !b) && c && d",
+          "expr": "!a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1669,17 +1599,12 @@
         },
         {
           "priority": 67,
-          "expr": "(!a || !b) && c && d",
+          "expr": "!a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1722,17 +1647,12 @@
         },
         {
           "priority": 66,
-          "expr": "(!a || !b) && c && d",
+          "expr": "!a && c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1775,17 +1695,12 @@
         },
         {
           "priority": 65,
-          "expr": "(!a || !b) && !c && d",
+          "expr": "!a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1828,17 +1743,12 @@
         },
         {
           "priority": 64,
-          "expr": "(!a || !b) && !c && d",
+          "expr": "!a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1881,17 +1791,12 @@
         },
         {
           "priority": 63,
-          "expr": "(!a || !b) && !c && d",
+          "expr": "!a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1927,17 +1832,12 @@
         },
         {
           "priority": 62,
-          "expr": "(!a || !b) && !c && d",
+          "expr": "!a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1980,17 +1880,12 @@
         },
         {
           "priority": 61,
-          "expr": "(!a || !b) && !c && d",
+          "expr": "!a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -2026,17 +1921,12 @@
         },
         {
           "priority": 60,
-          "expr": "(!a || !b) && !c && d",
+          "expr": "!a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -2079,17 +1969,12 @@
         },
         {
           "priority": 59,
-          "expr": "(!a || !b) && !c && d",
+          "expr": "!a && !c && d",
           "conditions": {
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
               "value": 1754549783
-            },
-            "b": {
-              "key": "InvitedTimesChecker",
-              "op": "=",
-              "value": 1
             },
             "c": {
               "key": "TodayTaskFinishedChecker",

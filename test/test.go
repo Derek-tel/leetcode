@@ -161,14 +161,9 @@ func main() {
 	ts := &t
 	fmt.Println(ts.IsZero())
 
-	var taskIds []int
-	fmt.Println(len(taskIds) == 0)
-	fmt.Println(taskIds == nil)
-	taskIds = nil
-	fmt.Println(slices.Contains(taskIds, 1))
-	for i, id := range taskIds {
-		fmt.Println(i, id)
-	}
+	visitMap := make(map[string]bool)
+	fmt.Println(visitMap["xxx"])
+
 }
 
 func GetCachedTodayUserTask() []int {
