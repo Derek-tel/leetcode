@@ -3,7 +3,7 @@
     "android",
     "iOS"
   ],
-  "app_version": "3.0.1",
+  "app_version": "3.1.9",
   "k12_share": {
     "risk_level": 0,
     "reward_ended_at": 1757325600,
@@ -48,6 +48,7 @@
         "content": "【组队活动】不是魔法，是它们在呼唤你！"
       }
     ],
+    "thread_url": "https://test.chatglm.cn/posts/797?assistant_id=66d014374a55532f538576cb",
     "credit_rule": {},
     "team_rule": {
       "size_limit": 4,
