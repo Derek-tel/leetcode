@@ -6,6 +6,7 @@ import (
 	"math"
 	"reflect"
 	"slices"
+	"sort"
 	"strings"
 	"time"
 
@@ -164,6 +165,17 @@ func main() {
 	visitMap := make(map[string]bool)
 	fmt.Println(visitMap["xxx"])
 
+	sortDemo := []struct {
+		GroupId string
+	}{
+		{GroupId: "k12_invite_task"},
+		{GroupId: "k12_photo_question"},
+	}
+
+	sort.Slice(sortDemo, func(i, j int) bool {
+		return sortDemo[i].GroupId > sortDemo[j].GroupId
+	})
+	fmt.Println(sortDemo)
 }
 
 func GetCachedTodayUserTask() []int {
