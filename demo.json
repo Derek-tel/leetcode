@@ -735,7 +735,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -783,7 +783,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -831,7 +831,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -872,7 +872,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -920,7 +920,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -961,7 +961,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1009,7 +1009,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1057,7 +1057,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1105,7 +1105,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1153,7 +1153,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1194,7 +1194,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1242,7 +1242,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1283,7 +1283,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1331,7 +1331,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1379,7 +1379,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1427,7 +1427,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1475,7 +1475,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1516,7 +1516,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1564,7 +1564,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1605,7 +1605,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1653,7 +1653,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1701,7 +1701,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1749,7 +1749,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1797,7 +1797,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1838,7 +1838,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1886,7 +1886,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1927,7 +1927,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -1975,7 +1975,7 @@
             "a": {
               "key": "InviteeRegisterTimeChecker",
               "op": ">=",
-              "value": 1754549783
+              "value": 1755273600
             },
             "c": {
               "key": "TodayTaskFinishedChecker",
@@ -2056,7 +2056,7 @@
         }
       },
       "risk_conf": {
-        "device_limit": 3,
+        "device_limit": 10,
         "ip_limit": 10,
         "ip_limit_hour": [
           1,
