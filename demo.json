@@ -24,8 +24,8 @@
       49
     ],
     "push_include_days": 5,
-    "push_android_link": "",
-    "push_ios_link": "",
+    "push_android_link": "zhipuai://qingyan/detail?target=fullscreenH5&path=activities/fissionK12",
+    "push_ios_link": "https://bogrug.jgshare.cn?target=fullscreenH5&path=activities/fissionK12",
     "push_messages": [
       {
         "title": "📢 叮！您的今日待办已到货！",
@@ -48,7 +48,7 @@
         "content": "【组队活动】不是魔法，是它们在呼唤你！"
       }
     ],
-    "thread_url": "",
+    "thread_url": "https://chatglm.cn/posts/2415#dark=0",
     "credit_rule": {},
     "team_rule": {
       "size_limit": 4,
