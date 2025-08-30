@@ -5,7 +5,6 @@
   ],
   "app_version": "3.1.9",
   "k12_share": {
-    "risk_level": 0,
     "reward_ended_at": 1757325600,
     "customer_service_qr": "https://new-front.chatglm.cn/activeimg/effective-web/6837fe9a6da0aa3573a98af1",
     "filter_prize_ids": [
@@ -24,8 +23,6 @@
       49
     ],
     "push_include_days": 5,
-    "push_android_link": "zhipuai://qingyan/detail?target=fullscreenH5&path=activities/fissionK12",
-    "push_ios_link": "https://bogrug.jgshare.cn?target=fullscreenH5&path=activities/fissionK12",
     "push_messages": [
       {
         "title": "📢 叮！您的今日待办已到货！",
@@ -48,7 +45,9 @@
         "content": "【组队活动】不是魔法，是它们在呼唤你！"
       }
     ],
-    "thread_url": "https://chatglm.cn/posts/2415#dark=0",
+    "push_android_link": "zhipuai://qingyan/detail?target=fullscreenH5&path=activities/fissionK12",
+    "push_ios_link": "https://bogrug.jgshare.cn?target=fullscreenH5&path=activities/fissionK12",
+    "thread_url": "https://chatglm.cn/posts/2443?assistant_id=66d014374a55532f538576cb#dark=0",
     "credit_rule": {},
     "team_rule": {
       "size_limit": 4,
@@ -83,7 +82,103 @@
     },
     "invite_rule": {
       "credit_quota_daily": 200,
+      "limit": {
+        "invited_times_daily_limit": {
+          "priority": 1,
+          "expr": "a",
+          "conditions": {
+            "a": {
+              "key": "InvitedTimesTodayChecker",
+              "op": "=",
+              "value": 0
+            }
+          },
+          "actions": []
+        }
+      },
       "inviter_reward_rule": [
+        {
+          "priority": 102,
+          "expr": "a && b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 3
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49
+              ]
+            },
+            "c": {
+              "key": "InviteTimesTodayChecker",
+              "op": ">",
+              "value": 50
+            }
+          },
+          "actions": [
+            {
+              "key": "LotteryChanceExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
+        {
+          "priority": 101,
+          "expr": "a && !b && c",
+          "conditions": {
+            "a": {
+              "key": "InviteeRiskLevelChecker",
+              "op": ">=",
+              "value": 3
+            },
+            "b": {
+              "key": "TodayTaskFinishedChecker",
+              "op": "contain",
+              "value": [
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49
+              ]
+            },
+            "c": {
+              "key": "InviteTimesTodayChecker",
+              "op": ">",
+              "value": 50
+            }
+          },
+          "actions": [
+            {
+              "key": "LotteryChanceFrozenExecutor",
+              "params": {
+                "max_chance": 2,
+                "min_chance": 2
+              }
+            }
+          ]
+        },
         {
           "priority": 100,
           "expr": "a && b && c",
@@ -2018,6 +2113,7 @@
         }
       ],
       "invitee_task_cfg": {
+        "target_assistant": null,
         "task_key": "k12_invite_task"
       },
       "invitee_reward_rule": [
@@ -2041,20 +2137,6 @@
           ]
         }
       ],
-      "limit": {
-        "invited_times_daily_limit": {
-          "priority": 1,
-          "expr": "a",
-          "conditions": {
-            "a": {
-              "key": "InvitedTimesTodayChecker",
-              "op": "=",
-              "value": 0
-            }
-          },
-          "actions": []
-        }
-      },
       "risk_conf": {
         "device_limit": 10,
         "ip_limit": 10,
@@ -2066,14 +2148,17 @@
           5,
           6,
           7
-        ]
+        ],
+        "risk_invite_percent": 0.6,
+        "risk_invite_threshold": 10,
+        "risk_level": 2
       }
     },
     "lottery_rule": {
       "lottery_key": "k12_lottery",
       "marquee_key": "summer_study",
-      "risk_level": 2,
-      "hack_prize_id": 202
+      "hack_prize_id": 202,
+      "risk_level": 2
     }
   }
 }

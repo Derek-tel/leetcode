@@ -176,6 +176,16 @@ func main() {
 		return sortDemo[i].GroupId > sortDemo[j].GroupId
 	})
 	fmt.Println(sortDemo)
+
+	type GetSpammerRiskInfoResponse struct {
+		Level int32    `protobuf:"varint,1,opt,name=level" json:"level,omitempty"`
+		Score float32  `protobuf:"fixed32,2,opt,name=score" json:"score,omitempty"`
+		Tags  []string `protobuf:"bytes,3,rep,name=tags" json:"tags,omitempty"`
+	}
+
+	res := new(GetSpammerRiskInfoResponse)
+	fmt.Println(res == nil)
+	fmt.Println(res)
 }
 
 func GetCachedTodayUserTask() []int {
