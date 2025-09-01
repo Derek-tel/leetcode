@@ -123,9 +123,9 @@
               ]
             },
             "c": {
-              "key": "InviteTimesTodayChecker",
+              "key": "InviteTimesChecker",
               "op": ">",
-              "value": 50
+              "value": 500
             }
           },
           "actions": [
@@ -164,9 +164,9 @@
               ]
             },
             "c": {
-              "key": "InviteTimesTodayChecker",
+              "key": "InviteTimesChecker",
               "op": ">",
-              "value": 50
+              "value": 500
             }
           },
           "actions": [
